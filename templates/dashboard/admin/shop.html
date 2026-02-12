@@ -1,0 +1,1560 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+    <title>فروشگاه خیریه‌محور | خیریه‌آنلاین</title>
+    <!-- Bootstrap 5 RTL -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Vazir Font -->
+    <link href="https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.css" rel="stylesheet">
+    <!-- ApexCharts -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- Persian Datepicker -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/shahtheme/persian-datepicker@1.2.0/dist/css/persian-datepicker.min.css">
+    <!-- Select2 -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <style>
+        :root {
+            --primary-deep: #0a2c3d;
+            --primary-soft: #1e4a5f;
+            --accent-gold: #e6b31e;
+            --accent-orange: #ff8a5c;
+            --accent-teal: #2a9d8f;
+            --accent-purple: #6c5ce7;
+            --accent-red: #e63946;
+            --light-bg: #f8fafc;
+            --card-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+            --card-border-radius: 20px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Vazir', sans-serif;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            overflow-x: hidden;
+        }
+
+        /* ========== سایدبار ========= */
+        .dashboard-sidebar {
+            position: fixed;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 280px;
+            background: linear-gradient(170deg, var(--primary-deep) 0%, #0f3a4f 100%);
+            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.08);
+            padding: 28px 20px;
+            overflow-y: auto;
+            z-index: 1040;
+        }
+
+        .sidebar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 40px;
+            padding: 0 12px;
+        }
+
+        .sidebar-brand img {
+            width: 48px;
+            height: 48px;
+            filter: brightness(0) invert(1);
+        }
+
+        .sidebar-brand h3 {
+            color: white;
+            font-weight: 700;
+            margin: 0;
+            font-size: 1.6rem;
+        }
+
+        .nav-link-sidebar {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 18px;
+            border-radius: 16px;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 500;
+            transition: all 0.2s;
+            margin-bottom: 8px;
+        }
+
+        .nav-link-sidebar i {
+            font-size: 1.25rem;
+            width: 24px;
+            text-align: center;
+        }
+
+        .nav-link-sidebar:hover {
+            background: rgba(230, 179, 30, 0.12);
+            color: white;
+        }
+
+        .nav-link-sidebar.active {
+            background: var(--accent-gold);
+            color: var(--primary-deep);
+        }
+
+        .sidebar-divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+            margin: 24px 0;
+        }
+
+        /* ========== محتوای اصلی ========= */
+        .main-content {
+            margin-right: 280px;
+            padding: 28px 32px;
+            transition: all 0.3s;
+            min-height: 100vh;
+        }
+
+        /* ========== هدر ========= */
+        .dashboard-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: white;
+            padding: 16px 28px;
+            border-radius: 60px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+        }
+
+        .header-search {
+            display: flex;
+            align-items: center;
+            background: #f1f5f9;
+            border-radius: 40px;
+            padding: 8px 20px;
+            width: 320px;
+        }
+
+        .header-search i {
+            color: #64748b;
+            margin-left: 10px;
+        }
+
+        .header-search input {
+            border: none;
+            background: transparent;
+            outline: none;
+            width: 100%;
+        }
+
+        .user-avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: var(--primary-soft);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+        }
+
+        /* ========== تب‌ها ========= */
+        .nav-tabs-custom {
+            border-bottom: none;
+            background: white;
+            padding: 8px;
+            border-radius: 60px;
+            display: inline-flex;
+            margin-bottom: 24px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .nav-tabs-custom .nav-link {
+            border: none;
+            color: var(--primary-deep);
+            font-weight: 600;
+            padding: 12px 28px;
+            border-radius: 50px;
+            transition: all 0.3s;
+        }
+
+        .nav-tabs-custom .nav-link i {
+            margin-left: 8px;
+        }
+
+        .nav-tabs-custom .nav-link.active {
+            background: var(--primary-deep);
+            color: white;
+        }
+
+        /* ========== کارت‌ها ========= */
+        .dashboard-card {
+            background: white;
+            border-radius: 24px;
+            padding: 24px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 24px;
+            border: 1px solid rgba(0,0,0,0.02);
+        }
+
+        .card-header-custom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-weight: 700;
+            color: var(--primary-deep);
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* ========== کارت فروشگاه ========= */
+        .shop-card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            border: 1px solid #edf2f7;
+            transition: all 0.2s;
+            height: 100%;
+        }
+
+        .shop-card:hover {
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+            transform: translateY(-4px);
+        }
+
+        .shop-logo {
+            width: 70px;
+            height: 70px;
+            border-radius: 16px;
+            background: #f1f5f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: var(--primary-deep);
+        }
+
+        .vendor-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: #e9d5ff;
+            color: #6b21a8;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        /* ========== کارت محصول ========= */
+        .product-card {
+            background: white;
+            border-radius: 18px;
+            padding: 16px;
+            border: 1px solid #edf2f7;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .product-card:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+        }
+
+        .charity-percent {
+            background: var(--accent-teal);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        /* ========== ویجت‌های آماری ========= */
+        .stat-card-mini {
+            background: #f8fafc;
+            border-radius: 18px;
+            padding: 18px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: all 0.2s;
+        }
+
+        .stat-card-mini:hover {
+            background: #f1f5f9;
+            transform: translateY(-2px);
+        }
+
+        .stat-icon-mini {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+        }
+
+        /* ========== فرم‌ها ========= */
+        .form-control, .form-select, .input-group-text {
+            border-radius: 14px;
+            border: 1.5px solid rgba(10, 44, 61, 0.08);
+            padding: 12px 16px;
+            transition: all 0.2s;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 0 4px rgba(230, 179, 30, 0.15);
+        }
+
+        .btn-primary-charity {
+            background: var(--primary-deep);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 28px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-primary-charity:hover {
+            background: var(--primary-soft);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 18px rgba(10, 44, 61, 0.2);
+            color: white;
+        }
+
+        .btn-outline-gold {
+            background: transparent;
+            border: 2px solid var(--accent-gold);
+            color: var(--primary-deep);
+            border-radius: 50px;
+            padding: 10px 24px;
+            font-weight: 600;
+        }
+
+        .btn-outline-gold:hover {
+            background: var(--accent-gold);
+            color: var(--primary-deep);
+        }
+
+        .btn-outline-teal {
+            background: transparent;
+            border: 2px solid var(--accent-teal);
+            color: var(--accent-teal);
+            border-radius: 50px;
+            padding: 10px 24px;
+            font-weight: 600;
+        }
+
+        .btn-outline-teal:hover {
+            background: var(--accent-teal);
+            color: white;
+        }
+
+        /* ========== جدول‌ها ========= */
+        .table-dashboard {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table-dashboard th {
+            color: #64748b;
+            font-weight: 600;
+            font-size: 0.8rem;
+            padding: 12px 0;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .table-dashboard td {
+            padding: 16px 0;
+            border-bottom: 1px solid #edf2f7;
+            vertical-align: middle;
+        }
+
+        .badge-status {
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .badge-success { background: #d1fae5; color: #065f46; }
+        .badge-warning { background: #fed7aa; color: #92400e; }
+        .badge-danger { background: #fee2e2; color: #991b1b; }
+        .badge-info { background: #dbeafe; color: #1e40af; }
+        .badge-purple { background: #e9d5ff; color: #6b21a8; }
+
+        /* ========== کمبود موجودی ========= */
+        .low-stock {
+            background: #fee2e2;
+            color: #991b1b;
+            padding: 2px 8px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+
+        /* ========== کوپن ========= */
+        .coupon-card {
+            background: linear-gradient(145deg, #ffffff, #f8fafc);
+            border: 2px dashed var(--accent-gold);
+            border-radius: 16px;
+            padding: 20px;
+            position: relative;
+        }
+
+        .coupon-code {
+            font-family: monospace;
+            font-size: 1.2rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: var(--primary-deep);
+        }
+
+        /* ========== ریسپانسیو ========= */
+        @media (max-width: 992px) {
+            .dashboard-sidebar {
+                right: -280px;
+            }
+            .dashboard-sidebar.show {
+                right: 0;
+            }
+            .main-content {
+                margin-right: 0;
+            }
+            .sidebar-toggle {
+                display: block !important;
+            }
+        }
+
+        .sidebar-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-deep);
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.5s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ========== سایدبار ========= -->
+<div class="dashboard-sidebar" id="sidebar">
+    <div class="sidebar-brand">
+        <img src="https://img.icons8.com/3d-fluency/94/charity.png" alt="charity">
+        <h3>خیریه‌آنلاین</h3>
+    </div>
+
+    <div class="text-center mb-4 text-white">
+        <div class="user-avatar mx-auto mb-2" style="width: 70px; height: 70px; font-size: 1.8rem;">مد</div>
+        <h6 class="fw-bold mb-1">مدیر فروشگاه</h6>
+        <span class="badge bg-warning text-dark px-3 py-2">ادمین</span>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="nav flex-column">
+        <a href="#" class="nav-link-sidebar">
+            <i class="fas fa-tachometer-alt"></i>
+            <span>داشبورد</span>
+        </a>
+        <a href="#" class="nav-link-sidebar active">
+            <i class="fas fa-store"></i>
+            <span>فروشگاه‌ها</span>
+        </a>
+        <a href="#" class="nav-link-sidebar">
+            <i class="fas fa-shopping-cart"></i>
+            <span>سفارشات</span>
+        </a>
+        <a href="#" class="nav-link-sidebar">
+            <i class="fas fa-boxes"></i>
+            <span>محصولات</span>
+        </a>
+        <a href="#" class="nav-link-sidebar">
+            <i class="fas fa-tags"></i>
+            <span>کوپن‌ها</span>
+        </a>
+        <a href="#" class="nav-link-sidebar">
+            <i class="fas fa-undo-alt"></i>
+            <span>مرجوعی</span>
+        </a>
+        <a href="#" class="nav-link-sidebar">
+            <i class="fas fa-chart-line"></i>
+            <span>گزارشات</span>
+        </a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="nav flex-column">
+        <a href="#" class="nav-link-sidebar" onclick="logout()">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>خروج</span>
+        </a>
+    </div>
+</div>
+
+<!-- ========== محتوای اصلی ========= -->
+<div class="main-content">
+    <!-- هدر موبایل -->
+    <div class="d-flex align-items-center mb-3 d-lg-none">
+        <i class="fas fa-bars sidebar-toggle fs-3" onclick="document.getElementById('sidebar').classList.toggle('show')"></i>
+    </div>
+
+    <!-- ========== هدر بالا ========= -->
+    <div class="dashboard-header fade-in-up">
+        <div class="d-flex align-items-center gap-3">
+            <div class="header-search">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="جستجوی فروشگاه، محصول، سفارش...">
+            </div>
+        </div>
+        <div class="d-flex align-items-center gap-3">
+            <div class="notification-badge">
+                <i class="far fa-bell fs-5"></i>
+                <span class="badge-counter">۴</span>
+            </div>
+            <div class="user-dropdown d-flex align-items-center gap-2" data-bs-toggle="dropdown">
+                <span>علی محمدی</span>
+                <div class="user-avatar">ع</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== تب‌های اصلی ========= -->
+    <ul class="nav nav-tabs-custom" id="mainTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="shops-tab" data-bs-toggle="tab" data-bs-target="#shops" type="button">
+                <i class="fas fa-store"></i> فروشگاه‌ها
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="orders-tab" data-bs-toggle="tab" data-bs-target="#orders" type="button">
+                <i class="fas fa-shopping-cart"></i> سفارشات
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="inventory-tab" data-bs-toggle="tab" data-bs-target="#inventory" type="button">
+                <i class="fas fa-boxes"></i> موجودی و محصولات
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="coupons-tab" data-bs-toggle="tab" data-bs-target="#coupons" type="button">
+                <i class="fas fa-tags"></i> کوپن‌ها
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="returns-tab" data-bs-toggle="tab" data-bs-target="#returns" type="button">
+                <i class="fas fa-undo-alt"></i> مرجوعی
+            </button>
+        </li>
+    </ul>
+
+    <!-- ========== محتوای تب‌ها ========= -->
+    <div class="tab-content">
+        <!-- ========== تب 1: فروشگاه‌ها ========= -->
+        <div class="tab-pane fade show active" id="shops" role="tabpanel">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h4 class="fw-bold" style="color: var(--primary-deep);">
+                    <i class="fas fa-store ms-2"></i> مدیریت فروشگاه‌ها و فروشندگان
+                </h4>
+                <button class="btn btn-primary-charity" data-bs-toggle="modal" data-bs-target="#createShopModal">
+                    <i class="fas fa-plus-circle ms-2"></i> ایجاد فروشگاه جدید
+                </button>
+            </div>
+
+            <!-- آمار فروشگاه‌ها -->
+            <div class="row g-4 mb-4">
+                <div class="col-md-3 col-6">
+                    <div class="stat-card-mini">
+                        <div class="stat-icon-mini" style="background: #e6b31e20; color: var(--accent-gold);">
+                            <i class="fas fa-store"></i>
+                        </div>
+                        <div>
+                            <small class="text-muted">کل فروشگاه‌ها</small>
+                            <h5 class="fw-bold mb-0">۲۴</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-card-mini">
+                        <div class="stat-icon-mini" style="background: #2a9d8f20; color: var(--accent-teal);">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div>
+                            <small class="text-muted">تأیید شده</small>
+                            <h5 class="fw-bold mb-0">۱۸</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-card-mini">
+                        <div class="stat-icon-mini" style="background: #ff8a5c20; color: var(--accent-orange);">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div>
+                            <small class="text-muted">در انتظار تأیید</small>
+                            <h5 class="fw-bold mb-0">۴</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-card-mini">
+                        <div class="stat-icon-mini" style="background: #6c5ce720; color: var(--accent-purple);">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div>
+                            <small class="text-muted">فروشندگان</small>
+                            <h5 class="fw-bold mb-0">۵۶</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- لیست فروشگاه‌ها -->
+            <div class="dashboard-card">
+                <div class="card-header-custom">
+                    <h5 class="card-title">
+                        <i class="fas fa-store-alt"></i>
+                        فروشگاه‌های فعال
+                    </h5>
+                    <div>
+                        <select class="form-select form-select-sm" style="width: 150px;">
+                            <option>همه وضعیت‌ها</option>
+                            <option>تأیید شده</option>
+                            <option>در انتظار</option>
+                            <option>رد شده</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="shop-card">
+                            <div class="d-flex justify-content-between">
+                                <div class="shop-logo">
+                                    <i class="fas fa-tshirt"></i>
+                                </div>
+                                <span class="badge-status badge-success">تأیید شده</span>
+                            </div>
+                            <div class="mt-3">
+                                <h5 class="fw-bold mb-1">فروشگاه پوشاک مهر</h5>
+                                <p class="small text-muted mb-2">
+                                    <i class="fas fa-map-marker-alt ms-1"></i> تهران، خیابان انقلاب
+                                </p>
+                                <div class="d-flex gap-2 mb-2">
+                                    <span class="vendor-badge"><i class="fas fa-user ms-1"></i> مدیر: علی رضایی</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <small class="text-muted">فروشندگان: ۴ نفر</small>
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-sm btn-outline-primary" onclick="viewShop(1)">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-teal" onclick="addVendor(1)">
+                                            <i class="fas fa-user-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="d-flex justify-content-between">
+                                    <span class="text-muted small">درصد خیریه پیش‌فرض:</span>
+                                    <span class="fw-bold" style="color: var(--accent-teal);">۱۲٪</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="shop-card">
+                            <div class="d-flex justify-content-between">
+                                <div class="shop-logo">
+                                    <i class="fas fa-laptop"></i>
+                                </div>
+                                <span class="badge-status badge-success">تأیید شده</span>
+                            </div>
+                            <div class="mt-3">
+                                <h5 class="fw-bold mb-1">فروشگاه دیجیتال خیریه</h5>
+                                <p class="small text-muted mb-2">
+                                    <i class="fas fa-map-marker-alt ms-1"></i> اصفهان، چهارباغ
+                                </p>
+                                <div class="d-flex gap-2 mb-2">
+                                    <span class="vendor-badge"><i class="fas fa-user ms-1"></i> مدیر: سارا محمدی</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <small class="text-muted">فروشندگان: ۳ نفر</small>
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-sm btn-outline-primary">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-teal">
+                                            <i class="fas fa-user-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="d-flex justify-content-between">
+                                    <span class="text-muted small">درصد خیریه پیش‌فرض:</span>
+                                    <span class="fw-bold" style="color: var(--accent-teal);">۸٪</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="shop-card">
+                            <div class="d-flex justify-content-between">
+                                <div class="shop-logo">
+                                    <i class="fas fa-seedling"></i>
+                                </div>
+                                <span class="badge-status badge-warning">در انتظار تأیید</span>
+                            </div>
+                            <div class="mt-3">
+                                <h5 class="fw-bold mb-1">فروشگاه محصولات ارگانیک</h5>
+                                <p class="small text-muted mb-2">
+                                    <i class="fas fa-map-marker-alt ms-1"></i> مشهد، احمدآباد
+                                </p>
+                                <div class="d-flex gap-2 mb-2">
+                                    <span class="vendor-badge"><i class="fas fa-user ms-1"></i> مدیر: رضا کریمی</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <small class="text-muted">فروشندگان: ۲ نفر</small>
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-sm btn-outline-primary">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-success" onclick="verifyShop(3)">
+                                            <i class="fas fa-check-circle"></i> تأیید
+                                        </button>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="d-flex justify-content-between">
+                                    <span class="text-muted small">درصد خیریه پیش‌فرض:</span>
+                                    <span class="fw-bold" style="color: var(--accent-teal);">۱۵٪</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== تب 2: سفارشات ========= -->
+        <div class="tab-pane fade" id="orders" role="tabpanel">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h4 class="fw-bold" style="color: var(--primary-deep);">
+                    <i class="fas fa-shopping-cart ms-2"></i> مدیریت سفارشات
+                </h4>
+                <button class="btn btn-primary-charity" data-bs-toggle="modal" data-bs-target="#cartModal">
+                    <i class="fas fa-shopping-basket ms-2"></i> مشاهده سبد خرید
+                </button>
+            </div>
+
+            <!-- آمار سفارشات -->
+            <div class="row g-4 mb-4">
+                <div class="col-md-3 col-6">
+                    <div class="stat-card-mini">
+                        <div class="stat-icon-mini" style="background: #e6b31e20;">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <div>
+                            <small>کل سفارشات</small>
+                            <h5 class="fw-bold mb-0">۱,۲۴۰</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-card-mini">
+                        <div class="stat-icon-mini" style="background: #2a9d8f20;">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div>
+                            <small>تکمیل شده</small>
+                            <h5 class="fw-bold mb-0">۸۹۰</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-card-mini">
+                        <div class="stat-icon-mini" style="background: #ff8a5c20;">
+                            <i class="fas fa-spinner"></i>
+                        </div>
+                        <div>
+                            <small>در حال پردازش</small>
+                            <h5 class="fw-bold mb-0">۱۲۰</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-card-mini">
+                        <div class="stat-icon-mini" style="background: #6c5ce720;">
+                            <i class="fas fa-hand-holding-heart"></i>
+                        </div>
+                        <div>
+                            <small>کمک به خیریه</small>
+                            <h5 class="fw-bold mb-0">۴۸.۵M</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- فیلتر سفارشات -->
+            <div class="dashboard-card">
+                <div class="row g-3">
+                    <div class="col-md-2">
+                        <select class="form-select" id="orderStatusFilter">
+                            <option>همه وضعیت‌ها</option>
+                            <option>در انتظار پرداخت</option>
+                            <option>پرداخت شده</option>
+                            <option>در حال پردازش</option>
+                            <option>ارسال شده</option>
+                            <option>تحویل شده</option>
+                            <option>لغو شده</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <select class="form-select">
+                            <option>روش پرداخت</option>
+                            <option>زرین‌پال</option>
+                            <option>آی‌دی پی</option>
+                            <option>واریز مستقیم</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control datepicker" placeholder="از تاریخ">
+                    </div>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control datepicker" placeholder="تا تاریخ">
+                    </div>
+                    <div class="col-md-2">
+                        <select class="form-select">
+                            <option>همه فروشگاه‌ها</option>
+                            <option>فروشگاه پوشاک مهر</option>
+                            <option>فروشگاه دیجیتال</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-outline-gold w-100">
+                            <i class="fas fa-filter"></i> اعمال فیلتر
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- جدول سفارشات -->
+            <div class="dashboard-card">
+                <div class="table-responsive">
+                    <table class="table-dashboard">
+                        <thead>
+                            <tr>
+                                <th>شماره سفارش</th>
+                                <th>مشتری</th>
+                                <th>فروشگاه</th>
+                                <th>مبلغ کل</th>
+                                <th>کمک به خیریه</th>
+                                <th>وضعیت</th>
+                                <th>پرداخت</th>
+                                <th>تاریخ</th>
+                                <th>عملیات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="fw-bold">#ORD-۱۲۳۴۵</td>
+                                <td>رضا کریمی</td>
+                                <td>پوشاک مهر</td>
+                                <td>۲,۵۴۰,۰۰۰</td>
+                                <td><span class="fw-bold" style="color: var(--accent-teal);">۳۰۴,۸۰۰</span></td>
+                                <td><span class="badge-status badge-success">تحویل شده</span></td>
+                                <td><span class="badge bg-light">زرین‌پال</span></td>
+                                <td>۱۴۰۴/۰۱/۲۵</td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-primary" onclick="viewOrder(1)">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-secondary" onclick="updateOrderStatus(1)">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bold">#ORD-۱۲۳۴۶</td>
+                                <td>سارا احمدی</td>
+                                <td>دیجیتال خیریه</td>
+                                <td>۴,۸۲۰,۰۰۰</td>
+                                <td><span class="fw-bold" style="color: var(--accent-teal);">۳۸۵,۶۰۰</span></td>
+                                <td><span class="badge-status badge-info">در حال پردازش</span></td>
+                                <td><span class="badge bg-light">آی‌دی پی</span></td>
+                                <td>۱۴۰۴/۰۱/۲۴</td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-primary">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-secondary">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bold">#ORD-۱۲۳۴۷</td>
+                                <td>محمد رضایی</td>
+                                <td>محصولات ارگانیک</td>
+                                <td>۱,۲۵۰,۰۰۰</td>
+                                <td><span class="fw-bold" style="color: var(--accent-teal);">۱۸۷,۵۰۰</span></td>
+                                <td><span class="badge-status badge-warning">در انتظار پرداخت</span></td>
+                                <td><span class="badge bg-light">واریز مستقیم</span></td>
+                                <td>۱۴۰۴/۰۱/۲۳</td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-primary">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-secondary">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="d-flex justify-content-center mt-4">
+                    <nav>
+                        <ul class="pagination">
+                            <li class="page-item disabled"><a class="page-link" href="#">قبلی</a></li>
+                            <li class="page-item active"><a class="page-link" href="#">۱</a></li>
+                            <li class="page-item"><a class="page-link" href="#">۲</a></li>
+                            <li class="page-item"><a class="page-link" href="#">۳</a></li>
+                            <li class="page-item"><a class="page-link" href="#">بعدی</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== تب 3: موجودی و محصولات ========= -->
+        <div class="tab-pane fade" id="inventory" role="tabpanel">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h4 class="fw-bold" style="color: var(--primary-deep);">
+                    <i class="fas fa-boxes ms-2"></i> مدیریت موجودی و محصولات
+                </h4>
+                <div>
+                    <button class="btn btn-outline-teal me-2" onclick="checkLowStock()">
+                        <i class="fas fa-exclamation-triangle ms-2"></i> هشدار کم‌موجودی (۱۲)
+                    </button>
+                    <button class="btn btn-primary-charity" data-bs-toggle="modal" data-bs-target="#addProductModal">
+                        <i class="fas fa-plus-circle ms-2"></i> افزودن محصول
+                    </button>
+                </div>
+            </div>
+
+            <!-- کارت‌های هشدار موجودی -->
+            <div class="row g-4 mb-4">
+                <div class="col-md-4">
+                    <div class="dashboard-card p-3" style="border-right: 6px solid var(--accent-red);">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <small class="text-muted">کمتر از حد مجاز</small>
+                                <h3 class="fw-bold mb-0" style="color: var(--accent-red);">۸</h3>
+                                <span>محصول نیاز به تأمین</span>
+                            </div>
+                            <div class="stat-icon-mini" style="background: #fee2e2;">
+                                <i class="fas fa-exclamation-triangle" style="color: #991b1b;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="dashboard-card p-3" style="border-right: 6px solid var(--accent-orange);">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <small class="text-muted">در شرف اتمام</small>
+                                <h3 class="fw-bold mb-0" style="color: var(--accent-orange);">۱۲</h3>
+                                <span>موجودی کمتر از ۱۰</span>
+                            </div>
+                            <div class="stat-icon-mini" style="background: #fed7aa;">
+                                <i class="fas fa-clock" style="color: #92400e;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="dashboard-card p-3" style="border-right: 6px solid var(--accent-teal);">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <small class="text-muted">کمک به خیریه</small>
+                                <h3 class="fw-bold mb-0" style="color: var(--accent-teal);">۶۴.۲M</h3>
+                                <span>جمع کمک از فروش</span>
+                            </div>
+                            <div class="stat-icon-mini" style="background: #d1fae5;">
+                                <i class="fas fa-hand-holding-heart" style="color: #065f46;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- لیست محصولات کم‌موجود -->
+            <div class="dashboard-card">
+                <div class="card-header-custom">
+                    <h5 class="card-title">
+                        <i class="fas fa-exclamation-circle" style="color: var(--accent-red);"></i>
+                        محصولات با موجودی کم
+                    </h5>
+                    <span class="badge bg-danger">نیاز به تأمین فوری</span>
+                </div>
+                <div class="table-responsive">
+                    <table class="table-dashboard">
+                        <thead>
+                            <tr>
+                                <th>محصول</th>
+                                <th>فروشگاه</th>
+                                <th>SKU</th>
+                                <th>موجودی فعلی</th>
+                                <th>حد مجاز</th>
+                                <th>درصد خیریه</th>
+                                <th>وضعیت</th>
+                                <th>عملیات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="fw-bold">تیشرت طرح خیریه</td>
+                                <td>پوشاک مهر</td>
+                                <td>TS-۱۲۳</td>
+                                <td><span class="fw-bold text-danger">۲</span></td>
+                                <td>۱۰</td>
+                                <td><span class="badge" style="background: #e6b31e20; color: var(--accent-gold);">۱۲٪</span></td>
+                                <td><span class="badge-status badge-danger">بحرانی</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-primary">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-success">
+                                        <i class="fas fa-plus-circle"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bold">لپ‌تاپ استوک</td>
+                                <td>دیجیتال خیریه</td>
+                                <td>LP-۴۵۶</td>
+                                <td><span class="fw-bold text-warning">۵</span></td>
+                                <td>۸</td>
+                                <td><span class="badge" style="background: #e6b31e20; color: var(--accent-gold);">۸٪</span></td>
+                                <td><span class="badge-status badge-warning">کم‌موجود</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-primary">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-success">
+                                        <i class="fas fa-plus-circle"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== تب 4: کوپن‌ها ========= -->
+        <div class="tab-pane fade" id="coupons" role="tabpanel">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h4 class="fw-bold" style="color: var(--primary-deep);">
+                    <i class="fas fa-tags ms-2"></i> کوپن‌های تخفیف خیریه‌محور
+                </h4>
+                <button class="btn btn-primary-charity" data-bs-toggle="modal" data-bs-target="#createCouponModal">
+                    <i class="fas fa-plus-circle ms-2"></i> ایجاد کوپن جدید
+                </button>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="coupon-card mb-4">
+                        <div class="d-flex justify-content-between">
+                            <span class="badge bg-success">فعال</span>
+                            <span class="badge bg-light">تا ۱۴۰۴/۰۳/۰۱</span>
+                        </div>
+                        <div class="text-center my-3">
+                            <span class="coupon-code">CHARITY۲۰۲۴</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>نوع تخفیف:</span>
+                            <span class="fw-bold">درصدی</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>مقدار:</span>
+                            <span class="fw-bold" style="color: var(--accent-teal);">۲۰٪</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>حداقل سفارش:</span>
+                            <span>۲۰۰,۰۰۰ تومان</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>خیریه مرتبط:</span>
+                            <span>خیریه امام رضا</span>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between">
+                            <span class="text-muted">استفاده: ۴۵/۱۰۰</span>
+                            <div>
+                                <button class="btn btn-sm btn-outline-primary">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-danger">
+                                    <i class="fas fa-ban"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="coupon-card mb-4">
+                        <div class="d-flex justify-content-between">
+                            <span class="badge bg-success">فعال</span>
+                            <span class="badge bg-light">تا ۱۴۰۴/۰۴/۱۵</span>
+                        </div>
+                        <div class="text-center my-3">
+                            <span class="coupon-code">FREESHIP</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>نوع تخفیف:</span>
+                            <span class="fw-bold">ارسال رایگان</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>حداقل سفارش:</span>
+                            <span>۵۰۰,۰۰۰ تومان</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>خیریه مرتبط:</span>
+                            <span>مؤسسه مهر سبز</span>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between">
+                            <span class="text-muted">استفاده: ۲۳/۵۰</span>
+                            <div>
+                                <button class="btn btn-sm btn-outline-primary">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-danger">
+                                    <i class="fas fa-ban"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="coupon-card mb-4" style="background: #fef9e7;">
+                        <div class="d-flex justify-content-between">
+                            <span class="badge bg-warning">در انتظار</span>
+                            <span class="badge bg-light">از ۱۴۰۴/۰۲/۱۰</span>
+                        </div>
+                        <div class="text-center my-3">
+                            <span class="coupon-code">RAMADAN۱۴۰۴</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>نوع تخفیف:</span>
+                            <span class="fw-bold">مبلغی</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>مقدار:</span>
+                            <span class="fw-bold" style="color: var(--accent-teal);">۵۰,۰۰۰ تومان</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>حداقل سفارش:</span>
+                            <span>۲۵۰,۰۰۰ تومان</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>خیریه مرتبط:</span>
+                            <span>کمک به جهیزیه</span>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between">
+                            <span class="text-muted">استفاده: ۰/۲۰۰</span>
+                            <div>
+                                <button class="btn btn-sm btn-outline-primary">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-sm btn-success" onclick="activateCoupon(3)">
+                                    <i class="fas fa-check-circle"></i> فعال
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== تب 5: مرجوعی ========= -->
+        <div class="tab-pane fade" id="returns" role="tabpanel">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h4 class="fw-bold" style="color: var(--primary-deep);">
+                    <i class="fas fa-undo-alt ms-2"></i> درخواست‌های مرجوعی
+                </h4>
+            </div>
+
+            <div class="dashboard-card">
+                <div class="table-responsive">
+                    <table class="table-dashboard">
+                        <thead>
+                            <tr>
+                                <th>شماره درخواست</th>
+                                <th>سفارش</th>
+                                <th>مشتری</th>
+                                <th>فروشگاه</th>
+                                <th>دلیل</th>
+                                <th>مبلغ مرجوع</th>
+                                <th>وضعیت</th>
+                                <th>تاریخ</th>
+                                <th>عملیات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#RET-۵۶۷۸</td>
+                                <td>#ORD-۱۲۳۴۵</td>
+                                <td>رضا کریمی</td>
+                                <td>پوشاک مهر</td>
+                                <td><small>اندازه نامناسب</small></td>
+                                <td>۴۵۰,۰۰۰</td>
+                                <td><span class="badge-status badge-warning">در انتظار بررسی</span></td>
+                                <td>۱۴۰۴/۰۱/۲۶</td>
+                                <td>
+                                    <button class="btn btn-sm btn-success" onclick="approveReturn(1)">
+                                        <i class="fas fa-check"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-danger" onclick="rejectReturn(1)">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#RET-۵۶۷۹</td>
+                                <td>#ORD-۱۲۳۴۶</td>
+                                <td>سارا احمدی</td>
+                                <td>دیجیتال خیریه</td>
+                                <td><small>خرابی در حمل</small></td>
+                                <td>۱,۲۰۰,۰۰۰</td>
+                                <td><span class="badge-status badge-info">در حال بررسی</span></td>
+                                <td>۱۴۰۴/۰۱/۲۵</td>
+                                <td>
+                                    <button class="btn btn-sm btn-success">
+                                        <i class="fas fa-check"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-danger">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== مودال ایجاد فروشگاه ========= -->
+<div class="modal fade" id="createShopModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fas fa-store ms-2"></i> ایجاد فروشگاه جدید</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="createShopForm">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">نام فروشگاه</label>
+                            <input type="text" class="form-control" placeholder="مثال: فروشگاه پوشاک مهر">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">نوع فروشگاه</label>
+                            <select class="form-select">
+                                <option>پوشاک</option>
+                                <option>دیجیتال</option>
+                                <option>مواد غذایی</option>
+                                <option>صنایع دستی</option>
+                                <option>سایر</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">ایمیل (مدیر/فروشنده)</label>
+                            <input type="email" class="form-control" placeholder="admin@shop.com">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">شماره تماس</label>
+                            <input type="text" class="form-control" placeholder="۰۲۱-۱۲۳۴۵۶۷۸">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">آدرس</label>
+                        <textarea class="form-control" rows="2" placeholder="آدرس کامل فروشگاه"></textarea>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">وبسایت</label>
+                            <input type="url" class="form-control" placeholder="https://">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">درصد خیریه پیش‌فرض</label>
+                            <div class="input-group">
+                                <input type="number" class="form-control" placeholder="۱۲" value="۱۲">
+                                <span class="input-group-text">٪</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">توضیحات</label>
+                        <textarea class="form-control" rows="2" placeholder="درباره فروشگاه..."></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">انصراف</button>
+                <button type="button" class="btn btn-primary-charity" onclick="createShop()">ایجاد فروشگاه</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== مودال سبد خرید ========= -->
+<div class="modal fade" id="cartModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fas fa-shopping-basket ms-2"></i> سبد خرید</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>محصول</th>
+                                <th>فروشگاه</th>
+                                <th>قیمت</th>
+                                <th>تعداد</th>
+                                <th>کمک به خیریه</th>
+                                <th>جمع</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>تیشرت طرح خیریه</td>
+                                <td>پوشاک مهر</td>
+                                <td>۲۵۰,۰۰۰</td>
+                                <td>
+                                    <input type="number" class="form-control form-control-sm" style="width: 70px;" value="۲" min="1">
+                                </td>
+                                <td><span style="color: var(--accent-teal);">۳۰,۰۰۰</span></td>
+                                <td>۵۶۰,۰۰۰</td>
+                                <td><button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                    <div>
+                        <label>کد تخفیف:</label>
+                        <div class="input-group" style="width: 250px;">
+                            <input type="text" class="form-control" placeholder="کد تخفیف">
+                            <button class="btn btn-outline-gold">اعمال</button>
+                        </div>
+                    </div>
+                    <div>
+                        <h6>جمع کل: <span class="fw-bold" style="color: var(--primary-deep);">۵۶۰,۰۰۰ تومان</span></h6>
+                        <small class="text-muted">کمک به خیریه: ۶۰,۰۰۰ تومان</small>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">بستن</button>
+                <button type="button" class="btn btn-primary-charity">تسویه حساب</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== مودال ایجاد کوپن ========= -->
+<div class="modal fade" id="createCouponModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fas fa-tag ms-2"></i> ایجاد کوپن تخفیف جدید</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label class="form-label">کد تخفیف</label>
+                        <input type="text" class="form-control" placeholder="مثال: CHARITY۲۰۲۴">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">نوع تخفیف</label>
+                        <select class="form-select">
+                            <option>درصدی</option>
+                            <option>مبلغی</option>
+                            <option>ارسال رایگان</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">مقدار تخفیف</label>
+                        <input type="number" class="form-control" placeholder="مثال: ۲۰">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">حداقل مبلغ سفارش</label>
+                        <input type="number" class="form-control" placeholder="۲۰۰,۰۰۰">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">خیریه مرتبط</label>
+                        <select class="form-select">
+                            <option>همه خیریه‌ها</option>
+                            <option>خیریه امام رضا (ع)</option>
+                            <option>مؤسسه مهر سبز</option>
+                            <option>خیریه نورالهدی</option>
+                        </select>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <label class="form-label">اعتبار از</label>
+                            <input type="text" class="form-control datepicker" placeholder="۱۴۰۴/۰۱/۰۱">
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label">تا تاریخ</label>
+                            <input type="text" class="form-control datepicker" placeholder="۱۴۰۴/۰۳/۰۱">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">محدودیت استفاده</label>
+                        <input type="number" class="form-control" placeholder="۱۰۰">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">انصراف</button>
+                <button type="button" class="btn btn-primary-charity">ایجاد کوپن</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ==================== توابع مدیریت فروشگاه ====================
+    function viewShop(shopId) {
+        alert(`مشاهده فروشگاه ${shopId} - اتصال به API: /api/v1/endpoints/shop/${shopId}`);
+    }
+
+    function addVendor(shopId) {
+        alert(`افزودن فروشنده به فروشگاه ${shopId} - اتصال به API: /api/v1/endpoints/shop/${shopId}/vendors`);
+    }
+
+    function verifyShop(shopId) {
+        if(confirm('آیا از تأیید این فروشگاه اطمینان دارید؟')) {
+            alert(`تأیید فروشگاه ${shopId} - اتصال به API: /api/v1/endpoints/shop/${shopId}/verify`);
+        }
+    }
+
+    function createShop() {
+        alert('ایجاد فروشگاه جدید - اتصال به API: /api/v1/endpoints/shop/');
+        $('#createShopModal').modal('hide');
+    }
+
+    // ==================== توابع مدیریت سفارشات ====================
+    function viewOrder(orderId) {
+        alert(`مشاهده سفارش ${orderId} - اتصال به API: /api/v1/endpoints/orders/${orderId}`);
+    }
+
+    function updateOrderStatus(orderId) {
+        alert(`تغییر وضعیت سفارش ${orderId} - اتصال به API: /api/v1/endpoints/orders/${orderId}/status`);
+    }
+
+    // ==================== توابع مدیریت موجودی ====================
+    function checkLowStock() {
+        alert('دریافت لیست محصولات کم‌موجود - اتصال به API: /api/v1/endpoints/inventory/low-stock');
+    }
+
+    // ==================== توابع مدیریت کوپن ====================
+    function activateCoupon(couponId) {
+        alert(`فعال‌سازی کوپن ${couponId} - اتصال به API: /api/v1/endpoints/coupons/${couponId}/activate`);
+    }
+
+    // ==================== توابع مدیریت مرجوعی ====================
+    function approveReturn(returnId) {
+        alert(`تأیید درخواست مرجوعی ${returnId} - اتصال به API: /api/v1/endpoints/returns/${returnId}`);
+    }
+
+    function rejectReturn(returnId) {
+        alert(`رد درخواست مرجوعی ${returnId}`);
+    }
+
+    function logout() {
+        alert('خروج از سیستم');
+        window.location.reload();
+    }
+
+    // ==================== مقداردهی اولیه ====================
+    window.onload = function() {
+        // فعال‌سازی Select2
+        $('.form-select').select2({
+            dropdownParent: $('#createShopModal'),
+            language: {
+                noResults: function() { return "نتیجه‌ای یافت نشد"; }
+            }
+        });
+
+        // تنظیم datepicker
+        document.querySelectorAll('.datepicker').forEach(el => {
+            el.placeholder = '۱۴۰۴/۰۱/۰۱';
+        });
+    };
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

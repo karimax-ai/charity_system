@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تأیید هویت | نورخیریه</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/auth-style.css">
+</head>
+<body>
+    <div class="auth-wrapper">
+        <div class="auth-card animate__animated animate__fadeInUp">
+            <div class="auth-header">
+                <div class="brand-icon">
+                    <i class="fas fa-id-card"></i>
+                </div>
+                <h2 class="fw-bold mb-2">تأیید هویت</h2>
+                <p class="mb-0 opacity-75">با احترام به حریم خصوصی شما</p>
+            </div>
+
+            <div class="auth-body">
+                <div id="errorAlert" class="alert-custom alert-danger d-none">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span id="errorMessage"></span>
+                </div>
+
+                <div class="alert alert-info bg-soft-primary border-0">
+                    <i class="fas fa-shield-alt me-2 text-primary"></i>
+                    مدارک شما محرمانه باقی می‌ماند و فقط توسط مدیر بررسی می‌شود.
+                </div>
+
+                <form id="verificationForm">
+                    <!-- نوع مدرک -->
+                    <div class="mb-4">
+                        <label class="form-label fw-bold mb-3">نوع مدرک</label>
+                        <div class="d-flex gap-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="docType" id="nationalCard" value="national_card" checked>
+                                <label class="form-check-label" for="nationalCard">
+                                    کارت ملی
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="docType" id="birthCertificate" value="birth_certificate">
+                                <label class="form-check-label" for="birthCertificate">
+                                    شناسنامه
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="docType" id="license" value="license">
+                                <label class="form-check-label" for="license">
+                                    جواز کسب
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- آپلود فایل -->
+                    <div class="mb-4">
+                        <label class="form-label fw-bold mb-3">آپلود تصویر مدرک</label>
+                        <div class="upload-area" id="uploadArea">
+                            <div class="upload-icon">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                            </div>
+                            <h6 class="fw-bold mb-2">برای آپلود کلیک کنید یا فایل را اینجا بکشید</h6>
+                            <p class="text-secondary small mb-0">
+                                حداکثر حجم ۵ مگابایت - فرمت JPG, PNG, PDF
+                            </p>
+                            <input type="file" id="fileInput" accept=".jpg,.jpeg,.png,.pdf" style="display: none;">
+                        </div>
+
+                        <!-- پیش‌نمایش فایل -->
+                        <div id="filePreview" class="mt-3 d-none">
+                            <div class="d-flex align-items-center gap-3 p-3 bg-light rounded-3">
+                                <i class="fas fa-file-image fa-2x text-primary"></i>
+                                <div class="flex-grow-1">
+                                    <span id="fileName" class="fw-bold"></span>
+                                    <span id="fileSize" class="text-secondary small d-block"></span>
+                                </div>
+                                <button type="button" class="btn btn-sm btn-outline-danger" onclick="removeFile()">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- توضیحات اضافه -->
+                    <div class="mb-4">
+                        <label class="form-label fw-bold">توضیحات (اختیاری)</label>
+                        <textarea class="form-control" id="description" rows="3"
+                                  placeholder="توضیحات اضافه در مورد مدرک..."></textarea>
+                    </div>
+
+                    <!-- تعهدنامه -->
+                    <div class="form-check mb-4">
+                        <input class="form-check-input" type="checkbox" id="confirm" required>
+                        <label class="form-check-label text-secondary" for="confirm">
+                            صحت اطلاعات وارد شده را تأیید می‌کنم
+                        </label>
+                    </div>
+
+                    <!-- دکمه ارسال -->
+                    <button type="submit" id="submitBtn" class="btn btn-gradient w-100 py-3">
+                        <span id="submitBtnText">ارسال مدارک</span>
+                        <span id="submitBtnSpinner" class="spinner-border spinner-border-sm d-none"></span>
+                    </button>
+
+                    <p class="text-center text-secondary small mt-4">
+                        پس از تأیید مدیر، حساب کاربری شما فعال می‌شود
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script>
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const filePreview = document.getElementById('filePreview');
+        let selectedFile = null;
+
+        // آپلود با کلیک
+        uploadArea.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        // Drag & Drop
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                handleFile(files[0]);
+            }
+        });
+
+        // انتخاب فایل
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                handleFile(e.target.files[0]);
+            }
+        });
+
+        function handleFile(file) {
+            selectedFile = file;
+
+            document.getElementById('fileName').innerText = file.name;
+            document.getElementById('fileSize').innerText =
+                (file.size / 1024).toFixed(2) + ' KB';
+
+            filePreview.classList.remove('d-none');
+        }
+
+        function removeFile() {
+            selectedFile = null;
+            fileInput.value = '';
+            filePreview.classList.add('d-none');
+        }
+
+        // ارسال فرم
+        document.getElementById('verificationForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            if (!selectedFile) {
+                document.getElementById('errorMessage').innerText = 'لطفاً یک فایل انتخاب کنید';
+                document.getElementById('errorAlert').classList.remove('d-none');
+                return;
+            }
+
+            const btn = document.getElementById('submitBtn');
+            const btnText = document.getElementById('submitBtnText');
+            const spinner = document.getElementById('submitBtnSpinner');
+
+            btn.disabled = true;
+            btnText.classList.add('d-none');
+            spinner.classList.remove('d-none');
+
+            try {
+                const docType = document.querySelector('input[name="docType"]:checked').value;
+
+                // تبدیل فایل به base64
+                const reader = new FileReader();
+                reader.readAsDataURL(selectedFile);
+                reader.onload = async function() {
+                    const base64File = reader.result.split(',')[1];
+
+                    const response = await axios.post('/api/v1/auth/verification/documents', [{
+                        document_type: docType,
+                        document_data: base64File,
+                        filename: selectedFile.name,
+                        mime_type: selectedFile.type,
+                        description: document.getElementById('description').value
+                    }], {
+                        headers: {
+                            'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
+                            'Content-Type': 'application/json'
+                        }
+                    });
+
+                    window.location.href = '/dashboard?verification_submitted=1';
+                };
+
+            } catch (error) {
+                btn.disabled = false;
+                btnText.classList.remove('d-none');
+                spinner.classList.add('d-none');
+
+                document.getElementById('errorMessage').innerText =
+                    error.response?.data?.detail || 'خطا در ارسال مدارک';
+                document.getElementById('errorAlert').classList.remove('d-none');
+            }
+        });
+    </script>
+</body>
+</html>

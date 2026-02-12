@@ -1,0 +1,2184 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>سامانه هوشمند مدیریت خیریه‌ها | خیریه‌آنلاین</title>
+
+    <!-- SEO & Meta -->
+    <meta name="description" content="سامانه جامع و هوشمند مدیریت خیریه‌ها، نیازمندی‌ها و کمک‌های مردمی با قابلیت تأیید هویت، گزارش‌گیری پیشرفته و پرداخت امن">
+    <meta name="theme-color" content="#0a2c3d">
+
+    <!-- Bootstrap 5 RTL -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
+
+    <!-- Font Awesome 6 Pro -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <!-- Vazir Font -->
+    <link href="https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.css" rel="stylesheet">
+
+    <!-- ApexCharts -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+    <!-- Select2 پیشرفته -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/i18n/fa.js"></script>
+
+    <!-- Persian Datepicker -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/shahtheme/persian-datepicker@1.2.0/dist/css/persian-datepicker.min.css">
+    <script src="https://cdn.jsdelivr.net/gh/shahtheme/persian-datepicker@1.2.0/dist/js/persian-datepicker.min.js"></script>
+
+    <!-- Toastify -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+    <!-- AOS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <style>
+        /* ===== سیستم طراحی پیشرفته با معماری Enterprise ===== */
+        :root {
+            --primary-deep: #0a2c3d;
+            --primary-soft: #1e4a5f;
+            --primary-gradient: linear-gradient(145deg, #0a2c3d, #1e4a5f);
+            --primary-gradient-reverse: linear-gradient(145deg, #1e4a5f, #0a2c3d);
+
+            --accent-gold: #e6b31e;
+            --accent-gold-soft: rgba(230, 179, 30, 0.12);
+            --accent-gold-gradient: linear-gradient(135deg, #e6b31e, #ffd166);
+
+            --accent-orange: #ff8a5c;
+            --accent-orange-soft: rgba(255, 138, 92, 0.12);
+            --accent-orange-gradient: linear-gradient(135deg, #ff8a5c, #ffaa7a);
+
+            --accent-teal: #2a9d8f;
+            --accent-teal-soft: rgba(42, 157, 143, 0.12);
+            --accent-teal-gradient: linear-gradient(135deg, #2a9d8f, #4ecdc4);
+
+            --accent-purple: #6c5ce7;
+            --accent-purple-soft: rgba(108, 92, 231, 0.12);
+            --accent-purple-gradient: linear-gradient(135deg, #6c5ce7, #a29bfe);
+
+            --success-emerald: #10b981;
+            --error-coral: #ef4444;
+            --warning-amber: #f59e0b;
+            --info-sky: #3b82f6;
+
+            --gray-50: #f8fafc;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --gray-400: #94a3b8;
+            --gray-500: #64748b;
+            --gray-600: #475569;
+            --gray-700: #334155;
+            --gray-800: #1e293b;
+            --gray-900: #0f172a;
+
+            --glass-white: rgba(255, 255, 255, 0.95);
+            --glass-blur: blur(16px);
+
+            --shadow-xs: 0 2px 4px rgba(0,0,0,0.02);
+            --shadow-sm: 0 4px 6px -2px rgba(0,0,0,0.05);
+            --shadow-md: 0 12px 16px -4px rgba(0,0,0,0.06);
+            --shadow-lg: 0 20px 24px -6px rgba(0,0,0,0.08);
+            --shadow-xl: 0 32px 48px -12px rgba(0,0,0,0.12);
+            --shadow-gold: 0 12px 24px -8px rgba(230, 179, 30, 0.24);
+            --shadow-teal: 0 12px 24px -8px rgba(42, 157, 143, 0.24);
+
+            --radius-xs: 6px;
+            --radius-sm: 10px;
+            --radius-md: 14px;
+            --radius-lg: 20px;
+            --radius-xl: 28px;
+            --radius-2xl: 36px;
+            --radius-full: 9999px;
+
+            --font-primary: 'Vazir', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --transition-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+            --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+
+            --sidebar-width: 300px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: var(--font-primary);
+        }
+
+        body {
+            background-color: var(--gray-50);
+            overflow-x: hidden;
+        }
+
+        /* ===== اسکرولبار سفارشی ===== */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--gray-100);
+            border-radius: var(--radius-full);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gray-400);
+            border-radius: var(--radius-full);
+            transition: all 0.3s;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--gray-500);
+        }
+
+        /* ===== سایدبار فوق‌حرفه‌ای ===== */
+        .dashboard-sidebar {
+            position: fixed;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: var(--sidebar-width);
+            background: var(--primary-gradient);
+            box-shadow: var(--shadow-xl);
+            padding: 28px 20px;
+            overflow-y: auto;
+            transition: all 0.4s var(--transition-bounce);
+            z-index: 1050;
+        }
+
+        .sidebar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 40px;
+            padding: 0 12px;
+        }
+
+        .sidebar-brand-logo {
+            width: 52px;
+            height: 52px;
+            background: var(--accent-gold-gradient);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: var(--primary-deep);
+            box-shadow: var(--shadow-gold);
+        }
+
+        .sidebar-brand h3 {
+            color: white;
+            font-weight: 700;
+            margin: 0;
+            font-size: 1.6rem;
+            letter-spacing: -0.5px;
+        }
+
+        .sidebar-user {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(8px);
+            border-radius: var(--radius-xl);
+            padding: 20px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .user-avatar-xl {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: var(--accent-gold-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-deep);
+            font-weight: 800;
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+            border: 3px solid rgba(255,255,255,0.3);
+        }
+
+        .nav-link-sidebar {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 18px;
+            border-radius: var(--radius-lg);
+            color: rgba(255, 255, 255, 0.75);
+            font-weight: 500;
+            transition: all 0.3s var(--transition-smooth);
+            margin-bottom: 4px;
+        }
+
+        .nav-link-sidebar i {
+            font-size: 1.3rem;
+            width: 24px;
+            text-align: center;
+        }
+
+        .nav-link-sidebar:hover {
+            background: rgba(230, 179, 30, 0.15);
+            color: white;
+            transform: translateX(-5px);
+        }
+
+        .nav-link-sidebar.active {
+            background: var(--accent-gold);
+            color: var(--primary-deep);
+            box-shadow: var(--shadow-gold);
+        }
+
+        /* ===== محتوای اصلی ===== */
+        .main-content {
+            margin-right: var(--sidebar-width);
+            padding: 28px 32px;
+            transition: all 0.4s var(--transition-bounce);
+            min-height: 100vh;
+        }
+
+        @media (max-width: 992px) {
+            .dashboard-sidebar {
+                right: -100%;
+            }
+            .dashboard-sidebar.show {
+                right: 0;
+            }
+            .main-content {
+                margin-right: 0;
+            }
+        }
+
+        /* ===== هدر پیشرفته ===== */
+        .dashboard-header {
+            background: var(--glass-white);
+            backdrop-filter: var(--glass-blur);
+            border-radius: var(--radius-2xl);
+            padding: 16px 28px;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 32px;
+            border: 1px solid rgba(255,255,255,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .header-search {
+            display: flex;
+            align-items: center;
+            background: var(--gray-100);
+            border-radius: var(--radius-full);
+            padding: 8px 20px;
+            width: 360px;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .header-search:focus-within {
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 0 4px var(--accent-gold-soft);
+            background: white;
+        }
+
+        .header-search i {
+            color: var(--gray-500);
+            margin-left: 10px;
+        }
+
+        .header-search input {
+            border: none;
+            background: transparent;
+            outline: none;
+            width: 100%;
+        }
+
+        .notification-badge {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .badge-counter {
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            background: var(--accent-orange-gradient);
+            color: white;
+            border-radius: var(--radius-full);
+            padding: 3px 8px;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+
+        .user-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+        }
+
+        /* ===== تب‌های حرفه‌ای ===== */
+        .nav-tabs-pro {
+            border-bottom: none;
+            background: white;
+            padding: 8px;
+            border-radius: var(--radius-full);
+            display: inline-flex;
+            margin-bottom: 28px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-tabs-pro .nav-link {
+            border: none;
+            color: var(--gray-600);
+            font-weight: 600;
+            padding: 12px 32px;
+            border-radius: var(--radius-full);
+            transition: all 0.3s;
+        }
+
+        .nav-tabs-pro .nav-link i {
+            margin-left: 8px;
+        }
+
+        .nav-tabs-pro .nav-link.active {
+            background: var(--primary-gradient);
+            color: white;
+            box-shadow: var(--shadow-md);
+        }
+
+        /* ===== کارت‌های آماری مینی ===== */
+        .stat-card-mini {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 18px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: all 0.4s var(--transition-bounce);
+            border: 1px solid var(--gray-200);
+            height: 100%;
+        }
+
+        .stat-card-mini:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: transparent;
+        }
+
+        .stat-icon-mini {
+            width: 52px;
+            height: 52px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+        }
+
+        /* ===== کارت خیریه ===== */
+        .charity-card {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: 24px;
+            border: 1px solid var(--gray-200);
+            transition: all 0.4s var(--transition-bounce);
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .charity-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--primary-gradient);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .charity-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-xl);
+            border-color: transparent;
+        }
+
+        .charity-card:hover::before {
+            opacity: 1;
+        }
+
+        .charity-logo {
+            width: 70px;
+            height: 70px;
+            border-radius: var(--radius-lg);
+            background: var(--gray-100);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--primary-deep);
+        }
+
+        .follow-btn {
+            background: transparent;
+            border: 2px solid var(--accent-gold);
+            color: var(--primary-deep);
+            border-radius: var(--radius-full);
+            padding: 8px 18px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .follow-btn:hover {
+            background: var(--accent-gold);
+            color: var(--primary-deep);
+            transform: translateY(-2px);
+        }
+
+        .follow-btn.following {
+            background: var(--accent-teal);
+            border-color: var(--accent-teal);
+            color: white;
+        }
+
+        /* ===== درگاه پرداخت ===== */
+        .payment-gateway-card {
+            border: 2px solid var(--gray-200);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: white;
+        }
+
+        .payment-gateway-card:hover {
+            border-color: var(--accent-gold);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .payment-gateway-card.selected {
+            border-color: var(--accent-teal);
+            background: var(--accent-teal-soft);
+        }
+
+        .gateway-logo {
+            font-size: 2.8rem;
+            margin-bottom: 12px;
+        }
+
+        /* ===== ویجت نیاز فوری ===== */
+        .urgent-need-badge {
+            background: linear-gradient(135deg, #fee2e2, #fecaca);
+            color: #991b1b;
+            padding: 4px 12px;
+            border-radius: var(--radius-full);
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        /* ===== مودال پیشرفته ===== */
+        .modal-modern .modal-content {
+            border-radius: var(--radius-xl);
+            border: none;
+            background: var(--glass-white);
+            backdrop-filter: var(--glass-blur);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .modal-modern .modal-header {
+            border-bottom: 1px solid var(--gray-200);
+            padding: 24px 28px;
+        }
+
+        .modal-modern .modal-body {
+            padding: 28px;
+        }
+
+        .modal-modern .modal-footer {
+            border-top: 1px solid var(--gray-200);
+            padding: 24px 28px;
+        }
+
+        /* ===== ویزارد پیشرفته ===== */
+        .wizard-pro {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 32px;
+            background: var(--gray-100);
+            padding: 16px;
+            border-radius: var(--radius-full);
+        }
+
+        .step-pro {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .step-number-pro {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: white;
+            color: var(--gray-600);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin-left: 12px;
+            border: 2px solid var(--gray-300);
+            transition: all 0.3s;
+        }
+
+        .step-number-pro.active {
+            background: var(--accent-gold);
+            color: var(--primary-deep);
+            border-color: var(--accent-gold);
+        }
+
+        .step-number-pro.completed {
+            background: var(--accent-teal);
+            color: white;
+            border-color: var(--accent-teal);
+        }
+
+        .step-label-pro {
+            font-weight: 600;
+            color: var(--gray-700);
+        }
+
+        .step-connector-pro {
+            width: 80px;
+            height: 2px;
+            background: var(--gray-300);
+            margin: 0 20px;
+        }
+
+        /* ===== دکمه‌های اختصاصی ===== */
+        .btn-primary-charity {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            border-radius: var(--radius-full);
+            padding: 12px 28px;
+            font-weight: 700;
+            transition: all 0.4s var(--transition-bounce);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary-charity:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            color: white;
+        }
+
+        .btn-outline-gold {
+            background: transparent;
+            border: 2px solid var(--accent-gold);
+            color: var(--primary-deep);
+            border-radius: var(--radius-full);
+            padding: 10px 24px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-outline-gold:hover {
+            background: var(--accent-gold);
+            color: var(--primary-deep);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-gold);
+        }
+
+        /* ===== فرم‌های پیشرفته ===== */
+        .form-control, .form-select {
+            border-radius: var(--radius-md);
+            border: 1.5px solid var(--gray-200);
+            padding: 12px 16px;
+            transition: all 0.3s;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 0 4px var(--accent-gold-soft);
+        }
+
+        /* ===== انیمیشن‌ها ===== */
+        .fade-in-up {
+            animation: fadeInUp 0.6s var(--transition-smooth);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 var(--accent-gold-soft); }
+            70% { box-shadow: 0 0 0 12px rgba(230, 179, 30, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(230, 179, 30, 0); }
+        }
+
+        /* ======= صفحه‌بندی ====== */
+        .pagination .page-link {
+            border-radius: var(--radius-full);
+            margin: 0 4px;
+            color: var(--primary-deep);
+            border: 1px solid var(--gray-200);
+        }
+
+        .pagination .page-item.active .page-link {
+            background: var(--primary-gradient);
+            border-color: var(--primary-deep);
+            color: white;
+        }
+
+        /* ===== ریسپانسیو ===== */
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 20px 16px;
+            }
+
+            .nav-tabs-pro .nav-link {
+                padding: 10px 16px;
+                font-size: 0.9rem;
+            }
+
+            .nav-tabs-pro .nav-link span {
+                display: none;
+            }
+
+            .nav-tabs-pro .nav-link i {
+                margin-left: 0;
+                font-size: 1.2rem;
+            }
+
+            .step-label-pro {
+                display: none;
+            }
+
+            .step-connector-pro {
+                width: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== سایدبار حرفه‌ای ===== -->
+<div class="dashboard-sidebar" id="sidebar">
+    <div class="sidebar-brand">
+        <div class="sidebar-brand-logo">
+            <i class="fas fa-hand-holding-heart"></i>
+        </div>
+        <h3>خیریه‌آنلاین</h3>
+    </div>
+
+    <div class="sidebar-user text-center">
+        <div class="user-avatar-xl mx-auto">مد</div>
+        <h6 class="fw-bold text-white mb-1">علی محمدی</h6>
+        <span class="badge bg-warning text-dark px-3 py-2">مدیر ارشد سیستم</span>
+        <div class="mt-3 text-white-50 small">
+            <i class="fas fa-building ms-1"></i> ۲۴ خیریه فعال
+        </div>
+    </div>
+
+    <div class="nav flex-column">
+        <a href="#" class="nav-link-sidebar">
+            <i class="fas fa-tachometer-alt"></i>
+            <span>داشبورد</span>
+        </a>
+        <a href="#" class="nav-link-sidebar active">
+            <i class="fas fa-building"></i>
+            <span>مدیریت خیریه‌ها</span>
+        </a>
+        <a href="#" class="nav-link-sidebar">
+            <i class="fas fa-hand-holding-heart"></i>
+            <span>مدیریت کمک‌ها</span>
+        </a>
+        <a href="#" class="nav-link-sidebar">
+            <i class="fas fa-clipboard-list"></i>
+            <span>مدیریت نیازها</span>
+        </a>
+        <a href="#" class="nav-link-sidebar">
+            <i class="fas fa-users"></i>
+            <span>کاربران و نقش‌ها</span>
+        </a>
+        <a href="#" class="nav-link-sidebar">
+            <i class="fas fa-chart-line"></i>
+            <span>گزارشات پیشرفته</span>
+        </a>
+        <a href="#" class="nav-link-sidebar">
+            <i class="fas fa-cog"></i>
+            <span>تنظیمات</span>
+        </a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="nav flex-column">
+        <a href="#" class="nav-link-sidebar" onclick="logout()">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>خروج</span>
+        </a>
+    </div>
+</div>
+
+<!-- ===== محتوای اصلی ===== -->
+<div class="main-content">
+    <!-- هدر موبایل -->
+    <div class="d-flex align-items-center mb-3 d-lg-none">
+        <i class="fas fa-bars fs-3" onclick="document.getElementById('sidebar').classList.toggle('show')" style="color: var(--primary-deep); cursor: pointer;"></i>
+    </div>
+
+    <!-- ===== هدر پیشرفته ===== -->
+    <div class="dashboard-header fade-in-up">
+        <div class="d-flex align-items-center gap-3">
+            <div class="header-search">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="جستجوی هوشمند خیریه، نیاز، کمک...">
+            </div>
+        </div>
+        <div class="d-flex align-items-center gap-4">
+            <div class="notification-badge">
+                <i class="far fa-bell fs-5"></i>
+                <span class="badge-counter">۵</span>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+                <span class="fw-bold">علی محمدی</span>
+                <div class="user-avatar">ع</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== تب‌های اصلی حرفه‌ای ===== -->
+    <ul class="nav nav-tabs-pro" id="mainTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="charities-tab" data-bs-toggle="tab" data-bs-target="#charities" type="button">
+                <i class="fas fa-building"></i>
+                <span>خیریه‌ها</span>
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="donations-tab" data-bs-toggle="tab" data-bs-target="#donations" type="button">
+                <i class="fas fa-hand-holding-heart"></i>
+                <span>کمک‌ها</span>
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="needs-tab" data-bs-toggle="tab" data-bs-target="#needs" type="button">
+                <i class="fas fa-clipboard-list"></i>
+                <span>نیازها</span>
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="verification-tab" data-bs-toggle="tab" data-bs-target="#verification" type="button">
+                <i class="fas fa-shield-alt"></i>
+                <span>تأییدیه‌ها</span>
+            </button>
+        </li>
+    </ul>
+
+    <!-- ===== محتوای تب‌ها ===== -->
+    <div class="tab-content">
+        <!-- ===== تب 1: مدیریت خیریه‌ها (پیشرفته) ===== -->
+        <div class="tab-pane fade show active" id="charities" role="tabpanel">
+            <!-- هدر با آمار و دکمه اقدام -->
+            <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+                <div>
+                    <h4 class="fw-bold" style="color: var(--primary-deep);">
+                        <i class="fas fa-building ms-2"></i> مدیریت خیریه‌ها
+                    </h4>
+                    <p class="text-muted">مدیریت، تأیید و نظارت بر خیریه‌های فعال در پلتفرم</p>
+                </div>
+                <button class="btn btn-primary-charity" data-bs-toggle="modal" data-bs-target="#createCharityModal">
+                    <i class="fas fa-plus-circle ms-2"></i> ثبت خیریه جدید
+                </button>
+            </div>
+
+            <!-- فیلترهای پیشرفته -->
+            <div class="dashboard-card mb-4" data-aos="fade-up">
+                <div class="row g-3">
+                    <div class="col-lg-3 col-md-6">
+                        <label class="form-label fw-bold small">جستجوی خیریه</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-transparent"><i class="fas fa-search"></i></span>
+                            <input type="text" class="form-control" placeholder="نام، استان، شهر...">
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-6">
+                        <label class="form-label fw-bold small">وضعیت</label>
+                        <select class="form-select" id="charityStatusFilter">
+                            <option value="">همه</option>
+                            <option value="active">فعال</option>
+                            <option value="pending">در انتظار تأیید</option>
+                            <option value="inactive">غیرفعال</option>
+                            <option value="suspended">مسدود</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-2 col-md-6">
+                        <label class="form-label fw-bold small">نوع خیریه</label>
+                        <select class="form-select" id="charityTypeFilter">
+                            <option value="">همه</option>
+                            <option value="public">عمومی</option>
+                            <option value="private">خصوصی</option>
+                            <option value="ngo">سمن</option>
+                            <option value="religious">مذهبی</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-2 col-md-6">
+                        <label class="form-label fw-bold small">تأیید شده</label>
+                        <select class="form-select" id="charityVerifiedFilter">
+                            <option value="">همه</option>
+                            <option value="true">تأیید شده</option>
+                            <option value="false">تأیید نشده</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-3 d-flex align-items-end">
+                        <button class="btn btn-outline-gold w-100" onclick="filterCharities()">
+                            <i class="fas fa-filter ms-2"></i> اعمال فیلتر
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- آمار لحظه‌ای خیریه‌ها -->
+            <div class="row g-4 mb-4">
+                <div class="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="0">
+                    <div class="stat-card-mini">
+                        <div class="stat-icon-mini" style="background: var(--accent-gold-soft); color: var(--accent-gold);">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <div>
+                            <small class="text-muted">کل خیریه‌ها</small>
+                            <h4 class="fw-bold mb-0">۱۲۴</h4>
+                            <small class="text-success">+۸ نسبت به ماه قبل</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="stat-card-mini">
+                        <div class="stat-icon-mini" style="background: var(--accent-teal-soft); color: var(--accent-teal);">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div>
+                            <small class="text-muted">تأیید شده</small>
+                            <h4 class="fw-bold mb-0">۸۹</h4>
+                            <small class="text-muted">۷۲٪ از کل</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="stat-card-mini">
+                        <div class="stat-icon-mini" style="background: var(--accent-orange-soft); color: var(--accent-orange);">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div>
+                            <small class="text-muted">در انتظار تأیید</small>
+                            <h4 class="fw-bold mb-0">۱۲</h4>
+                            <span class="badge bg-warning">نیازمند بررسی</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="stat-card-mini">
+                        <div class="stat-icon-mini" style="background: var(--accent-purple-soft); color: var(--accent-purple);">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div>
+                            <small class="text-muted">دنبال‌کنندگان</small>
+                            <h4 class="fw-bold mb-0">۲,۸۴۰</h4>
+                            <small class="text-success">+۱۲٪</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- لیست خیریه‌ها به صورت کارتی -->
+            <div class="dashboard-card">
+                <div class="card-header-custom d-flex justify-content-between align-items-center mb-4">
+                    <h5 class="card-title fw-bold">
+                        <i class="fas fa-list-ul ms-2" style="color: var(--accent-gold);"></i>
+                        فهرست خیریه‌ها
+                    </h5>
+                    <div class="d-flex gap-2">
+                        <span class="badge bg-light text-dark px-3 py-2">
+                            <i class="fas fa-sort ms-1"></i> مرتب‌سازی: جدیدترین
+                        </span>
+                        <button class="btn btn-sm btn-outline-secondary">
+                            <i class="fas fa-download"></i> خروجی
+                        </button>
+                    </div>
+                </div>
+
+                <div class="row g-4" id="charitiesList">
+                    <!-- خیریه 1: تأیید شده -->
+                    <div class="col-xl-4 col-lg-6">
+                        <div class="charity-card">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div class="charity-logo">
+                                    <i class="fas fa-heart"></i>
+                                </div>
+                                <div>
+                                    <span class="badge-status badge-success">فعال</span>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <h5 class="fw-bold mb-1">خیریه امام رضا (ع)</h5>
+                                <p class="small text-muted mb-2">
+                                    <i class="fas fa-map-marker-alt ms-1"></i> مشهد، استان خراسان رضوی
+                                </p>
+                                <div class="d-flex gap-2 mb-2">
+                                    <span class="badge bg-light text-dark px-3">مذهبی</span>
+                                    <span class="badge bg-info px-3">تأیید شده</span>
+                                    <span class="badge bg-success px-3">شناسه: ۱۲۳۴۵</span>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-between mt-3">
+                                    <div>
+                                        <small class="text-muted d-block"><i class="fas fa-users ms-1"></i> ۱,۲۴۰ دنبال‌کننده</small>
+                                        <small class="text-muted"><i class="fas fa-hand-holding-heart ms-1"></i> ۴۵۰ کمک</small>
+                                    </div>
+                                    <span class="fw-bold" style="color: var(--accent-teal);">رتبه A+</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mt-3">
+                                    <button class="follow-btn following">
+                                        <i class="fas fa-check-circle ms-1"></i> دنبال می‌کنید
+                                    </button>
+                                    <div>
+                                        <button class="btn btn-sm btn-outline-secondary ms-1" onclick="viewCharity(1)">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-primary" onclick="editCharity(1)">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-info" onclick="verifyCharity(1)">
+                                            <i class="fas fa-shield-alt"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- خیریه 2: در انتظار تأیید -->
+                    <div class="col-xl-4 col-lg-6">
+                        <div class="charity-card">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div class="charity-logo">
+                                    <i class="fas fa-seedling"></i>
+                                </div>
+                                <div>
+                                    <span class="badge-status badge-warning">در انتظار تأیید</span>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <h5 class="fw-bold mb-1">مؤسسه مهر سبز</h5>
+                                <p class="small text-muted mb-2">
+                                    <i class="fas fa-map-marker-alt ms-1"></i> تهران، استان تهران
+                                </p>
+                                <div class="d-flex gap-2 mb-2">
+                                    <span class="badge bg-light text-dark px-3">سمن</span>
+                                    <span class="badge bg-secondary px-3">تأیید نشده</span>
+                                    <span class="urgent-need-badge">نیازمند مدارک</span>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-between mt-3">
+                                    <div>
+                                        <small class="text-muted d-block"><i class="fas fa-users ms-1"></i> ۸۵ دنبال‌کننده</small>
+                                        <small class="text-muted"><i class="fas fa-clock ms-1"></i> ثبت: ۳ روز پیش</small>
+                                    </div>
+                                    <span class="fw-bold text-warning">در انتظار</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mt-3">
+                                    <button class="follow-btn">
+                                        <i class="fas fa-plus-circle ms-1"></i> دنبال کنید
+                                    </button>
+                                    <div>
+                                        <button class="btn btn-sm btn-outline-secondary ms-1" onclick="viewCharity(2)">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-warning" onclick="reviewCharity(2)">
+                                            <i class="fas fa-clipboard-check"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- خیریه 3: فعال -->
+                    <div class="col-xl-4 col-lg-6">
+                        <div class="charity-card">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div class="charity-logo">
+                                    <i class="fas fa-hands"></i>
+                                </div>
+                                <div>
+                                    <span class="badge-status badge-success">فعال</span>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <h5 class="fw-bold mb-1">خیریه نورالهدی</h5>
+                                <p class="small text-muted mb-2">
+                                    <i class="fas fa-map-marker-alt ms-1"></i> اصفهان، استان اصفهان
+                                </p>
+                                <div class="d-flex gap-2 mb-2">
+                                    <span class="badge bg-light text-dark px-3">عمومی</span>
+                                    <span class="badge bg-info px-3">تأیید شده</span>
+                                    <span class="badge bg-primary px-3">نقره‌ای</span>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-between mt-3">
+                                    <div>
+                                        <small class="text-muted d-block"><i class="fas fa-users ms-1"></i> ۵۶۰ دنبال‌کننده</small>
+                                        <small class="text-muted"><i class="fas fa-trophy ms-1"></i> ۳ سال سابقه</small>
+                                    </div>
+                                    <span class="fw-bold" style="color: var(--accent-purple);">معتبر</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mt-3">
+                                    <button class="follow-btn">
+                                        <i class="fas fa-plus-circle ms-1"></i> دنبال کنید
+                                    </button>
+                                    <div>
+                                        <button class="btn btn-sm btn-outline-secondary ms-1" onclick="viewCharity(3)">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-primary" onclick="editCharity(3)">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- صفحه‌بندی پیشرفته -->
+                <div class="d-flex justify-content-between align-items-center mt-4">
+                    <div class="small text-muted">
+                        نمایش ۱ تا ۳ از ۱۲۴ خیریه
+                    </div>
+                    <nav>
+                        <ul class="pagination">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a>
+                            </li>
+                            <li class="page-item active"><a class="page-link" href="#">۱</a></li>
+                            <li class="page-item"><a class="page-link" href="#">۲</a></li>
+                            <li class="page-item"><a class="page-link" href="#">۳</a></li>
+                            <li class="page-item"><a class="page-link" href="#">۴</a></li>
+                            <li class="page-item"><a class="page-link" href="#">۵</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#"><i class="fas fa-chevron-left"></i></a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== تب 2: مدیریت کمک‌ها (پیشرفته) ===== -->
+        <div class="tab-pane fade" id="donations" role="tabpanel">
+            <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+                <div>
+                    <h4 class="fw-bold" style="color: var(--primary-deep);">
+                        <i class="fas fa-hand-holding-heart ms-2"></i> مدیریت کمک‌ها
+                    </h4>
+                    <p class="text-muted">مدیریت و نظارت بر کمک‌های مالی و غیرمالی</p>
+                </div>
+                <button class="btn btn-primary-charity" data-bs-toggle="modal" data-bs-target="#createDonationModal">
+                    <i class="fas fa-plus-circle ms-2"></i> ثبت کمک جدید
+                </button>
+            </div>
+
+            <!-- کارت‌های آمار پیشرفته کمک‌ها -->
+            <div class="row g-4 mb-4">
+                <div class="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="0">
+                    <div class="stat-card-mini">
+                        <div class="stat-icon-mini" style="background: var(--accent-gold-soft); color: var(--accent-gold);">
+                            <i class="fas fa-hand-holding-usd"></i>
+                        </div>
+                        <div>
+                            <small class="text-muted">کل کمک‌ها</small>
+                            <h4 class="fw-bold mb-0">۸۴۲.۵M</h4>
+                            <small class="text-muted">تومان</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="stat-card-mini">
+                        <div class="stat-icon-mini" style="background: var(--accent-teal-soft); color: var(--accent-teal);">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div>
+                            <small class="text-muted">پرداخت موفق</small>
+                            <h4 class="fw-bold mb-0">۱,۲۴۰</h4>
+                            <small class="text-success">۹۸٪ موفقیت</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="stat-card-mini">
+                        <div class="stat-icon-mini" style="background: var(--accent-orange-soft); color: var(--accent-orange);">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div>
+                            <small class="text-muted">در انتظار</small>
+                            <h4 class="fw-bold mb-0">۳۲</h4>
+                            <span class="badge bg-warning">تأیید نشده</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="stat-card-mini">
+                        <div class="stat-icon-mini" style="background: var(--accent-purple-soft); color: var(--accent-purple);">
+                            <i class="fas fa-file-invoice"></i>
+                        </div>
+                        <div>
+                            <small class="text-muted">رسید مالیاتی</small>
+                            <h4 class="fw-bold mb-0">۸۵۶</h4>
+                            <small class="text-success">+۱۲۴ جدید</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- نمودار پیشرفته کمک‌ها -->
+            <div class="dashboard-card" data-aos="fade-up">
+                <div class="card-header-custom d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="card-title fw-bold">
+                        <i class="fas fa-chart-line ms-2" style="color: var(--accent-gold);"></i>
+                        تحلیل روند کمک‌های مالی
+                    </h5>
+                    <div class="d-flex gap-2">
+                        <select class="form-select form-select-sm" style="width: 140px;" id="donationChartPeriod">
+                            <option value="7">۷ روز اخیر</option>
+                            <option value="30" selected>۳۰ روز اخیر</option>
+                            <option value="90">۹۰ روز اخیر</option>
+                            <option value="365">سالانه</option>
+                        </select>
+                        <button class="btn btn-sm btn-outline-secondary" onclick="exportDonationChart()">
+                            <i class="fas fa-download"></i>
+                        </button>
+                    </div>
+                </div>
+                <div id="donationChart" style="height: 380px;"></div>
+            </div>
+
+            <!-- درگاه‌های پرداخت پیشرفته -->
+            <div class="dashboard-card mt-4" data-aos="fade-up">
+                <div class="card-header-custom d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="card-title fw-bold">
+                        <i class="fas fa-credit-card ms-2" style="color: var(--accent-teal);"></i>
+                        درگاه‌های پرداخت فعال
+                    </h5>
+                    <button class="btn btn-sm btn-outline-primary">
+                        <i class="fas fa-plus-circle ms-1"></i> افزودن درگاه
+                    </button>
+                </div>
+                <div class="row g-3">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="payment-gateway-card selected">
+                            <div class="gateway-logo" style="color: #00a1e4;">
+                                <i class="fas fa-wallet"></i>
+                            </div>
+                            <h6 class="fw-bold">زرین‌پال</h6>
+                            <span class="badge bg-success">فعال</span>
+                            <div class="small text-muted mt-2">کارمزد: ۲.۵٪</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="payment-gateway-card">
+                            <div class="gateway-logo" style="color: #ed1c24;">
+                                <i class="fas fa-id-card"></i>
+                            </div>
+                            <h6 class="fw-bold">آی‌دی پی</h6>
+                            <span class="badge bg-success">فعال</span>
+                            <div class="small text-muted mt-2">کارمزد: ۲٪</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="payment-gateway-card">
+                            <div class="gateway-logo" style="color: #1a5a9c;">
+                                <i class="fas fa-university"></i>
+                            </div>
+                            <h6 class="fw-bold">درگاه ملت</h6>
+                            <span class="badge bg-secondary">غیرفعال</span>
+                            <div class="small text-muted mt-2">کارمزد: ۲.۵٪</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="payment-gateway-card">
+                            <div class="gateway-logo" style="color: var(--accent-teal);">
+                                <i class="fas fa-exchange-alt"></i>
+                            </div>
+                            <h6 class="fw-bold">واریز مستقیم</h6>
+                            <span class="badge bg-success">فعال</span>
+                            <div class="small text-muted mt-2">بدون کارمزد</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- آخرین کمک‌ها با جزئیات کامل -->
+            <div class="dashboard-card mt-4" data-aos="fade-up">
+                <div class="card-header-custom d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="card-title fw-bold">
+                        <i class="fas fa-history ms-2" style="color: var(--accent-orange);"></i>
+                        آخرین کمک‌ها
+                    </h5>
+                    <a href="#" class="small fw-bold">مشاهده همه <i class="fas fa-arrow-left ms-1"></i></a>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead class="bg-light">
+                            <tr>
+                                <th>کمک‌کننده</th>
+                                <th>خیریه</th>
+                                <th>مبلغ (تومان)</th>
+                                <th>روش پرداخت</th>
+                                <th>وضعیت</th>
+                                <th>تاریخ</th>
+                                <th>عملیات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="user-avatar me-2" style="width: 36px; height: 36px;">ر</div>
+                                        رضا کریمی
+                                    </div>
+                                </td>
+                                <td>خیریه امام رضا</td>
+                                <td class="fw-bold">۲,۵۰۰,۰۰۰</td>
+                                <td><span class="badge bg-light">زرین‌پال</span></td>
+                                <td><span class="badge-status badge-success">موفق</span></td>
+                                <td>۱۴۰۴/۰۱/۲۵</td>
+                                <td>
+                                    <button class="btn btn-sm btn-link" onclick="viewDonation(1)">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-link" onclick="generateReceipt(1)">
+                                        <i class="fas fa-file-invoice"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="user-avatar me-2" style="width: 36px; height: 36px;">س</div>
+                                        سارا احمدی
+                                    </div>
+                                </td>
+                                <td>مؤسسه مهر سبز</td>
+                                <td class="fw-bold">۱,۲۰۰,۰۰۰</td>
+                                <td><span class="badge bg-light">آی‌دی پی</span></td>
+                                <td><span class="badge-status badge-warning">در انتظار</span></td>
+                                <td>۱۴۰۴/۰۱/۲۴</td>
+                                <td>
+                                    <button class="btn btn-sm btn-link" onclick="viewDonation(2)">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-link" onclick="approveDonation(2)">
+                                        <i class="fas fa-check-circle"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="user-avatar me-2" style="width: 36px; height: 36px;">م</div>
+                                        محمد رضایی
+                                    </div>
+                                </td>
+                                <td>خیریه نورالهدی</td>
+                                <td class="fw-bold">۳,۵۰۰,۰۰۰</td>
+                                <td><span class="badge bg-light">واریز مستقیم</span></td>
+                                <td><span class="badge-status badge-info">در حال بررسی</span></td>
+                                <td>۱۴۰۴/۰۱/۲۳</td>
+                                <td>
+                                    <button class="btn btn-sm btn-link" onclick="viewDonation(3)">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-link" onclick="verifyDirectTransfer(3)">
+                                        <i class="fas fa-check-double"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== تب 3: مدیریت نیازها (پیشرفته) ===== -->
+        <div class="tab-pane fade" id="needs" role="tabpanel">
+            <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+                <div>
+                    <h4 class="fw-bold" style="color: var(--primary-deep);">
+                        <i class="fas fa-clipboard-list ms-2"></i> مدیریت نیازها
+                    </h4>
+                    <p class="text-muted">ثبت، پیگیری و تأمین نیازهای خیریه‌ها و نیازمندان</p>
+                </div>
+                <button class="btn btn-primary-charity" data-bs-toggle="modal" data-bs-target="#needWizardModal">
+                    <i class="fas fa-plus-circle ms-2"></i> ثبت نیاز (Wizard)
+                </button>
+            </div>
+
+            <!-- فیلترهای پیشرفته نیازها -->
+            <div class="dashboard-card mb-4" data-aos="fade-up">
+                <div class="row g-3">
+                    <div class="col-lg-2 col-md-4">
+                        <label class="form-label fw-bold small">دسته‌بندی</label>
+                        <select class="form-select" id="needCategoryFilter">
+                            <option>همه</option>
+                            <option>آموزشی</option>
+                            <option>بهداشتی</option>
+                            <option>معیشتی</option>
+                            <option>جهیزیه</option>
+                            <option>درمانی</option>
+                            <option>مسکن</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-2 col-md-4">
+                        <label class="form-label fw-bold small">استان</label>
+                        <select class="form-select" id="needProvinceFilter">
+                            <option>همه</option>
+                            <option>تهران</option>
+                            <option>خراسان رضوی</option>
+                            <option>اصفهان</option>
+                            <option>فارس</option>
+                            <option>خوزستان</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-2 col-md-4">
+                        <label class="form-label fw-bold small">وضعیت</label>
+                        <select class="form-select" id="needStatusFilter">
+                            <option>همه</option>
+                            <option>فعال</option>
+                            <option>در انتظار</option>
+                            <option>تکمیل شده</option>
+                            <option>پیش‌نویس</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-2 col-md-4">
+                        <label class="form-label fw-bold small">فوریت</label>
+                        <select class="form-select" id="needUrgencyFilter">
+                            <option>همه</option>
+                            <option>عادی</option>
+                            <option>فوری</option>
+                            <option>اضطراری</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-4 d-flex align-items-end gap-2">
+                        <button class="btn btn-outline-gold flex-grow-1" onclick="filterNeeds()">
+                            <i class="fas fa-filter ms-2"></i> اعمال فیلتر
+                        </button>
+                        <button class="btn btn-outline-secondary" onclick="resetNeedFilters()">
+                            <i class="fas fa-redo-alt"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- آمار لحظه‌ای نیازها -->
+            <div class="row g-4 mb-4">
+                <div class="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="0">
+                    <div class="stat-card-mini">
+                        <div class="stat-icon-mini" style="background: var(--accent-gold-soft); color: var(--accent-gold);">
+                            <i class="fas fa-clipboard-list"></i>
+                        </div>
+                        <div>
+                            <small class="text-muted">کل نیازها</small>
+                            <h4 class="fw-bold mb-0">۱۵۶</h4>
+                            <small class="text-success">+۱۲ این ماه</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="stat-card-mini">
+                        <div class="stat-icon-mini" style="background: var(--accent-teal-soft); color: var(--accent-teal);">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div>
+                            <small class="text-muted">تکمیل شده</small>
+                            <h4 class="fw-bold mb-0">۸۷</h4>
+                            <small class="text-muted">۵۶٪ از کل</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="stat-card-mini">
+                        <div class="stat-icon-mini" style="background: var(--accent-orange-soft); color: var(--accent-orange);">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div>
+                            <small class="text-muted">در انتظار</small>
+                            <h4 class="fw-bold mb-0">۲۴</h4>
+                            <span class="badge bg-warning">نیازمند کمک</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="stat-card-mini">
+                        <div class="stat-icon-mini" style="background: var(--accent-purple-soft); color: var(--accent-purple);">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div>
+                            <small class="text-muted">نیاز فوری</small>
+                            <h4 class="fw-bold mb-0">۱۲</h4>
+                            <span class="badge bg-danger">اضطراری</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- لیست نیازها با جزئیات کامل -->
+            <div class="dashboard-card" data-aos="fade-up">
+                <div class="card-header-custom d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="card-title fw-bold">
+                        <i class="fas fa-tasks ms-2" style="color: var(--accent-teal);"></i>
+                        فهرست نیازهای فعال
+                    </h5>
+                    <div class="d-flex gap-2">
+                        <span class="badge bg-light text-dark px-3 py-2">
+                            <i class="fas fa-sort-amount-down ms-1"></i> اولویت: فوری
+                        </span>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead class="bg-light">
+                            <tr>
+                                <th>عنوان نیاز</th>
+                                <th>خیریه</th>
+                                <th>دسته‌بندی</th>
+                                <th>مبلغ هدف</th>
+                                <th>جمع‌آوری شده</th>
+                                <th>پیشرفت</th>
+                                <th>فوریت</th>
+                                <th>وضعیت</th>
+                                <th>عملیات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="fw-bold">کمک به دانشجویان بی‌بضاعت</td>
+                                <td>خیریه امام رضا</td>
+                                <td><span class="badge bg-light">آموزشی</span></td>
+                                <td>۵۰,۰۰۰,۰۰۰</td>
+                                <td>۳۲,۵۰۰,۰۰۰</td>
+                                <td>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="progress" style="width: 100px; height: 8px;">
+                                            <div class="progress-bar bg-success" style="width: 65%;"></div>
+                                        </div>
+                                        <small class="fw-bold">۶۵٪</small>
+                                    </div>
+                                </td>
+                                <td><span class="badge bg-warning">فوری</span></td>
+                                <td><span class="badge-status badge-success">فعال</span></td>
+                                <td>
+                                    <div class="btn-group">
+                                        <button class="btn btn-sm btn-outline-secondary" onclick="viewNeed(1)">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-primary" onclick="editNeed(1)">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-info" onclick="addVerification(1)">
+                                            <i class="fas fa-check-double"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bold">خرید ویلچر برای معلولین</td>
+                                <td>مؤسسه مهر سبز</td>
+                                <td><span class="badge bg-light">بهداشتی</span></td>
+                                <td>۱۵,۰۰۰,۰۰۰</td>
+                                <td>۴,۲۰۰,۰۰۰</td>
+                                <td>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="progress" style="width: 100px; height: 8px;">
+                                            <div class="progress-bar bg-warning" style="width: 28%;"></div>
+                                        </div>
+                                        <small class="fw-bold">۲۸٪</small>
+                                    </div>
+                                </td>
+                                <td><span class="badge bg-danger">اضطراری</span></td>
+                                <td><span class="badge-status badge-warning">در انتظار</span></td>
+                                <td>
+                                    <div class="btn-group">
+                                        <button class="btn btn-sm btn-outline-secondary" onclick="viewNeed(2)">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-primary" onclick="editNeed(2)">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bold">جهیزیه نوعروسان</td>
+                                <td>خیریه نورالهدی</td>
+                                <td><span class="badge bg-light">جهیزیه</span></td>
+                                <td>۳۰,۰۰۰,۰۰۰</td>
+                                <td>۲۸,۵۰۰,۰۰۰</td>
+                                <td>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="progress" style="width: 100px; height: 8px;">
+                                            <div class="progress-bar bg-success" style="width: 95%;"></div>
+                                        </div>
+                                        <small class="fw-bold">۹۵٪</small>
+                                    </div>
+                                </td>
+                                <td><span class="badge bg-success">عادی</span></td>
+                                <td><span class="badge-status badge-success">فعال</span></td>
+                                <td>
+                                    <div class="btn-group">
+                                        <button class="btn btn-sm btn-outline-secondary" onclick="viewNeed(3)">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-primary" onclick="editNeed(3)">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== تب 4: تأییدیه‌ها و احراز هویت ===== -->
+        <div class="tab-pane fade" id="verification" role="tabpanel">
+            <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+                <div>
+                    <h4 class="fw-bold" style="color: var(--primary-deep);">
+                        <i class="fas fa-shield-alt ms-2"></i> تأییدیه‌ها و احراز هویت
+                    </h4>
+                    <p class="text-muted">مدیریت درخواست‌های تأیید خیریه‌ها و نیازمندان</p>
+                </div>
+                <div>
+                    <span class="badge bg-warning px-4 py-2 pulse">
+                        <i class="fas fa-clock ms-1"></i> ۱۲ درخواست در انتظار
+                    </span>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <div class="dashboard-card">
+                        <h5 class="fw-bold mb-3">
+                            <i class="fas fa-building ms-2" style="color: var(--accent-gold);"></i>
+                            درخواست‌های تأیید خیریه
+                        </h5>
+                        <div class="list-group">
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="fw-bold mb-1">مؤسسه مهر سبز</h6>
+                                    <small class="text-muted">درخواست: ۱۴۰۴/۰۱/۲۰</small>
+                                </div>
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-sm btn-success" onclick="approveCharity(2)">تأیید</button>
+                                    <button class="btn btn-sm btn-outline-danger" onclick="rejectCharity(2)">رد</button>
+                                    <button class="btn btn-sm btn-outline-secondary" onclick="viewCharity(2)">مشاهده</button>
+                                </div>
+                            </div>
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="fw-bold mb-1">خیریه امام علی (ع)</h6>
+                                    <small class="text-muted">درخواست: ۱۴۰۴/۰۱/۱۹</small>
+                                </div>
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-sm btn-success">تأیید</button>
+                                    <button class="btn btn-sm btn-outline-danger">رد</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="dashboard-card">
+                        <h5 class="fw-bold mb-3">
+                            <i class="fas fa-user-check ms-2" style="color: var(--accent-teal);"></i>
+                            درخواست‌های تأیید نیازمندان
+                        </h5>
+                        <div class="list-group">
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="fw-bold mb-1">فاطمه سلیمی</h6>
+                                    <small class="text-muted">مدارک ارسال شده: ۱۴۰۴/۰۱/۲۲</small>
+                                </div>
+                                <div>
+                                    <button class="btn btn-sm btn-success">تأیید</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== مودال ثبت خیریه پیشرفته ===== -->
+<div class="modal fade modal-modern" id="createCharityModal" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold">
+                    <i class="fas fa-plus-circle ms-2" style="color: var(--accent-gold);"></i>
+                    ثبت خیریه جدید
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="createCharityForm">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">نام خیریه</label>
+                                <input type="text" class="form-control" placeholder="مثال: خیریه امام رضا (ع)" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">نوع خیریه</label>
+                                <select class="form-select" required>
+                                    <option value="">انتخاب کنید</option>
+                                    <option value="public">عمومی</option>
+                                    <option value="private">خصوصی</option>
+                                    <option value="ngo">سمن</option>
+                                    <option value="religious">مذهبی</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">استان</label>
+                                <select class="form-select" id="provinceSelect">
+                                    <option>تهران</option>
+                                    <option>خراسان رضوی</option>
+                                    <option>اصفهان</option>
+                                    <option>فارس</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">شهر</label>
+                                <input type="text" class="form-control" placeholder="مثال: مشهد">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">کد پستی</label>
+                                <input type="text" class="form-control" placeholder="۱۰ رقمی">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">آدرس کامل</label>
+                                <textarea class="form-control" rows="2"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">تلفن تماس</label>
+                                <input type="text" class="form-control" placeholder="۰۲۱-۱۲۳۴۵۶۷۸">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">وبسایت</label>
+                                <input type="url" class="form-control" placeholder="https://">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">ایمیل رسمی</label>
+                                <input type="email" class="form-control" placeholder="info@charity.ir">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">شماره ثبت</label>
+                                <input type="text" class="form-control" placeholder="۱۲۳۴۵">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">شناسه ملی</label>
+                                <input type="text" class="form-control" placeholder="۱۴۰۰۵۶۷۸۹۰">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">توضیحات</label>
+                                <textarea class="form-control" rows="3" placeholder="درباره خیریه، اهداف و فعالیت‌ها..."></textarea>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">مدارک و مستندات</label>
+                                <input type="file" class="form-control" multiple>
+                                <div class="small text-muted mt-1">فرمت‌های مجاز: PDF, JPG, PNG (حداکثر ۱۰ مگابایت)</div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">انصراف</button>
+                <button type="button" class="btn btn-primary-charity" onclick="submitCharity()">
+                    <i class="fas fa-save ms-2"></i> ثبت خیریه
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== مودال ثبت کمک پیشرفته ===== -->
+<div class="modal fade modal-modern" id="createDonationModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold">
+                    <i class="fas fa-hand-holding-heart ms-2" style="color: var(--accent-orange);"></i>
+                    ثبت کمک جدید
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">انتخاب خیریه</label>
+                        <select class="form-select" id="charitySelect" required>
+                            <option value="">انتخاب کنید</option>
+                            <option value="1">خیریه امام رضا (ع)</option>
+                            <option value="2">مؤسسه مهر سبز</option>
+                            <option value="3">خیریه نورالهدی</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">مبلغ (تومان)</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control" placeholder="مثال: ۵۰۰۰۰۰">
+                            <span class="input-group-text bg-light">تومان</span>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">روش پرداخت</label>
+                        <div class="row g-2">
+                            <div class="col-md-4">
+                                <div class="payment-option p-3 border rounded-3 text-center">
+                                    <i class="fas fa-wallet fs-3" style="color: #00a1e4;"></i>
+                                    <div class="mt-2">زرین‌پال</div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="payment-option p-3 border rounded-3 text-center">
+                                    <i class="fas fa-id-card fs-3" style="color: #ed1c24;"></i>
+                                    <div class="mt-2">آی‌دی پی</div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="payment-option p-3 border rounded-3 text-center">
+                                    <i class="fas fa-exchange-alt fs-3" style="color: var(--accent-teal);"></i>
+                                    <div class="mt-2">واریز مستقیم</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="anonymousDonation">
+                        <label class="form-check-label" for="anonymousDonation">کمک ناشناس</label>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">توضیحات (اختیاری)</label>
+                        <textarea class="form-control" rows="2" placeholder="به نیت ..."></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">انصراف</button>
+                <button type="button" class="btn btn-primary-charity" onclick="initiatePayment()">
+                    <i class="fas fa-credit-card ms-2"></i> پرداخت
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== مودال ویزارد ثبت نیاز ===== -->
+<div class="modal fade modal-modern" id="needWizardModal" data-bs-backdrop="static" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold">
+                    <i class="fas fa-clipboard-list ms-2" style="color: var(--accent-teal);"></i>
+                    ثبت نیاز - راهنمای گام به گام
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <!-- مراحل ویزارد -->
+                <div class="wizard-pro">
+                    <div class="step-pro">
+                        <div class="step-number-pro active">۱</div>
+                        <span class="step-label-pro">اطلاعات پایه</span>
+                    </div>
+                    <div class="step-connector-pro"></div>
+                    <div class="step-pro">
+                        <div class="step-number-pro">۲</div>
+                        <span class="step-label-pro">مالی</span>
+                    </div>
+                    <div class="step-connector-pro"></div>
+                    <div class="step-pro">
+                        <div class="step-number-pro">۳</div>
+                        <span class="step-label-pro">موقعیت</span>
+                    </div>
+                    <div class="step-connector-pro"></div>
+                    <div class="step-pro">
+                        <div class="step-number-pro">۴</div>
+                        <span class="step-label-pro">جزئیات</span>
+                    </div>
+                    <div class="step-connector-pro"></div>
+                    <div class="step-pro">
+                        <div class="step-number-pro">۵</div>
+                        <span class="step-label-pro">پیوست‌ها</span>
+                    </div>
+                </div>
+
+                <!-- مرحله 1: اطلاعات پایه -->
+                <div id="wizardStep1">
+                    <h6 class="fw-bold mb-3" style="color: var(--primary-deep);">
+                        <i class="fas fa-info-circle ms-2"></i> گام ۱: اطلاعات پایه نیاز
+                    </h6>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">عنوان نیاز</label>
+                                <input type="text" class="form-control" placeholder="مثال: کمک به خرید ویلچر">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label fw-bold">دسته‌بندی</label>
+                            <select class="form-select">
+                                <option>آموزشی</option>
+                                <option>بهداشتی</option>
+                                <option>معیشتی</option>
+                                <option>جهیزیه</option>
+                                <option>درمانی</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">توضیح کوتاه</label>
+                        <input type="text" class="form-control" placeholder="خلاصه‌ای از نیاز (حداکثر ۲۰۰ کاراکتر)">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="isUrgent">
+                                <label class="form-check-label" for="isUrgent">نیاز فوری</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="isEmergency">
+                                <label class="form-check-label" for="isEmergency">وضعیت اضطراری</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-between mt-4">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">انصراف</button>
+                    <button type="button" class="btn btn-primary-charity" onclick="nextWizardStep(2)">
+                        مرحله بعد <i class="fas fa-arrow-left ms-2"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ==================== تنظیمات اولیه ====================
+    let donationChart = null;
+
+    // ==================== نمودار کمک‌ها ====================
+    function initDonationChart() {
+        const options = {
+            chart: {
+                type: 'area',
+                height: 380,
+                fontFamily: 'Vazir',
+                toolbar: {
+                    show: true,
+                    tools: {
+                        download: true,
+                        selection: true,
+                        zoom: true,
+                        pan: true
+                    }
+                },
+                animations: {
+                    enabled: true,
+                    easing: 'easeinout',
+                    speed: 800
+                }
+            },
+            series: [{
+                name: 'کمک‌ها (میلیون تومان)',
+                data: [12.5, 18.7, 15.2, 22.4, 19.8, 26.5, 31.2, 28.9, 34.5, 41.2, 39.8, 42.5, 47.8, 52.3, 48.9, 56.7, 61.2, 58.9, 63.4, 67.8, 71.2, 74.5, 78.9, 82.3, 86.7, 91.2, 95.6, 99.8, 102.3, 108.9]
+            }],
+            xaxis: {
+                categories: ['۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹', '۱۰', '۱۱', '۱۲', '۱۳', '۱۴', '۱۵', '۱۶', '۱۷', '۱۸', '۱۹', '۲۰', '۲۱', '۲۲', '۲۳', '۲۴', '۲۵', '۲۶', '۲۷', '۲۸', '۲۹', '۳۰'],
+                labels: {
+                    style: {
+                        fontFamily: 'Vazir'
+                    }
+                }
+            },
+            colors: ['#e6b31e'],
+            dataLabels: { enabled: false },
+            stroke: { curve: 'smooth', width: 3 },
+            fill: {
+                type: 'gradient',
+                gradient: {
+                    shadeIntensity: 1,
+                    opacityFrom: 0.7,
+                    opacityTo: 0.2,
+                    stops: [0, 90, 100]
+                }
+            },
+            tooltip: {
+                theme: 'light',
+                y: {
+                    formatter: function(val) {
+                        return val.toFixed(1) + ' میلیون تومان';
+                    }
+                }
+            },
+            grid: {
+                borderColor: 'var(--gray-200)',
+                strokeDashArray: 5
+            }
+        };
+
+        if (donationChart) {
+            donationChart.destroy();
+        }
+
+        donationChart = new ApexCharts(document.querySelector("#donationChart"), options);
+        donationChart.render();
+    }
+
+    // ==================== توابع مدیریت خیریه ====================
+    function filterCharities() {
+        showNotification('اعمال فیلتر خیریه‌ها...', 'info');
+    }
+
+    function viewCharity(id) {
+        showNotification(`مشاهده جزئیات خیریه ${id}`, 'info');
+    }
+
+    function editCharity(id) {
+        showNotification(`ویرایش خیریه ${id}`, 'info');
+    }
+
+    function reviewCharity(id) {
+        showNotification(`بررسی خیریه ${id}`, 'warning');
+    }
+
+    function verifyCharity(id) {
+        showNotification(`تأیید خیریه ${id}`, 'success');
+    }
+
+    function approveCharity(id) {
+        showNotification(`خیریه ${id} با موفقیت تأیید شد`, 'success');
+    }
+
+    function rejectCharity(id) {
+        showNotification(`درخواست خیریه ${id} رد شد`, 'error');
+    }
+
+    function submitCharity() {
+        showNotification('خیریه با موفقیت ثبت شد و در انتظار تأیید است', 'success');
+        $('#createCharityModal').modal('hide');
+    }
+
+    // ==================== توابع مدیریت کمک‌ها ====================
+    function viewDonation(id) {
+        showNotification(`مشاهده جزئیات کمک ${id}`, 'info');
+    }
+
+    function generateReceipt(id) {
+        showNotification(`رسید مالیاتی کمک ${id} با موفقیت صادر شد`, 'success');
+    }
+
+    function approveDonation(id) {
+        showNotification(`کمک ${id} تأیید شد`, 'success');
+    }
+
+    function verifyDirectTransfer(id) {
+        showNotification(`پرداخت مستقیم کمک ${id} تأیید شد`, 'success');
+    }
+
+    function initiatePayment() {
+        showNotification('اتصال به درگاه پرداخت...', 'info');
+        setTimeout(() => {
+            showNotification('پرداخت با موفقیت انجام شد', 'success');
+        }, 2000);
+    }
+
+    function exportDonationChart() {
+        showNotification('گزارش با موفقیت خروجی گرفته شد', 'success');
+    }
+
+    // ==================== توابع مدیریت نیازها ====================
+    function viewNeed(id) {
+        showNotification(`مشاهده جزئیات نیاز ${id}`, 'info');
+    }
+
+    function editNeed(id) {
+        showNotification(`ویرایش نیاز ${id}`, 'info');
+    }
+
+    function addVerification(id) {
+        showNotification(`تأییدیه برای نیاز ${id} ثبت شد`, 'success');
+    }
+
+    function filterNeeds() {
+        showNotification('اعمال فیلتر نیازها...', 'info');
+    }
+
+    function resetNeedFilters() {
+        showNotification('فیلترها بازنشانی شدند', 'info');
+    }
+
+    // ==================== ویزارد ====================
+    function nextWizardStep(step) {
+        showNotification(`رفتن به مرحله ${step} ویزارد`, 'info');
+    }
+
+    // ==================== سیستم اعلان ====================
+    function showNotification(message, type = 'success') {
+        Toastify({
+            text: message,
+            duration: 3000,
+            gravity: "bottom",
+            position: "right",
+            backgroundColor: type === 'success' ? 'linear-gradient(135deg, #10b981, #059669)' :
+                           type === 'error' ? 'linear-gradient(135deg, #ef4444, #dc2626)' :
+                           type === 'warning' ? 'linear-gradient(135deg, #f59e0b, #d97706)' :
+                           'linear-gradient(135deg, #3b82f6, #2563eb)',
+            className: "rounded-pill px-4 py-2",
+            close: true
+        }).showToast();
+    }
+
+    // ==================== خروج ====================
+    function logout() {
+        showNotification('در حال خروج از سیستم...', 'info');
+        setTimeout(() => {
+            window.location.href = '/login';
+        }, 1500);
+    }
+
+    // ==================== دکمه دنبال کردن ====================
+    function initFollowButtons() {
+        document.querySelectorAll('.follow-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (this.classList.contains('following')) {
+                    this.classList.remove('following');
+                    this.innerHTML = '<i class="fas fa-plus-circle ms-1"></i> دنبال کنید';
+                    showNotification('از دنبال کردن خارج شدید', 'info');
+                } else {
+                    this.classList.add('following');
+                    this.innerHTML = '<i class="fas fa-check-circle ms-1"></i> دنبال می‌کنید';
+                    showNotification('با موفقیت دنبال کردید', 'success');
+                }
+            });
+        });
+    }
+
+    // ==================== Select2 ====================
+    function initSelect2() {
+        if (typeof $.fn.select2 !== 'undefined') {
+            $('#charitySelect, #provinceSelect').select2({
+                dropdownParent: $('#createCharityModal'),
+                language: 'fa',
+                placeholder: 'انتخاب کنید',
+                allowClear: true
+            });
+        }
+    }
+
+    // ==================== AOS ====================
+    function initAOS() {
+        if (typeof AOS !== 'undefined') {
+            AOS.init({
+                duration: 800,
+                once: true,
+                disable: 'mobile'
+            });
+        }
+    }
+
+    // ==================== مقداردهی اولیه ====================
+    $(document).ready(function() {
+        initDonationChart();
+        initFollowButtons();
+        initSelect2();
+        initAOS();
+
+        // نمایش خوش‌آمدگویی
+        showNotification('به سامانه مدیریت خیریه‌آنلاین خوش آمدید', 'success');
+    });
+</script>
+
+<!-- ===== اسکریپت‌های مورد نیاز ===== -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+</body>
+</html>

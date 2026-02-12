@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+
+{% block title %}ورود با کد یکبار مصرف - سامانه خیریه{% endblock %}
+
+{% block extra_css %}
+<style>
+    .otp-input {
+        width: 50px;
+        height: 60px;
+        font-size: 24px;
+        text-align: center;
+        margin: 0 5px;
+        border: 2px solid #dee2e6;
+        border-radius: 10px;
+    }
+    
+    .otp-input:focus {
+        border-color: #0d6efd;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    }
+    
+    .countdown {
+        font-family: monospace;
+        font-size: 1.5rem;
+        color: #dc3545;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card border-0 shadow-lg">
+                <div class="card-header bg-info text-white text-center py-4">
+                    <h3 class="mb-0">
+                        <i class="fas fa-mobile-alt me-2"></i>
+                        ورود با کد یکبار مصرف
+                    </h3>
+                </div>
+                
+                <div class="card-body p-4">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-sms fa-3x text-info mb-3"></i>
+                        <h4>کد تأیید را دریافت کنید</h4>
+                        <p class="text-muted">
+                            شماره موبایل خود را وارد کنید تا کد ۶ رقمی برای شما ارسال شود
+                        </p>
+                    </div>
+                    
+                    {% if error %}
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <i class="fas fa-exclamation-circle me-2"></i>
+                        {{ error }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                    {% endif %}
+                    
+                    <form method="POST" action="/request-otp" id="otpRequestForm">
+                        <div class="mb-4">
+                            <label for="phone" class="form-label">
+                                <i class="fas fa-phone me-1"></i>
+                                شماره موبایل
+                            </label>
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-text">+۹۸</span>
+                                <input type="tel" 
+                                       class="form-control" 
+                                       id="phone" 
+                                       name="phone" 
+                                       value="{{ phone or '' }}"
+                                       placeholder="۹۱۲۱۲۳۴۵۶۷"
+                                       pattern="09[0-9]{9}"
+                                       required>
+                            </div>
+                            <div class="form-text">
+                                کد ۶ رقمی به این شماره ارسال خواهد شد
+                            </div>
+                        </div>
+                        
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-info btn-lg">
+                                <i class="fas fa-paper-plane me-2"></i>
+                                دریافت کد تأیید
+                            </button>
+                        </div>
+                    </form>
+                    
+                    <hr class="my-4">
+                    
+                    <div class="text-center">
+                        <p class="mb-2">
+                            <a href="/login" class="text-decoration-none">
+                                <i class="fas fa-sign-in-alt me-1"></i>
+                                ورود با رمز عبور
+                            </a>
+                        </p>
+                        <p class="mb-0">
+                            حساب کاربری ندارید؟
+                            <a href="/register" class="text-decoration-none fw-bold">
+                                ثبت‌نام کنید
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Security Info -->
+            <div class="card border-0 shadow-sm mt-4">
+                <div class="card-body">
+                    <h6 class="card-title">
+                        <i class="fas fa-shield-alt me-2 text-success"></i>
+                        نکات امنیتی
+                    </h6>
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-2">
+                            <i class="fas fa-check-circle text-success me-2"></i>
+                            کد تأیید فقط ۵ دقیقه اعتبار دارد
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-check-circle text-success me-2"></i>
+                            کد را در اختیار دیگران قرار ندهید
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle text-success me-2"></i>
+                            در صورت عدم دریافت کد، مجدداً درخواست دهید
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Format phone number
+document.getElementById('phone').addEventListener('input', function(e) {
+    let value = e.target.value.replace(/\D/g, '');
+    if (value.startsWith('98')) {
+        value = value.substring(2);
+    }
+    if (value.startsWith('0')) {
+        value = value.substring(1);
+    }
+    e.target.value = value;
+});
+</script>
+{% endblock %}

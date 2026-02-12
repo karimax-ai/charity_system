@@ -1,0 +1,1346 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+    <title>خیریه‌آنلاین | درگاه یکپارچه احراز هویت</title>
+
+    <!-- SEO Meta -->
+    <meta name="description" content="درگاه امن احراز هویت خیریه‌آنلاین - ورود، ثبت‌نام و احراز هویت چندمرحله‌ای با بالاترین سطح امنیت">
+    <meta name="theme-color" content="#0a2c3d">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- Bootstrap 5 RTL Core -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
+
+    <!-- Font Awesome 6 Pro (ممکن است برخی آیکون‌ها نیاز به لایسنس داشته باشند - نسخه رایگان) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <!-- Vazir Font - فینت اختصاصی فارسی -->
+    <link href="https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.css" rel="stylesheet">
+
+    <!-- AOS (Animate On Scroll) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Toastify (اعلان‌های زیبا) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
+    <style>
+        /* ===== متغیرهای پیشرفته با سیستم طراحی کامل ===== */
+        :root {
+            --primary-deep: #0a2c3d;
+            --primary-soft: #1e4a5f;
+            --primary-gradient: linear-gradient(145deg, var(--primary-deep), var(--primary-soft));
+            --accent-gold: #e6b31e;
+            --accent-gold-soft: rgba(230, 179, 30, 0.12);
+            --accent-orange: #ff8a5c;
+            --accent-orange-soft: rgba(255, 138, 92, 0.12);
+            --success-emerald: #10b981;
+            --error-coral: #ef4444;
+            --warning-amber: #f59e0b;
+            --info-sky: #3b82f6;
+
+            --glass-white: rgba(255, 255, 255, 0.92);
+            --glass-deep: rgba(10, 44, 61, 0.08);
+            --glass-blur: blur(20px);
+
+            --shadow-sm: 0 8px 20px -6px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 20px 40px -12px rgba(0, 0, 0, 0.12);
+            --shadow-lg: 0 32px 64px -16px rgba(0, 0, 0, 0.18);
+            --shadow-gold: 0 16px 32px -8px rgba(230, 179, 30, 0.28);
+
+            --radius-xs: 8px;
+            --radius-sm: 12px;
+            --radius-md: 20px;
+            --radius-lg: 28px;
+            --radius-xl: 36px;
+            --radius-full: 9999px;
+
+            --font-primary: 'Vazir', -apple-system, BlinkMacSystemFont, sans-serif;
+            --transition-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+            --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* ===== استایل‌های پایه با بهینه‌سازی کامل ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: var(--font-primary);
+        }
+
+        body {
+            background: var(--primary-gradient);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: clamp(16px, 5vw, 40px);
+            position: relative;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* ===== سیستم انیمیشن پس‌زمینه پیشرفته ===== */
+        .bg-orb {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .orb {
+            position: absolute;
+            width: 60vmax;
+            height: 60vmax;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(230, 179, 30, 0.08), rgba(255, 138, 92, 0.04), transparent 70%);
+            animation: orb-float 40s infinite alternate;
+        }
+
+        .orb-2 {
+            width: 50vmin;
+            height: 50vmin;
+            background: radial-gradient(circle at 70% 70%, rgba(255, 138, 92, 0.06), rgba(230, 179, 30, 0.02), transparent);
+            bottom: 0;
+            right: 0;
+            animation: orb-float-slow 60s infinite alternate;
+        }
+
+        @keyframes orb-float {
+            0% { transform: translate(-10%, -10%) scale(1); }
+            100% { transform: translate(15%, 15%) scale(1.2); }
+        }
+
+        @keyframes orb-float-slow {
+            0% { transform: translate(5%, 5%) scale(0.8); }
+            100% { transform: translate(-20%, -20%) scale(1.3); }
+        }
+
+        /* ===== کانتینر اصلی با سیستم گرید هوشمند ===== */
+        .auth-container {
+            width: 100%;
+            max-width: 1440px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* ===== کارت اصلی با افکت گلس پیشرفته ===== */
+        .glass-master {
+            background: var(--glass-white);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s var(--transition-bounce);
+        }
+
+        .glass-master:hover {
+            box-shadow: var(--shadow-lg), 0 0 0 2px rgba(255, 255, 255, 0.1);
+        }
+
+        .glass-master::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-gold), var(--accent-orange), var(--accent-gold));
+            background-size: 200% 100%;
+            animation: gradient-shift 6s ease infinite;
+        }
+
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* ===== سیستم تب‌بندی فوق‌حرفه‌ای ===== */
+        .nav-pro {
+            background: rgba(10, 44, 61, 0.04);
+            padding: 6px;
+            border-radius: var(--radius-full);
+            display: inline-flex;
+            width: 100%;
+            border: none;
+            margin-bottom: 28px;
+        }
+
+        .nav-pro .nav-link {
+            border: none;
+            color: var(--primary-deep);
+            font-weight: 600;
+            padding: 12px 24px;
+            border-radius: var(--radius-full);
+            background: transparent;
+            transition: all 0.3s var(--transition-smooth);
+            font-size: 0.95rem;
+            position: relative;
+            z-index: 1;
+            flex: 1;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .nav-pro .nav-link i {
+            margin-left: 8px;
+            font-size: 1.1em;
+        }
+
+        .nav-pro .nav-link.active {
+            background: white;
+            color: var(--primary-deep);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-pro .nav-link:not(.active):hover {
+            background: rgba(255, 255, 255, 0.6);
+            color: var(--primary-soft);
+        }
+
+        /* ===== فرم کنترل‌های مدرن ===== */
+        .form-group-modern {
+            margin-bottom: 1.75rem;
+            position: relative;
+        }
+
+        .form-label-modern {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--primary-deep);
+            letter-spacing: 0.3px;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-icon {
+            position: absolute;
+            right: 16px;
+            color: var(--primary-soft);
+            font-size: 1.1rem;
+            opacity: 0.6;
+            z-index: 4;
+            transition: all 0.2s;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 14px 48px 14px 16px;
+            border: 2px solid rgba(10, 44, 61, 0.06);
+            border-radius: var(--radius-md);
+            background: white;
+            transition: all 0.25s var(--transition-smooth);
+            font-size: 0.95rem;
+        }
+
+        .input-field:focus {
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 0 4px var(--accent-gold-soft);
+            outline: none;
+        }
+
+        .input-field:hover:not(:focus) {
+            border-color: rgba(10, 44, 61, 0.2);
+        }
+
+        .password-toggle {
+            position: absolute;
+            left: 16px;
+            background: transparent;
+            border: none;
+            color: var(--primary-soft);
+            opacity: 0.5;
+            transition: all 0.2s;
+            z-index: 4;
+        }
+
+        .password-toggle:hover {
+            opacity: 1;
+            color: var(--accent-orange);
+        }
+
+        /* ===== دکمه اصلی با افکت پیشرفته ===== */
+        .btn-primary-gradient {
+            background: var(--primary-gradient);
+            border: none;
+            border-radius: var(--radius-full);
+            padding: 16px 32px;
+            font-weight: 700;
+            color: white;
+            transition: all 0.4s var(--transition-bounce);
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-primary-gradient::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.3), transparent 70%);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+            z-index: -1;
+        }
+
+        .btn-primary-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg), 0 0 0 4px rgba(230, 179, 30, 0.2);
+        }
+
+        .btn-primary-gradient:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-primary-gradient:active {
+            transform: translateY(1px);
+        }
+
+        /* ===== دکمه‌های اجتماعی با افکت نئومورفیزم ===== */
+        .social-btn {
+            width: 56px;
+            height: 56px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border: 1.5px solid rgba(10, 44, 61, 0.06);
+            color: var(--primary-deep);
+            font-size: 1.5rem;
+            transition: all 0.3s var(--transition-bounce);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--primary-gradient);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1;
+        }
+
+        .social-btn i {
+            position: relative;
+            z-index: 2;
+            transition: all 0.3s;
+        }
+
+        .social-btn:hover {
+            transform: scale(1.1) translateY(-3px);
+            border-color: transparent;
+        }
+
+        .social-btn:hover::before {
+            opacity: 1;
+        }
+
+        .social-btn:hover i {
+            color: white;
+        }
+
+        /* ===== باکس OTP و ورودی ۲ مرحله‌ای ===== */
+        .otp-container {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            direction: ltr;
+            margin: 24px 0;
+        }
+
+        .otp-input {
+            width: 60px;
+            height: 70px;
+            border-radius: var(--radius-md);
+            border: 2px solid rgba(10, 44, 61, 0.08);
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-deep);
+            background: white;
+            transition: all 0.2s;
+        }
+
+        .otp-input:focus {
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 0 4px var(--accent-gold-soft);
+            outline: none;
+            transform: scale(1.05);
+        }
+
+        /* ===== کپچای حرفه‌ای ===== */
+        .captcha-modern {
+            background: linear-gradient(145deg, #f6f8fa, #ffffff);
+            border-radius: var(--radius-md);
+            padding: 12px 24px;
+            border: 1.5px solid rgba(10, 44, 61, 0.06);
+            font-family: 'Courier New', monospace;
+            font-size: 1.6rem;
+            font-weight: 900;
+            letter-spacing: 12px;
+            color: var(--primary-deep);
+            text-align: center;
+            box-shadow: inset 0 2px 6px rgba(0,0,0,0.02);
+            position: relative;
+        }
+
+        .captcha-modern i {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            color: var(--accent-gold);
+        }
+
+        /* ===== دستگاه‌های معتبر ===== */
+        .device-trust {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: var(--radius-full);
+            padding: 12px 20px;
+            border: 1px solid rgba(255,255,255,0.6);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            backdrop-filter: blur(8px);
+            margin-bottom: 8px;
+            transition: all 0.3s;
+        }
+
+        .device-trust:hover {
+            background: white;
+            box-shadow: var(--shadow-sm);
+            border-color: var(--accent-gold-soft);
+        }
+
+        /* ===== بخش برندینگ سمت چپ ===== */
+        .brand-section {
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+            backdrop-filter: blur(12px);
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(2deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        .stat-badge {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: var(--radius-full);
+            padding: 8px 18px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* ===== مودال‌های مدرن ===== */
+        .modal-modern .modal-content {
+            border-radius: var(--radius-lg);
+            border: none;
+            background: var(--glass-white);
+            backdrop-filter: var(--glass-blur);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .modal-modern .modal-header {
+            border-bottom: 1px solid rgba(10,44,61,0.06);
+            padding: 20px 24px;
+        }
+
+        .modal-modern .modal-footer {
+            border-top: 1px solid rgba(10,44,61,0.06);
+            padding: 20px 24px;
+        }
+
+        /* ===== ریسپانسیو کامل ===== */
+        @media (max-width: 992px) {
+            .nav-pro .nav-link {
+                padding: 10px 16px;
+                font-size: 0.85rem;
+            }
+
+            .nav-pro .nav-link i {
+                margin-left: 4px;
+                font-size: 1rem;
+            }
+
+            .otp-input {
+                width: 50px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+
+            .brand-section {
+                padding: 30px;
+                margin-bottom: 24px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .nav-pro .nav-link span {
+                display: none;
+            }
+
+            .nav-pro .nav-link i {
+                margin-left: 0;
+                font-size: 1.2rem;
+            }
+
+            .otp-input {
+                width: 45px;
+                height: 55px;
+                font-size: 1.3rem;
+            }
+        }
+
+        /* ===== انیمیشن‌های ورود ===== */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-slide {
+            animation: slideIn 0.6s var(--transition-smooth) forwards;
+        }
+
+        /* ===== تردمیل اعتبارسنجی ===== */
+        .validation-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s infinite linear;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* ===== اسکرول‌بار سفارشی ===== */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(10, 44, 61, 0.05);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(10, 44, 61, 0.2);
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(10, 44, 61, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <!-- افکت‌های پس‌زمینه متحرک -->
+    <div class="bg-orb">
+        <div class="orb"></div>
+        <div class="orb orb-2"></div>
+    </div>
+
+    <div class="auth-container">
+        <div class="row g-4 align-items-stretch">
+            <!-- ستون فرم‌های احراز هویت -->
+            <div class="col-lg-7 col-md-12" data-aos="fade-left" data-aos-duration="800">
+                <div class="glass-master p-4 p-xl-5 h-100 d-flex flex-column">
+                    <!-- هدر با اطلاعات اعتبار -->
+                    <div class="d-flex flex-wrap align-items-center justify-content-between mb-4">
+                        <div>
+                            <span class="badge bg-warning bg-opacity-15 px-3 py-2 rounded-pill" style="color: var(--primary-deep); background-color: rgba(230, 179, 30, 0.12);">
+                                <i class="fas fa-verified ms-1"></i>
+                                خیریه‌آنلاین
+                                <span class="mx-1">•</span>
+                                <small class="fw-normal">معتبرترین پلتفرم احسان</small>
+                            </span>
+                        </div>
+                        <div>
+                            <span class="badge bg-success bg-opacity-10 px-3 py-2 rounded-pill" style="color: #0a5e4a; background-color: rgba(16, 185, 129, 0.12);">
+                                <i class="fas fa-shield-check ms-1"></i>
+                                سطح امنیتی ۳
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- تب‌های حرفه‌ای ناوبری -->
+                    <ul class="nav nav-pro" id="authTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="login-tab" data-bs-toggle="tab" data-bs-target="#login" type="button" role="tab">
+                                <i class="fas fa-sign-in-alt"></i>
+                                <span>ورود</span>
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="register-tab" data-bs-toggle="tab" data-bs-target="#register" type="button" role="tab">
+                                <i class="fas fa-user-plus"></i>
+                                <span>ثبت‌نام</span>
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="otp-tab" data-bs-toggle="tab" data-bs-target="#otp" type="button" role="tab">
+                                <i class="fas fa-mobile-alt"></i>
+                                <span>ورود سریع</span>
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="twofa-tab" data-bs-toggle="tab" data-bs-target="#twofa" type="button" role="tab">
+                                <i class="fas fa-shield-halbed"></i>
+                                <span>۲FA</span>
+                            </button>
+                        </li>
+                    </ul>
+
+                    <!-- محتوای تب‌ها -->
+                    <div class="tab-content flex-grow-1" id="authTabContent">
+                        <!-- ===== تب ورود ===== -->
+                        <div class="tab-pane fade show active" id="login" role="tabpanel">
+                            <form id="loginForm" class="animate-slide">
+                                <div class="form-group-modern">
+                                    <label class="form-label-modern">
+                                        <i class="far fa-envelope ms-1"></i>
+                                        آدرس ایمیل
+                                    </label>
+                                    <div class="input-wrapper">
+                                        <i class="fas fa-envelope input-icon"></i>
+                                        <input type="email" class="input-field" placeholder="example@charity.org" autocomplete="email" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group-modern">
+                                    <label class="form-label-modern">
+                                        <i class="fas fa-lock ms-1"></i>
+                                        رمز عبور
+                                    </label>
+                                    <div class="input-wrapper">
+                                        <i class="fas fa-lock input-icon"></i>
+                                        <input type="password" class="input-field" id="loginPassword" placeholder="••••••••" autocomplete="current-password" required>
+                                        <button type="button" class="password-toggle" onclick="togglePassword('loginPassword', this)">
+                                            <i class="far fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-wrap align-items-center justify-content-between mb-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="rememberMe" checked>
+                                        <label class="form-check-label small" for="rememberMe">
+                                            مرا به خاطر بسپار
+                                        </label>
+                                    </div>
+                                    <a href="#" class="small text-decoration-none" style="color: var(--accent-orange);" data-bs-toggle="modal" data-bs-target="#forgotPasswordModal">
+                                        رمز عبور را فراموش کرده‌اید؟
+                                    </a>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary-gradient w-100 mb-3">
+                                    <i class="fas fa-arrow-left-to-bracket ms-2"></i>
+                                    ورود به داشبورد
+                                </button>
+
+                                <div class="divider d-flex align-items-center text-muted my-4">
+                                    <hr class="flex-grow-1">
+                                    <span class="mx-3 small fw-bold">یا ورود با</span>
+                                    <hr class="flex-grow-1">
+                                </div>
+
+                                <div class="d-flex justify-content-center gap-3">
+                                    <a href="#" class="social-btn" onclick="handleSocialLogin('google')">
+                                        <i class="fab fa-google"></i>
+                                    </a>
+                                    <a href="#" class="social-btn" onclick="handleSocialLogin('apple')">
+                                        <i class="fab fa-apple"></i>
+                                    </a>
+                                    <a href="#" class="social-btn" onclick="handleSocialLogin('github')">
+                                        <i class="fab fa-github"></i>
+                                    </a>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- ===== تب ثبت‌نام ===== -->
+                        <div class="tab-pane fade" id="register" role="tabpanel">
+                            <form id="registerForm">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <div class="form-group-modern">
+                                            <label class="form-label-modern">نام کاربری</label>
+                                            <div class="input-wrapper">
+                                                <i class="fas fa-user input-icon"></i>
+                                                <input type="text" class="input-field" placeholder="خیر_عزیز" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group-modern">
+                                            <label class="form-label-modern">ایمیل</label>
+                                            <div class="input-wrapper">
+                                                <i class="fas fa-envelope input-icon"></i>
+                                                <input type="email" class="input-field" placeholder="info@example.com" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group-modern">
+                                            <label class="form-label-modern">شماره موبایل</label>
+                                            <div class="input-wrapper">
+                                                <i class="fas fa-mobile-alt input-icon"></i>
+                                                <input type="tel" class="input-field" placeholder="۰۹۱۲۳۴۵۶۷۸۹" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group-modern">
+                                            <label class="form-label-modern">نقش کاربری</label>
+                                            <div class="input-wrapper">
+                                                <i class="fas fa-user-tag input-icon"></i>
+                                                <select class="input-field" required>
+                                                    <option value="" disabled selected>انتخاب کنید</option>
+                                                    <option value="NEEDY">نیازمند (دریافت کمک)</option>
+                                                    <option value="VENDOR">تأمین‌کننده</option>
+                                                    <option value="VOLUNTEER">داوطلب</option>
+                                                    <option value="CHARITY_MANAGER">مدیر خیریه</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group-modern">
+                                            <label class="form-label-modern">رمز عبور</label>
+                                            <div class="input-wrapper">
+                                                <i class="fas fa-lock input-icon"></i>
+                                                <input type="password" class="input-field" id="regPassword" placeholder="حداقل ۸ کاراکتر" required>
+                                                <button type="button" class="password-toggle" onclick="togglePassword('regPassword', this)">
+                                                    <i class="far fa-eye"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group-modern">
+                                            <label class="form-label-modern">تکرار رمز عبور</label>
+                                            <div class="input-wrapper">
+                                                <i class="fas fa-lock input-icon"></i>
+                                                <input type="password" class="input-field" id="regPasswordConfirm" placeholder="تکرار رمز عبور" required>
+                                                <button type="button" class="password-toggle" onclick="togglePassword('regPasswordConfirm', this)">
+                                                    <i class="far fa-eye"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-check my-4">
+                                    <input class="form-check-input" type="checkbox" id="termsCheck" required>
+                                    <label class="form-check-label small" for="termsCheck">
+                                        <a href="#" class="text-decoration-none">قوانین و مقررات</a> و
+                                        <a href="#" class="text-decoration-none">حریم خصوصی</a> را می‌پذیرم
+                                    </label>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary-gradient w-100">
+                                    <i class="fas fa-user-check ms-2"></i>
+                                    ثبت‌نام و احراز هویت
+                                </button>
+
+                                <p class="text-center text-muted mt-3 small">
+                                    <i class="fas fa-info-circle"></i>
+                                    پس از ثبت‌نام، برای نقش‌های نیازمند و تأمین‌کننده نیاز به تأیید مدارک دارید.
+                                </p>
+                            </form>
+                        </div>
+
+                        <!-- ===== تب ورود با OTP ===== -->
+                        <div class="tab-pane fade" id="otp" role="tabpanel">
+                            <div class="text-center mb-4">
+                                <div class="floating-element d-inline-block mb-3">
+                                    <i class="fas fa-message fa-4x" style="color: var(--primary-soft);"></i>
+                                </div>
+                                <h4 class="fw-bold">ورود بدون رمز عبور</h4>
+                                <p class="text-muted small">کد ۶ رقمی به شماره موبایل شما ارسال می‌شود</p>
+                            </div>
+
+                            <form id="otpRequestForm">
+                                <div class="form-group-modern">
+                                    <label class="form-label-modern">شماره موبایل</label>
+                                    <div class="d-flex gap-2">
+                                        <div class="input-wrapper flex-grow-1">
+                                            <i class="fas fa-phone input-icon"></i>
+                                            <input type="tel" class="input-field" id="phoneInput" placeholder="۰۹۱۲۳۴۵۶۷۸۹" required>
+                                        </div>
+                                        <button type="button" class="btn btn-outline-warning px-4" id="sendOtpBtn" style="border-width: 2px; border-radius: var(--radius-md); font-weight: 600;">
+                                            ارسال کد
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div id="otpVerificationSection" style="display: none;">
+                                    <label class="form-label-modern mt-4">کد تأیید ۶ رقمی</label>
+                                    <div class="otp-container">
+                                        <input type="text" class="otp-input" maxlength="1" pattern="\d*" inputmode="numeric">
+                                        <input type="text" class="otp-input" maxlength="1" pattern="\d*" inputmode="numeric">
+                                        <input type="text" class="otp-input" maxlength="1" pattern="\d*" inputmode="numeric">
+                                        <input type="text" class="otp-input" maxlength="1" pattern="\d*" inputmode="numeric">
+                                        <input type="text" class="otp-input" maxlength="1" pattern="\d*" inputmode="numeric">
+                                        <input type="text" class="otp-input" maxlength="1" pattern="\d*" inputmode="numeric">
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary-gradient w-100 mt-3">
+                                        <i class="fas fa-check-circle ms-2"></i>
+                                        تأیید و ورود
+                                    </button>
+
+                                    <div class="text-center mt-3">
+                                        <span class="small text-muted">کد را دریافت نکردید؟</span>
+                                        <a href="#" class="small me-2" onclick="resendOtp()">ارسال مجدد</a>
+                                        <span class="small text-muted" id="otpTimer">(۰:۳۰)</span>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- ===== تب احراز هویت دو مرحله‌ای ===== -->
+                        <div class="tab-pane fade" id="twofa" role="tabpanel">
+                            <div class="text-center mb-4">
+                                <div class="mb-3">
+                                    <i class="fas fa-shield-halbed fa-4x" style="color: var(--accent-gold);"></i>
+                                </div>
+                                <h4 class="fw-bold">تأیید هویت دو مرحله‌ای</h4>
+                                <p class="text-muted small">کد ۶ رقمی اپلیکیشن Google Authenticator یا پیامک را وارد کنید</p>
+                            </div>
+
+                            <form id="twofaForm">
+                                <div class="otp-container">
+                                    <input type="text" class="otp-input" maxlength="1" pattern="\d*" inputmode="numeric">
+                                    <input type="text" class="otp-input" maxlength="1" pattern="\d*" inputmode="numeric">
+                                    <input type="text" class="otp-input" maxlength="1" pattern="\d*" inputmode="numeric">
+                                    <input type="text" class="otp-input" maxlength="1" pattern="\d*" inputmode="numeric">
+                                    <input type="text" class="otp-input" maxlength="1" pattern="\d*" inputmode="numeric">
+                                    <input type="text" class="otp-input" maxlength="1" pattern="\d*" inputmode="numeric">
+                                </div>
+
+                                <button type="submit" class="btn btn-primary-gradient w-100 mt-3">
+                                    <i class="fas fa-shield-check ms-2"></i>
+                                    تأیید هویت
+                                </button>
+
+                                <div class="d-flex justify-content-between mt-3">
+                                    <a href="#" class="small">اسکن QR کد جدید</a>
+                                    <a href="#" class="small">غیرفعال‌سازی موقت</a>
+                                    <a href="#" class="small">راهنما</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- فوتر کارت: کپچا و دستگاه‌ها -->
+                    <div class="d-flex flex-wrap align-items-center justify-content-between mt-4 pt-3 border-top">
+                        <div class="d-flex align-items-center gap-3">
+                            <span class="small text-muted">
+                                <i class="fas fa-devices me-1"></i>
+                                دستگاه‌ها:
+                            </span>
+                            <span class="badge bg-light text-dark py-2 px-3 rounded-pill">
+                                <i class="fas fa-mobile-alt ms-1"></i>
+                                آیفون ۱۴
+                                <span class="badge bg-success ms-2">این دستگاه</span>
+                            </span>
+                            <a href="#" class="small" data-bs-toggle="modal" data-bs-target="#devicesModal">
+                                مدیریت
+                            </a>
+                        </div>
+                        <div class="d-flex align-items-center gap-2 mt-2 mt-sm-0">
+                            <div class="captcha-modern">
+                                <span id="captchaDisplay">7A9F2</span>
+                                <i class="fas fa-shield"></i>
+                            </div>
+                            <button class="btn btn-sm btn-outline-secondary rounded-circle" onclick="refreshCaptcha()" style="width: 42px; height: 42px;">
+                                <i class="fas fa-rotate-left"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ستون برندینگ و معرفی خیریه -->
+            <div class="col-lg-5 col-md-12" data-aos="fade-right" data-aos-duration="800" data-aos-delay="100">
+                <div class="brand-section h-100 d-flex flex-column justify-content-center">
+                    <div class="floating-element text-center text-lg-end">
+                        <img src="https://img.icons8.com/3d-fluency/180/charity.png" alt="خیریه آنلاین" style="width: 160px;" class="mb-4">
+                    </div>
+
+                    <h2 class="display-5 fw-bold text-white mb-2 text-center text-lg-end">
+                        به خانواده بزرگ
+                    </h2>
+                    <h1 class="display-3 fw-bold mb-3 text-center text-lg-end" style="color: var(--accent-gold); text-shadow: 0 4px 16px rgba(0,0,0,0.25);">
+                        خیریه‌آنلاین
+                    </h1>
+                    <h3 class="text-white-50 fs-3 mb-4 text-center text-lg-end">
+                        خوش آمدید
+                    </h3>
+
+                    <div class="mt-4 p-4 rounded-4" style="background: rgba(255,255,255,0.08); backdrop-filter: blur(8px);">
+                        <div class="d-flex align-items-center gap-3 mb-3">
+                            <div class="stat-badge">
+                                <i class="fas fa-check-circle" style="color: var(--accent-gold);"></i>
+                                ۵۰,۰۰۰+ خیر
+                            </div>
+                            <div class="stat-badge">
+                                <i class="fas fa-hand-holding-heart" style="color: var(--accent-orange);"></i>
+                                ۱۲۰+ مؤسسه
+                            </div>
+                        </div>
+
+                        <p class="text-white fw-light mb-3">
+                            <i class="fas fa-check-circle ms-2" style="color: var(--accent-gold);"></i>
+                            احراز هویت سریع و امن با بالاترین سطح استانداردهای جهانی
+                        </p>
+                        <p class="text-white fw-light mb-4">
+                            <i class="fas fa-file-shield ms-2"></i>
+                            نیازمندان و تأمین‌کنندگان، مدارک خود را بارگذاری و تأیید هویت شوید.
+                        </p>
+
+                        <div class="d-flex flex-wrap gap-2 justify-content-center justify-content-lg-end mt-3">
+                            <span class="badge px-3 py-2" style="background: rgba(230, 179, 30, 0.2); color: var(--accent-gold); border: 1px solid rgba(230, 179, 30, 0.3);">
+                                <i class="fas fa-refresh ms-1"></i> رفرش توکن
+                            </span>
+                            <span class="badge px-3 py-2" style="background: rgba(16, 185, 129, 0.2); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3);">
+                                <i class="fas fa-key ms-1"></i> رمز امن
+                            </span>
+                            <span class="badge px-3 py-2" style="background: rgba(59, 130, 246, 0.2); color: #3b82f6; border: 1px solid rgba(59, 130, 246, 0.3);">
+                                <i class="fas fa-shield ms-1"></i> سطح ۳
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 text-center text-lg-end">
+                        <small class="text-white-50">
+                            <i class="fas fa-star ms-1" style="color: var(--accent-gold);"></i>
+                            مورد اعتماد بیش از ۱۰۰۰ سازمان خیریه
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== مودال فراموشی رمز عبور ===== -->
+    <div class="modal fade modal-modern" id="forgotPasswordModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold">
+                        <i class="fas fa-key ms-2" style="color: var(--accent-orange);"></i>
+                        بازیابی رمز عبور
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <p class="small text-muted mb-3">
+                        <i class="fas fa-info-circle ms-1"></i>
+                        ایمیل خود را وارد کنید. لینک بازیابی برای شما ارسال خواهد شد.
+                    </p>
+                    <div class="form-group-modern">
+                        <div class="input-wrapper">
+                            <i class="fas fa-envelope input-icon"></i>
+                            <input type="email" class="input-field" id="resetEmail" placeholder="example@charity.org">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">انصراف</button>
+                    <button type="button" class="btn btn-primary-gradient px-4" onclick="sendResetLink()">
+                        <i class="fas fa-paper-plane ms-2"></i>
+                        ارسال لینک
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== مودال مدیریت دستگاه‌ها ===== -->
+    <div class="modal fade modal-modern" id="devicesModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold">
+                        <i class="fas fa-laptop ms-2"></i>
+                        دستگاه‌های معتبر
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <div class="device-trust">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-mobile-alt fa-lg ms-3" style="color: var(--primary-soft);"></i>
+                            <div>
+                                <span class="fw-bold">iPhone 14 Pro</span>
+                                <span class="small text-muted d-block">آخرین دسترسی: ۲ دقیقه پیش</span>
+                            </div>
+                        </div>
+                        <span class="badge bg-success">این دستگاه</span>
+                    </div>
+
+                    <div class="device-trust">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-laptop fa-lg ms-3" style="color: var(--primary-soft);"></i>
+                            <div>
+                                <span class="fw-bold">MacBook Air - تهران</span>
+                                <span class="small text-muted d-block">آخرین دسترسی: ۲ روز پیش</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-sm btn-outline-danger rounded-pill px-3" onclick="revokeDevice()">
+                            <i class="fas fa-trash-alt ms-1"></i>
+                            لغو اعتماد
+                        </button>
+                    </div>
+
+                    <div class="device-trust">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-tablet fa-lg ms-3" style="color: var(--primary-soft);"></i>
+                            <div>
+                                <span class="fw-bold">iPad Pro - مشهد</span>
+                                <span class="small text-muted d-block">آخرین دسترسی: ۱ هفته پیش</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-sm btn-outline-danger rounded-pill px-3" onclick="revokeDevice()">
+                            <i class="fas fa-trash-alt ms-1"></i>
+                            لغو اعتماد
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <span class="small text-muted">
+                        <i class="fas fa-shield ms-1"></i>
+                        حداکثر ۵ دستگاه فعال
+                    </span>
+                    <button type="button" class="btn btn-outline-primary" onclick="trustCurrentDevice()">
+                        <i class="fas fa-plus-circle ms-2"></i>
+                        افزودن دستگاه فعلی
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== مودال ارسال مدارک ===== -->
+    <div class="modal fade modal-modern" id="verificationDocsModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold">
+                        <i class="fas fa-file-certificate ms-2" style="color: var(--accent-gold);"></i>
+                        احراز هویت پیشرفته
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <div class="alert alert-warning bg-warning bg-opacity-10 border-warning border-opacity-25">
+                        <i class="fas fa-exclamation-triangle ms-2"></i>
+                        کاربر گرامی، برای نقش نیازمند یا فروشنده نیاز به تأیید مدارک دارید.
+                    </div>
+
+                    <form id="docsForm">
+                        <div class="form-group-modern">
+                            <label class="form-label-modern">نوع مدرک</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-id-card input-icon"></i>
+                                <select class="input-field" required>
+                                    <option value="" disabled selected>انتخاب کنید</option>
+                                    <option>کارت ملی</option>
+                                    <option>شناسنامه</option>
+                                    <option>جواز کسب / پروانه فعالیت</option>
+                                    <option>گواهی نیاز (مددجویی)</option>
+                                    <option>معرفی‌نامه از خیریه</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group-modern">
+                            <label class="form-label-modern">بارگذاری فایل (تصویر یا PDF)</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-cloud-upload-alt input-icon"></i>
+                                <input type="file" class="input-field" accept=".jpg,.jpeg,.png,.pdf" multiple required>
+                            </div>
+                            <div class="small text-muted mt-2">
+                                <i class="fas fa-info-circle ms-1"></i>
+                                حداکثر حجم: ۱۰ مگابایت | فرمت‌های مجاز: JPG, PNG, PDF
+                            </div>
+                        </div>
+
+                        <button type="button" class="btn btn-primary-gradient w-100 mt-3" onclick="submitDocuments()">
+                            <i class="fas fa-upload ms-2"></i>
+                            ارسال مدارک و درخواست تأیید
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== کتابخانه‌های جاوااسکریپت ===== -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+    <script>
+        // ===== مقداردهی اولیه AOS =====
+        AOS.init({
+            once: true,
+            disable: 'mobile'
+        });
+
+        // ===== سیستم مدیریت رمز عبور =====
+        function togglePassword(inputId, btn) {
+            const input = document.getElementById(inputId);
+            const icon = btn.querySelector('i');
+
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+
+        // ===== کپچای پویا =====
+        function generateCaptcha() {
+            const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789';
+            let captcha = '';
+            for (let i = 0; i < 5; i++) {
+                captcha += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return captcha;
+        }
+
+        function refreshCaptcha() {
+            const newCaptcha = generateCaptcha();
+            document.getElementById('captchaDisplay').innerText = newCaptcha;
+
+            // تریگر انیمیشن
+            const captchaEl = document.getElementById('captchaDisplay').parentElement;
+            captchaEl.style.transform = 'scale(0.95)';
+            setTimeout(() => captchaEl.style.transform = 'scale(1)', 150);
+
+            showNotification('کد امنیتی به‌روزرسانی شد', 'info');
+        }
+
+        // ===== سیستم اعلان Toast =====
+        function showNotification(message, type = 'success') {
+            const bgColor = type === 'success' ? 'linear-gradient(135deg, #10b981, #059669)' :
+                           type === 'error' ? 'linear-gradient(135deg, #ef4444, #dc2626)' :
+                           'linear-gradient(135deg, #3b82f6, #2563eb)';
+
+            Toastify({
+                text: message,
+                duration: 3000,
+                gravity: "bottom",
+                position: "right",
+                backgroundColor: bgColor,
+                className: "rounded-pill px-4 py-2",
+                close: true
+            }).showToast();
+        }
+
+        // ===== مدیریت OTP =====
+        document.getElementById('sendOtpBtn')?.addEventListener('click', function() {
+            const phone = document.getElementById('phoneInput').value;
+            const phoneRegex = /^09\d{9}$/;
+
+            if (!phoneRegex.test(phone)) {
+                showNotification('شماره موبایل نامعتبر است', 'error');
+                return;
+            }
+
+            document.getElementById('otpVerificationSection').style.display = 'block';
+            showNotification(`کد تأیید به شماره ${phone} ارسال شد`, 'success');
+
+            // تایمر شمارش معکوس
+            let timeLeft = 30;
+            const timerEl = document.getElementById('otpTimer');
+            const interval = setInterval(() => {
+                timeLeft--;
+                timerEl.textContent = `(۰:${timeLeft.toString().padStart(2, '0')})`;
+                if (timeLeft <= 0) {
+                    clearInterval(interval);
+                    timerEl.textContent = '(منقضی شده)';
+                }
+            }, 1000);
+        });
+
+        // ===== جابجایی خودکار بین فیلدهای OTP =====
+        document.querySelectorAll('.otp-input').forEach((input, index, inputs) => {
+            input.addEventListener('input', function(e) {
+                this.value = this.value.replace(/[^0-9]/g, '');
+                if (this.value.length >= 1 && index < inputs.length - 1) {
+                    inputs[index + 1].focus();
+                }
+            });
+
+            input.addEventListener('keydown', function(e) {
+                if (e.key === 'Backspace' && this.value.length === 0 && index > 0) {
+                    inputs[index - 1].focus();
+                }
+            });
+
+            input.addEventListener('paste', function(e) {
+                e.preventDefault();
+                const paste = (e.clipboardData || window.clipboardData).getData('text').replace(/\D/g, '').slice(0, inputs.length);
+                paste.split('').forEach((char, i) => {
+                    if (inputs[i]) inputs[i].value = char;
+                });
+            });
+        });
+
+        // ===== مدیریت فرم‌ها با اعتبارسنجی =====
+        document.getElementById('loginForm')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            showNotification('در حال ورود به داشبورد...', 'info');
+            setTimeout(() => {
+                showNotification('ورود موفقیت‌آمیز بود', 'success');
+            }, 1500);
+        });
+
+        document.getElementById('registerForm')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const password = document.getElementById('regPassword').value;
+            const confirm = document.getElementById('regPasswordConfirm').value;
+            const role = document.querySelector('#registerForm select').value;
+
+            if (password.length < 8) {
+                showNotification('رمز عبور باید حداقل ۸ کاراکتر باشد', 'error');
+                return;
+            }
+
+            if (password !== confirm) {
+                showNotification('رمز عبور و تکرار آن مطابقت ندارند', 'error');
+                return;
+            }
+
+            showNotification('ثبت‌نام با موفقیت انجام شد', 'success');
+
+            if (role === 'NEEDY' || role === 'VENDOR') {
+                setTimeout(() => {
+                    const modal = new bootstrap.Modal(document.getElementById('verificationDocsModal'));
+                    modal.show();
+                }, 500);
+            }
+        });
+
+        document.getElementById('twofaForm')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            showNotification('در حال تأیید هویت...', 'info');
+            setTimeout(() => {
+                showNotification('احراز هویت دو مرحله‌ای تأیید شد', 'success');
+            }, 1500);
+        });
+
+        // ===== احراز هویت اجتماعی =====
+        function handleSocialLogin(provider) {
+            showNotification(`اتصال به ${provider}...`, 'info');
+            setTimeout(() => {
+                showNotification('ورود با حساب اجتماعی موفقیت‌آمیز بود (دمو)', 'success');
+            }, 1000);
+        }
+
+        // ===== ارسال مجدد OTP =====
+        function resendOtp() {
+            showNotification('کد جدید ارسال شد', 'success');
+        }
+
+        // ===== لینک بازیابی رمز عبور =====
+        function sendResetLink() {
+            const email = document.getElementById('resetEmail').value;
+            if (!email.includes('@')) {
+                showNotification('ایمیل نامعتبر است', 'error');
+                return;
+            }
+            showNotification('لینک بازیابی به ایمیل شما ارسال شد', 'success');
+            bootstrap.Modal.getInstance(document.getElementById('forgotPasswordModal')).hide();
+        }
+
+        // ===== مدیریت دستگاه‌ها =====
+        function trustCurrentDevice() {
+            showNotification('این دستگاه به لیست دستگاه‌های معتبر اضافه شد', 'success');
+        }
+
+        function revokeDevice() {
+            showNotification('دستگاه از لیست اعتماد حذف شد', 'info');
+        }
+
+        // ===== ارسال مدارک =====
+        function submitDocuments() {
+            showNotification('مدارک با موفقیت ارسال شد و در انتظار تأیید است', 'success');
+            bootstrap.Modal.getInstance(document.getElementById('verificationDocsModal')).hide();
+        }
+
+        // ===== بارگذاری اولیه =====
+        window.onload = function() {
+            refreshCaptcha();
+        };
+    </script>
+</body>
+</html>

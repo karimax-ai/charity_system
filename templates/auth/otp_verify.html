@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تأیید کد | نورخیریه</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="/static/css/auth-style.css">
+</head>
+<body>
+    <div class="auth-wrapper">
+        <div class="auth-card animate__animated animate__fadeInUp">
+            <div class="auth-header">
+                <div class="brand-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h2 class="fw-bold mb-2">تأیید شماره موبایل</h2>
+                <p class="mb-0 opacity-75">کد ۶ رقمی ارسال شده را وارد کنید</p>
+            </div>
+            
+            <div class="auth-body text-center">
+                <div id="errorAlert" class="alert-custom alert-danger d-none">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span id="errorMessage"></span>
+                </div>
+                
+                <div class="mb-4">
+                    <div class="bg-soft-primary d-inline-block p-3 rounded-4">
+                        <i class="fas fa-message fa-3x text-primary"></i>
+                    </div>
+                    <p class="mt-3 mb-1">
+                        کد تأیید به شماره
+                        <span id="phoneDisplay" class="fw-bold text-primary">۰۹۱۲***۵۴۳۲</span>
+                        ارسال شد
+                    </p>
+                </div>
+                
+                <div class="otp-container" id="otpContainer">
+                    <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric">
+                    <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric">
+                    <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric">
+                    <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric">
+                    <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric">
+                    <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric">
+                </div>
+                
+                <div class="d-flex justify-content-between align-items-center mt-4">
+                    <span class="text-secondary">زمان باقی‌مانده:</span>
+                    <span id="timer" class="fw-bold text-primary">۰۲:۰۰</span>
+                </div>
+                
+                <button id="verifyBtn" class="btn btn-gradient w-100 mt-4 py-3" onclick="verifyOTP()">
+                    <span id="verifyBtnText">تأیید کد</span>
+                    <span id="verifyBtnSpinner" class="spinner-border spinner-border-sm d-none"></span>
+                </button>
+                
+                <div class="mt-3">
+                    <button class="btn btn-link text-decoration-none" onclick="resendOTP()" id="resendBtn">
+                        ارسال مجدد کد
+                    </button>
+                </div>
+                
+                <hr class="my-4">
+                
+                <div>
+                    <a href="/auth/login" class="text-decoration-none">
+                        <i class="fas fa-arrow-right me-1"></i>
+                        بازگشت به صفحه ورود
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    
+    <script>
+        let timerInterval;
+        let timeLeft = 120;
+        
+        // دریافت پارامترهای URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const phone = urlParams.get('phone');
+        const purpose = urlParams.get('purpose') || 'login';
+        
+        if (phone) {
+            document.getElementById('phoneDisplay').innerText = phone;
+        }
+        
+        // اتوماتیک حرکت به فیلد بعدی
+        const inputs = document.querySelectorAll('.otp-input');
+        inputs.forEach((input, index) => {
+            input.addEventListener('keyup', function(e) {
+                if (e.key >= '0' && e.key <= '9') {
+                    if (index < inputs.length - 1) {
+                        inputs[index + 1].focus();
+                    }
+                } else if (e.key === 'Backspace') {
+                    if (index > 0) {
+                        inputs[index - 1].focus();
+                    }
+                }
+                
+                // جمع‌آوری کد کامل
+                const code = Array.from(inputs).map(i => i.value).join('');
+                if (code.length === 6) {
+                    verifyOTP();
+                }
+            });
+        });
+        
+        // تایمر
+        function startTimer() {
+            const timerDisplay = document.getElementById('timer');
+            const resendBtn = document.getElementById('resendBtn');
+            
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timerDisplay.innerText = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    timerDisplay.innerText = '۰۰:۰۰';
+                    resendBtn.disabled = false;
+                    resendBtn.classList.remove('text-muted');
+                }
+            }, 1000);
+        }
+        
+        // ارسال مجدد OTP
+        async function resendOTP() {
+            if (timeLeft > 0) {
+                alert('لطفاً صبر کنید');
+                return;
+            }
+            
+            try {
+                await axios.post('/api/v1/auth/otp/request', {
+                    phone: phone
+                });
+                
+                timeLeft = 120;
+                startTimer();
+                document.getElementById('resendBtn').disabled = true;
+                
+            } catch (error) {
+                alert('خطا در ارسال مجدد کد');
+            }
+        }
+        
+        // تأیید OTP
+        async function verifyOTP() {
+            const code = Array.from(document.querySelectorAll('.otp-input'))
+                .map(i => i.value)
+                .join('');
+            
+            if (code.length !== 6) {
+                document.getElementById('errorMessage').innerText = 'لطفاً کد ۶ رقمی را کامل وارد کنید';
+                document.getElementById('errorAlert').classList.remove('d-none');
+                return;
+            }
+            
+            const btn = document.getElementById('verifyBtn');
+            const btnText = document.getElementById('verifyBtnText');
+            const spinner = document.getElementById('verifyBtnSpinner');
+            
+            btn.disabled = true;
+            btnText.classList.add('d-none');
+            spinner.classList.remove('d-none');
+            
+            try {
+                const response = await axios.post('/api/v1/auth/otp/verify', {
+                    phone: phone,
+                    code: code
+                });
+                
+                localStorage.setItem('access_token', response.data.access_token);
+                localStorage.setItem('refresh_token', response.data.refresh_token);
+                
+                if (purpose === '2fa') {
+                    window.location.href = '/dashboard';
+                } else if (purpose === 'password_reset') {
+                    window.location.href = '/auth/reset-password';
+                } else {
+                    window.location.href = '/dashboard';
+                }
+                
+            } catch (error) {
+                btn.disabled = false;
+                btnText.classList.remove('d-none');
+                spinner.classList.add('d-none');
+                
+                document.getElementById('errorMessage').innerText = 
+                    error.response?.data?.detail || 'کد وارد شده صحیح نیست';
+                document.getElementById('errorAlert').classList.remove('d-none');
+                
+                // پاک کردن فیلدها
+                inputs.forEach(i => i.value = '');
+                inputs[0].focus();
+            }
+        }
+        
+        // شروع تایمر
+        startTimer();
+    </script>
+</body>
+</html>

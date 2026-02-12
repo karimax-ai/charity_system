@@ -1,0 +1,1971 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>سامانه هوشمند گزارش‌گیری و مدیریت اسناد | خیریه‌آنلاین</title>
+
+    <!-- SEO & Meta -->
+    <meta name="description" content="سامانه جامع گزارش‌گیری پیشرفته، تحلیل داده و مدیریت فایل‌ها با قابلیت خروجی‌گیری چندفرمته و داشبوردهای تحلیلی">
+    <meta name="theme-color" content="#0a2c3d">
+
+    <!-- Bootstrap 5 RTL -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
+
+    <!-- Font Awesome 6 Pro -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <!-- Vazir Font -->
+    <link href="https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.css" rel="stylesheet">
+
+    <!-- ApexCharts -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+    <!-- Persian Datepicker -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/shahtheme/persian-datepicker@1.2.0/dist/css/persian-datepicker.min.css">
+    <script src="https://cdn.jsdelivr.net/gh/shahtheme/persian-datepicker@1.2.0/dist/js/persian-datepicker.min.js"></script>
+
+    <!-- Dropzone.js -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script>
+
+    <!-- Toastify -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+    <!-- AOS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <style>
+        /* ===== سیستم طراحی پیشرفته Enterprise ===== */
+        :root {
+            --primary-deep: #0a2c3d;
+            --primary-soft: #1e4a5f;
+            --primary-gradient: linear-gradient(145deg, #0a2c3d, #1e4a5f);
+            --primary-gradient-reverse: linear-gradient(145deg, #1e4a5f, #0a2c3d);
+
+            --accent-gold: #e6b31e;
+            --accent-gold-soft: rgba(230, 179, 30, 0.12);
+            --accent-gold-gradient: linear-gradient(135deg, #e6b31e, #ffd166);
+
+            --accent-orange: #ff8a5c;
+            --accent-orange-soft: rgba(255, 138, 92, 0.12);
+            --accent-orange-gradient: linear-gradient(135deg, #ff8a5c, #ffaa7a);
+
+            --accent-teal: #2a9d8f;
+            --accent-teal-soft: rgba(42, 157, 143, 0.12);
+            --accent-teal-gradient: linear-gradient(135deg, #2a9d8f, #4ecdc4);
+
+            --accent-purple: #6c5ce7;
+            --accent-purple-soft: rgba(108, 92, 231, 0.12);
+            --accent-purple-gradient: linear-gradient(135deg, #6c5ce7, #a29bfe);
+
+            --success-emerald: #10b981;
+            --error-coral: #ef4444;
+            --warning-amber: #f59e0b;
+            --info-sky: #3b82f6;
+
+            --gray-50: #f8fafc;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --gray-400: #94a3b8;
+            --gray-500: #64748b;
+            --gray-600: #475569;
+            --gray-700: #334155;
+            --gray-800: #1e293b;
+            --gray-900: #0f172a;
+
+            --glass-white: rgba(255, 255, 255, 0.95);
+            --glass-blur: blur(16px);
+
+            --shadow-xs: 0 2px 4px rgba(0,0,0,0.02);
+            --shadow-sm: 0 4px 6px -2px rgba(0,0,0,0.05);
+            --shadow-md: 0 12px 16px -4px rgba(0,0,0,0.06);
+            --shadow-lg: 0 20px 24px -6px rgba(0,0,0,0.08);
+            --shadow-xl: 0 32px 48px -12px rgba(0,0,0,0.12);
+            --shadow-gold: 0 12px 24px -8px rgba(230, 179, 30, 0.24);
+
+            --radius-xs: 6px;
+            --radius-sm: 10px;
+            --radius-md: 14px;
+            --radius-lg: 20px;
+            --radius-xl: 28px;
+            --radius-2xl: 36px;
+            --radius-full: 9999px;
+
+            --font-primary: 'Vazir', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --transition-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+            --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+
+            --sidebar-width: 300px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: var(--font-primary);
+        }
+
+        body {
+            background-color: var(--gray-50);
+            overflow-x: hidden;
+        }
+
+        /* ===== اسکرولبار سفارشی ===== */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--gray-100);
+            border-radius: var(--radius-full);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gray-400);
+            border-radius: var(--radius-full);
+            transition: all 0.3s;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--gray-500);
+        }
+
+        /* ===== سایدبار فوق‌حرفه‌ای ===== */
+        .dashboard-sidebar {
+            position: fixed;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: var(--sidebar-width);
+            background: var(--primary-gradient);
+            box-shadow: var(--shadow-xl);
+            padding: 28px 20px;
+            overflow-y: auto;
+            transition: all 0.4s var(--transition-bounce);
+            z-index: 1050;
+        }
+
+        .sidebar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 40px;
+            padding: 0 12px;
+        }
+
+        .sidebar-brand-logo {
+            width: 52px;
+            height: 52px;
+            background: var(--accent-gold-gradient);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: var(--primary-deep);
+            box-shadow: var(--shadow-gold);
+        }
+
+        .sidebar-brand h3 {
+            color: white;
+            font-weight: 700;
+            margin: 0;
+            font-size: 1.6rem;
+        }
+
+        .sidebar-user {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(8px);
+            border-radius: var(--radius-xl);
+            padding: 20px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .user-avatar-xl {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: var(--accent-gold-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-deep);
+            font-weight: 800;
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+            border: 3px solid rgba(255,255,255,0.3);
+        }
+
+        .nav-link-sidebar {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 18px;
+            border-radius: var(--radius-lg);
+            color: rgba(255, 255, 255, 0.75);
+            font-weight: 500;
+            transition: all 0.3s var(--transition-smooth);
+            margin-bottom: 4px;
+        }
+
+        .nav-link-sidebar i {
+            font-size: 1.3rem;
+            width: 24px;
+            text-align: center;
+        }
+
+        .nav-link-sidebar:hover {
+            background: rgba(230, 179, 30, 0.15);
+            color: white;
+            transform: translateX(-5px);
+        }
+
+        .nav-link-sidebar.active {
+            background: var(--accent-gold);
+            color: var(--primary-deep);
+            box-shadow: var(--shadow-gold);
+        }
+
+        /* ===== محتوای اصلی ===== */
+        .main-content {
+            margin-right: var(--sidebar-width);
+            padding: 28px 32px;
+            transition: all 0.4s var(--transition-bounce);
+            min-height: 100vh;
+        }
+
+        @media (max-width: 992px) {
+            .dashboard-sidebar {
+                right: -100%;
+            }
+            .dashboard-sidebar.show {
+                right: 0;
+            }
+            .main-content {
+                margin-right: 0;
+            }
+        }
+
+        /* ===== هدر پیشرفته ===== */
+        .dashboard-header {
+            background: var(--glass-white);
+            backdrop-filter: var(--glass-blur);
+            border-radius: var(--radius-2xl);
+            padding: 16px 28px;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 32px;
+            border: 1px solid rgba(255,255,255,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .header-search {
+            display: flex;
+            align-items: center;
+            background: var(--gray-100);
+            border-radius: var(--radius-full);
+            padding: 8px 20px;
+            width: 360px;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .header-search:focus-within {
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 0 4px var(--accent-gold-soft);
+            background: white;
+        }
+
+        .header-search i {
+            color: var(--gray-500);
+            margin-left: 10px;
+        }
+
+        .header-search input {
+            border: none;
+            background: transparent;
+            outline: none;
+            width: 100%;
+        }
+
+        .notification-badge {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .badge-counter {
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            background: var(--accent-orange-gradient);
+            color: white;
+            border-radius: var(--radius-full);
+            padding: 3px 8px;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+
+        .user-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+        }
+
+        /* ===== تب‌های حرفه‌ای ===== */
+        .nav-tabs-pro {
+            border-bottom: none;
+            background: white;
+            padding: 8px;
+            border-radius: var(--radius-full);
+            display: inline-flex;
+            margin-bottom: 28px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-tabs-pro .nav-link {
+            border: none;
+            color: var(--gray-600);
+            font-weight: 600;
+            padding: 12px 32px;
+            border-radius: var(--radius-full);
+            transition: all 0.3s;
+        }
+
+        .nav-tabs-pro .nav-link i {
+            margin-left: 8px;
+        }
+
+        .nav-tabs-pro .nav-link.active {
+            background: var(--primary-gradient);
+            color: white;
+            box-shadow: var(--shadow-md);
+        }
+
+        /* ===== کارت‌های آماری پیشرفته ===== */
+        .stat-card-mini {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 18px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: all 0.4s var(--transition-bounce);
+            border: 1px solid var(--gray-200);
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card-mini::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--primary-gradient);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .stat-card-mini:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: transparent;
+        }
+
+        .stat-card-mini:hover::before {
+            opacity: 1;
+        }
+
+        .stat-icon-mini {
+            width: 52px;
+            height: 52px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+        }
+
+        /* ===== کارت‌های اصلی ===== */
+        .dashboard-card {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: 28px;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 24px;
+            border: 1px solid var(--gray-200);
+            transition: all 0.3s;
+        }
+
+        .dashboard-card:hover {
+            box-shadow: var(--shadow-lg);
+            border-color: transparent;
+        }
+
+        .card-header-custom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .card-title {
+            font-weight: 700;
+            color: var(--primary-deep);
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.2rem;
+        }
+
+        /* ===== فیلترهای پیشرفته ===== */
+        .filter-section {
+            background: var(--gray-50);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .filter-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--gray-600);
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        /* ===== جدول‌های حرفه‌ای ===== */
+        .table-dashboard {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table-dashboard th {
+            color: var(--gray-600);
+            font-weight: 600;
+            font-size: 0.8rem;
+            padding: 16px 0;
+            border-bottom: 2px solid var(--gray-200);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .table-dashboard td {
+            padding: 16px 0;
+            border-bottom: 1px solid var(--gray-100);
+            vertical-align: middle;
+        }
+
+        .table-dashboard tr {
+            transition: all 0.3s;
+        }
+
+        .table-dashboard tr:hover {
+            background: var(--gray-50);
+        }
+
+        /* ===== کارت فایل ===== */
+        .file-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            border: 1px solid var(--gray-200);
+            transition: all 0.4s var(--transition-bounce);
+            height: 100%;
+            position: relative;
+        }
+
+        .file-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: transparent;
+        }
+
+        .file-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: var(--radius-md);
+            background: var(--gray-100);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 16px;
+        }
+
+        .file-type-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+        }
+
+        /* ===== تمپلیت خروجی ===== */
+        .export-template-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            border: 1px solid var(--gray-200);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s var(--transition-bounce);
+            height: 100%;
+        }
+
+        .export-template-card:hover {
+            border-color: var(--accent-gold);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-gold);
+        }
+
+        .export-template-card.selected {
+            border: 2px solid var(--accent-teal);
+            background: var(--accent-teal-soft);
+        }
+
+        /* ===== دراپ زون اختصاصی ===== */
+        .dropzone-custom {
+            border: 2px dashed var(--accent-gold);
+            border-radius: var(--radius-xl);
+            background: var(--accent-gold-soft);
+            padding: 40px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .dropzone-custom:hover {
+            background: rgba(230, 179, 30, 0.08);
+            border-color: var(--accent-orange);
+        }
+
+        .dropzone-custom .dz-preview {
+            margin: 16px;
+        }
+
+        /* ===== دکمه‌های اختصاصی ===== */
+        .btn-primary-charity {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            border-radius: var(--radius-full);
+            padding: 12px 28px;
+            font-weight: 700;
+            transition: all 0.4s var(--transition-bounce);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary-charity:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            color: white;
+        }
+
+        .btn-outline-gold {
+            background: transparent;
+            border: 2px solid var(--accent-gold);
+            color: var(--primary-deep);
+            border-radius: var(--radius-full);
+            padding: 10px 24px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-outline-gold:hover {
+            background: var(--accent-gold);
+            color: var(--primary-deep);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-gold);
+        }
+
+        /* ===== فرم‌های پیشرفته ===== */
+        .form-control, .form-select {
+            border-radius: var(--radius-md);
+            border: 1.5px solid var(--gray-200);
+            padding: 12px 16px;
+            transition: all 0.3s;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 0 4px var(--accent-gold-soft);
+        }
+
+        /* ===== انیمیشن‌ها ===== */
+        .fade-in-up {
+            animation: fadeInUp 0.6s var(--transition-smooth);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 var(--accent-gold-soft); }
+            70% { box-shadow: 0 0 0 12px rgba(230, 179, 30, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(230, 179, 30, 0); }
+        }
+
+        /* ===== صفحه‌بندی ===== */
+        .pagination .page-link {
+            border-radius: var(--radius-full);
+            margin: 0 4px;
+            color: var(--primary-deep);
+            border: 1px solid var(--gray-200);
+        }
+
+        .pagination .page-item.active .page-link {
+            background: var(--primary-gradient);
+            border-color: var(--primary-deep);
+            color: white;
+        }
+
+        /* ===== ریسپانسیو ===== */
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 20px 16px;
+            }
+
+            .nav-tabs-pro .nav-link {
+                padding: 10px 16px;
+            }
+
+            .nav-tabs-pro .nav-link span {
+                display: none;
+            }
+
+            .nav-tabs-pro .nav-link i {
+                margin-left: 0;
+                font-size: 1.2rem;
+            }
+
+            .stat-card-mini {
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== سایدبار حرفه‌ای ===== -->
+<div class="dashboard-sidebar" id="sidebar">
+    <div class="sidebar-brand">
+        <div class="sidebar-brand-logo">
+            <i class="fas fa-hand-holding-heart"></i>
+        </div>
+        <h3>خیریه‌آنلاین</h3>
+    </div>
+
+    <div class="sidebar-user text-center">
+        <div class="user-avatar-xl mx-auto">مد</div>
+        <h6 class="fw-bold text-white mb-1">علی محمدی</h6>
+        <span class="badge bg-warning text-dark px-3 py-2">مدیر ارشد سیستم</span>
+        <div class="mt-3 text-white-50 small">
+            <i class="fas fa-file-alt ms-1"></i> ۱۲۴ گزارش فعال
+        </div>
+    </div>
+
+    <div class="nav flex-column">
+        <a href="#" class="nav-link-sidebar">
+            <i class="fas fa-tachometer-alt"></i>
+            <span>داشبورد</span>
+        </a>
+        <a href="#" class="nav-link-sidebar active">
+            <i class="fas fa-chart-pie"></i>
+            <span>گزارش‌گیری هوشمند</span>
+        </a>
+        <a href="#" class="nav-link-sidebar">
+            <i class="fas fa-file-alt"></i>
+            <span>مدیریت اسناد</span>
+        </a>
+        <a href="#" class="nav-link-sidebar">
+            <i class="fas fa-download"></i>
+            <span>خروجی‌گیری</span>
+        </a>
+        <a href="#" class="nav-link-sidebar">
+            <i class="fas fa-building"></i>
+            <span>خیریه‌ها</span>
+        </a>
+        <a href="#" class="nav-link-sidebar">
+            <i class="fas fa-cog"></i>
+            <span>تنظیمات</span>
+        </a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="nav flex-column">
+        <a href="#" class="nav-link-sidebar" onclick="logout()">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>خروج</span>
+        </a>
+    </div>
+</div>
+
+<!-- ===== محتوای اصلی ===== -->
+<div class="main-content">
+    <!-- هدر موبایل -->
+    <div class="d-flex align-items-center mb-3 d-lg-none">
+        <i class="fas fa-bars fs-3" onclick="document.getElementById('sidebar').classList.toggle('show')" style="color: var(--primary-deep); cursor: pointer;"></i>
+    </div>
+
+    <!-- ===== هدر پیشرفته ===== -->
+    <div class="dashboard-header fade-in-up">
+        <div class="d-flex align-items-center gap-3">
+            <div class="header-search">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="جستجوی هوشمند در گزارش‌ها و فایل‌ها..." id="globalSearch">
+            </div>
+        </div>
+        <div class="d-flex align-items-center gap-4">
+            <div class="notification-badge" onclick="showNotifications()">
+                <i class="far fa-bell fs-5"></i>
+                <span class="badge-counter">۵</span>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+                <span class="fw-bold">علی محمدی</span>
+                <div class="user-avatar">ع</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== تب‌های اصلی حرفه‌ای ===== -->
+    <ul class="nav nav-tabs-pro" id="mainTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="reports-tab" data-bs-toggle="tab" data-bs-target="#reports" type="button">
+                <i class="fas fa-chart-pie"></i>
+                <span>گزارش‌های تحلیلی</span>
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="files-tab" data-bs-toggle="tab" data-bs-target="#files" type="button">
+                <i class="fas fa-file-alt"></i>
+                <span>مدیریت اسناد</span>
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="export-tab" data-bs-toggle="tab" data-bs-target="#export" type="button">
+                <i class="fas fa-download"></i>
+                <span>خروجی‌گیری</span>
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="analytics-tab" data-bs-toggle="tab" data-bs-target="#analytics" type="button">
+                <i class="fas fa-brain"></i>
+                <span>تحلیل پیشرفته</span>
+            </button>
+        </li>
+    </ul>
+
+    <!-- ===== محتوای تب‌ها ===== -->
+    <div class="tab-content">
+        <!-- ===== تب 1: گزارش‌های تحلیلی (پیشرفته) ===== -->
+        <div class="tab-pane fade show active" id="reports" role="tabpanel">
+            <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+                <div>
+                    <h4 class="fw-bold" style="color: var(--primary-deep);">
+                        <i class="fas fa-chart-line ms-2"></i> داشبورد گزارش‌گیری هوشمند
+                    </h4>
+                    <p class="text-muted">تحلیل جامع داده‌های مالی، کمک‌ها و عملکرد خیریه‌ها</p>
+                </div>
+                <div>
+                    <span class="badge px-4 py-2" style="background: var(--accent-teal-soft); color: var(--accent-teal);">
+                        <i class="fas fa-sync-alt ms-1"></i> آخرین بروزرسانی: لحظه‌ای
+                    </span>
+                </div>
+            </div>
+
+            <!-- کارت‌های آمار کلیدی پیشرفته -->
+            <div class="row g-4 mb-4">
+                <div class="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="0">
+                    <div class="stat-card-mini">
+                        <div class="stat-icon-mini" style="background: var(--accent-gold-soft); color: var(--accent-gold);">
+                            <i class="fas fa-hand-holding-usd"></i>
+                        </div>
+                        <div>
+                            <small class="text-muted">کل کمک‌های مالی</small>
+                            <h4 class="fw-bold mb-0">۸۴۲.۵M</h4>
+                            <div class="d-flex align-items-center">
+                                <span class="text-success small"><i class="fas fa-arrow-up"></i> ۱۲.۵٪</span>
+                                <span class="text-muted small mx-2">نسبت به ماه قبل</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="stat-card-mini">
+                        <div class="stat-icon-mini" style="background: var(--accent-teal-soft); color: var(--accent-teal);">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <div>
+                            <small class="text-muted">فروش محصولات</small>
+                            <h4 class="fw-bold mb-0">۲۳۴.۲M</h4>
+                            <span class="text-success small"><i class="fas fa-arrow-up"></i> ۸.۳٪</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="stat-card-mini">
+                        <div class="stat-icon-mini" style="background: var(--accent-orange-soft); color: var(--accent-orange);">
+                            <i class="fas fa-clipboard-list"></i>
+                        </div>
+                        <div>
+                            <small class="text-muted">نیازهای تکمیل شده</small>
+                            <h4 class="fw-bold mb-0">۱۵۶</h4>
+                            <span class="text-success small">+۲۱ نسبت به ماه قبل</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="stat-card-mini">
+                        <div class="stat-icon-mini" style="background: var(--accent-purple-soft); color: var(--accent-purple);">
+                            <i class="fas fa-file-invoice"></i>
+                        </div>
+                        <div>
+                            <small class="text-muted">صورت‌های مالی</small>
+                            <h4 class="fw-bold mb-0">۱۲</h4>
+                            <span class="text-muted small">سال مالی ۱۴۰۴</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- فیلتر گزارش پیشرفته -->
+            <div class="dashboard-card" data-aos="fade-up">
+                <div class="card-header-custom">
+                    <h5 class="card-title">
+                        <i class="fas fa-sliders-h"></i>
+                        فیلترهای پیشرفته گزارش
+                    </h5>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-sm btn-outline-secondary" onclick="resetFilters()">
+                            <i class="fas fa-redo-alt ms-1"></i> بازنشانی
+                        </button>
+                    </div>
+                </div>
+                <div class="row g-4">
+                    <div class="col-lg-3 col-md-6">
+                        <label class="filter-label">نوع گزارش</label>
+                        <select class="form-select" id="reportTypeSelect">
+                            <option value="donations" selected>📊 گزارش کمک‌های مالی</option>
+                            <option value="sales">🛒 گزارش فروش محصولات</option>
+                            <option value="needs">📋 گزارش نیازها</option>
+                            <option value="financial">💰 گزارش مالی جامع</option>
+                            <option value="products">📦 گزارش محصولات</option>
+                            <option value="charities">🏢 گزارش خیریه‌ها</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-2 col-md-6">
+                        <label class="filter-label">بازه زمانی</label>
+                        <select class="form-select" id="periodSelect">
+                            <option value="daily">📅 روزانه</option>
+                            <option value="weekly">📅 هفتگی</option>
+                            <option value="monthly" selected>📅 ماهانه</option>
+                            <option value="quarterly">📅 فصلی</option>
+                            <option value="yearly">📅 سالانه</option>
+                            <option value="custom">⚙️ سفارشی</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-2 col-md-6">
+                        <label class="filter-label">از تاریخ</label>
+                        <input type="text" class="form-control datepicker" id="dateFrom" placeholder="۱۴۰۴/۰۱/۰۱">
+                    </div>
+                    <div class="col-lg-2 col-md-6">
+                        <label class="filter-label">تا تاریخ</label>
+                        <input type="text" class="form-control datepicker" id="dateTo" placeholder="۱۴۰۴/۰۱/۳۱">
+                    </div>
+                    <div class="col-lg-3 d-flex align-items-end gap-2">
+                        <button class="btn btn-primary-charity flex-grow-1" onclick="generateReport()">
+                            <i class="fas fa-chart-line ms-2"></i> تولید گزارش
+                        </button>
+                        <button class="btn btn-outline-gold" onclick="saveReportTemplate()">
+                            <i class="fas fa-save"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- نمودارهای تحلیلی -->
+            <div class="row g-4">
+                <div class="col-lg-8">
+                    <div class="dashboard-card" data-aos="fade-left">
+                        <div class="card-header-custom">
+                            <h5 class="card-title">
+                                <i class="fas fa-chart-area"></i>
+                                روند ۱۲ ماهه کمک‌های مالی
+                            </h5>
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-sm btn-outline-secondary active">
+                                    <i class="fas fa-chart-line"></i> نمودار
+                                </button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary">
+                                    <i class="fas fa-table"></i> جدول
+                                </button>
+                            </div>
+                        </div>
+                        <div id="donationsTrendChart" style="height: 380px;"></div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="dashboard-card" data-aos="fade-right">
+                        <div class="card-header-custom">
+                            <h5 class="card-title">
+                                <i class="fas fa-chart-pie"></i>
+                                توزیع کمک‌ها
+                            </h5>
+                            <span class="badge bg-success">لحظه‌ای</span>
+                        </div>
+                        <div id="donationsPieChart" style="height: 280px;"></div>
+                        <div class="mt-3">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span><i class="fas fa-circle ms-2" style="color: #e6b31e;"></i> خیریه امام رضا</span>
+                                <span class="fw-bold">۴۲٪</span>
+                                <span class="text-muted small">۳۲۴ کمک</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span><i class="fas fa-circle ms-2" style="color: #2a9d8f;"></i> مؤسسه مهر سبز</span>
+                                <span class="fw-bold">۲۸٪</span>
+                                <span class="text-muted small">۱۸۷ کمک</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span><i class="fas fa-circle ms-2" style="color: #ff8a5c;"></i> خیریه نورالهدی</span>
+                                <span class="fw-bold">۱۸٪</span>
+                                <span class="text-muted small">۹۵ کمک</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span><i class="fas fa-circle ms-2" style="color: #6c5ce7;"></i> سایر خیریه‌ها</span>
+                                <span class="fw-bold">۱۲٪</span>
+                                <span class="text-muted small">۷۸ کمک</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- جدول گزارش تفصیلی -->
+            <div class="dashboard-card mt-4" data-aos="fade-up">
+                <div class="card-header-custom">
+                    <h5 class="card-title">
+                        <i class="fas fa-table"></i>
+                        گزارش تفصیلی کمک‌ها - فروردین ۱۴۰۴
+                    </h5>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-sm btn-outline-primary" onclick="exportToExcel()">
+                            <i class="fas fa-file-excel ms-1"></i> اکسل
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger" onclick="exportToPDF()">
+                            <i class="fas fa-file-pdf ms-1"></i> PDF
+                        </button>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table-dashboard">
+                        <thead>
+                            <tr>
+                                <th>خیریه</th>
+                                <th>تعداد کمک</th>
+                                <th>مبلغ کل (تومان)</th>
+                                <th>میانگین هر کمک</th>
+                                <th>بیشترین کمک</th>
+                                <th>تغییرات ماهانه</th>
+                                <th>سهم از کل</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="fw-bold">خیریه امام رضا (ع)</td>
+                                <td>۳۲۴</td>
+                                <td>۱۲۴,۵۰۰,۰۰۰</td>
+                                <td>۳۸۴,۲۵۹</td>
+                                <td>۵,۰۰۰,۰۰۰</td>
+                                <td><span class="text-success"><i class="fas fa-arrow-up"></i> +۱۲٪</span></td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="progress" style="width: 80px; height: 6px;">
+                                            <div class="progress-bar bg-warning" style="width: 42%;"></div>
+                                        </div>
+                                        <span class="ms-2 small">۴۲٪</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bold">مؤسسه مهر سبز</td>
+                                <td>۱۸۷</td>
+                                <td>۷۸,۲۰۰,۰۰۰</td>
+                                <td>۴۱۸,۱۸۲</td>
+                                <td>۳,۵۰۰,۰۰۰</td>
+                                <td><span class="text-success"><i class="fas fa-arrow-up"></i> +۸٪</span></td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="progress" style="width: 80px; height: 6px;">
+                                            <div class="progress-bar bg-success" style="width: 28%;"></div>
+                                        </div>
+                                        <span class="ms-2 small">۲۸٪</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bold">خیریه نورالهدی</td>
+                                <td>۹۵</td>
+                                <td>۴۵,۶۰۰,۰۰۰</td>
+                                <td>۴۸۰,۰۰۰</td>
+                                <td>۲,۵۰۰,۰۰۰</td>
+                                <td><span class="text-danger"><i class="fas fa-arrow-down"></i> -۳٪</span></td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="progress" style="width: 80px; height: 6px;">
+                                            <div class="progress-bar bg-info" style="width: 18%;"></div>
+                                        </div>
+                                        <span class="ms-2 small">۱۸٪</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-4">
+                    <div class="small text-muted">
+                        نمایش ۱ تا ۳ از ۲۴ خیریه فعال
+                    </div>
+                    <nav>
+                        <ul class="pagination">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a>
+                            </li>
+                            <li class="page-item active"><a class="page-link" href="#">۱</a></li>
+                            <li class="page-item"><a class="page-link" href="#">۲</a></li>
+                            <li class="page-item"><a class="page-link" href="#">۳</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#"><i class="fas fa-chevron-left"></i></a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== تب 2: مدیریت اسناد (پیشرفته) ===== -->
+        <div class="tab-pane fade" id="files" role="tabpanel">
+            <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+                <div>
+                    <h4 class="fw-bold" style="color: var(--primary-deep);">
+                        <i class="fas fa-file-alt ms-2"></i> مدیریت اسناد و مدارک
+                    </h4>
+                    <p class="text-muted">آپلود، دسته‌بندی و مدیریت فایل‌های سازمانی</p>
+                </div>
+                <button class="btn btn-primary-charity" data-bs-toggle="modal" data-bs-target="#uploadFileModal">
+                    <i class="fas fa-cloud-upload-alt ms-2"></i> آپلود سند جدید
+                </button>
+            </div>
+
+            <!-- آمار پیشرفته فایل‌ها -->
+            <div class="row g-4 mb-4">
+                <div class="col-xl-2 col-md-4 col-6" data-aos="fade-up" data-aos-delay="0">
+                    <div class="stat-card-mini">
+                        <div class="stat-icon-mini" style="background: var(--accent-gold-soft);">
+                            <i class="fas fa-file"></i>
+                        </div>
+                        <div>
+                            <small class="text-muted">کل اسناد</small>
+                            <h5 class="fw-bold mb-0">۱,۲۴۰</h5>
+                            <span class="small text-success">+۱۲۴</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-2 col-md-4 col-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="stat-card-mini">
+                        <div class="stat-icon-mini" style="background: var(--accent-teal-soft);">
+                            <i class="fas fa-file-image"></i>
+                        </div>
+                        <div>
+                            <small class="text-muted">تصاویر</small>
+                            <h5 class="fw-bold mb-0">۵۶۰</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-2 col-md-4 col-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="stat-card-mini">
+                        <div class="stat-icon-mini" style="background: var(--accent-orange-soft);">
+                            <i class="fas fa-file-pdf"></i>
+                        </div>
+                        <div>
+                            <small class="text-muted">PDF</small>
+                            <h5 class="fw-bold mb-0">۳۲۰</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-2 col-md-4 col-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="stat-card-mini">
+                        <div class="stat-icon-mini" style="background: var(--accent-purple-soft);">
+                            <i class="fas fa-file-word"></i>
+                        </div>
+                        <div>
+                            <small class="text-muted">Word</small>
+                            <h5 class="fw-bold mb-0">۱۸۰</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-2 col-md-4 col-6" data-aos="fade-up" data-aos-delay="400">
+                    <div class="stat-card-mini">
+                        <div class="stat-icon-mini" style="background: var(--accent-teal-soft);">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <div>
+                            <small class="text-muted">حجم کل</small>
+                            <h5 class="fw-bold mb-0">۴.۲GB</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-2 col-md-4 col-6" data-aos="fade-up" data-aos-delay="500">
+                    <div class="stat-card-mini">
+                        <div class="stat-icon-mini" style="background: var(--accent-gold-soft);">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div>
+                            <small class="text-muted">آپلود امروز</small>
+                            <h5 class="fw-bold mb-0">۱۲</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- فیلتر پیشرفته فایل‌ها -->
+            <div class="dashboard-card" data-aos="fade-up">
+                <div class="row g-3">
+                    <div class="col-lg-4">
+                        <div class="input-group">
+                            <span class="input-group-text bg-transparent"><i class="fas fa-search"></i></span>
+                            <input type="text" class="form-control" placeholder="جستجوی فایل...">
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <select class="form-select">
+                            <option>همه انواع فایل</option>
+                            <option>تصاویر</option>
+                            <option>PDF</option>
+                            <option>Word</option>
+                            <option>Excel</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-2">
+                        <select class="form-select">
+                            <option>همه موجودیت‌ها</option>
+                            <option>نیازها</option>
+                            <option>کمک‌ها</option>
+                            <option>خیریه‌ها</option>
+                            <option>گزارشات</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-2">
+                        <select class="form-select">
+                            <option>سطح دسترسی</option>
+                            <option>عمومی</option>
+                            <option>حفاظت شده</option>
+                            <option>خصوصی</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-2">
+                        <button class="btn btn-outline-gold w-100">
+                            <i class="fas fa-filter ms-2"></i> اعمال فیلتر
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- لیست فایل‌ها -->
+            <div class="row g-4 mt-2">
+                <div class="col-xl-3 col-lg-4 col-md-6" data-aos="fade-up">
+                    <div class="file-card">
+                        <div class="file-type-badge">
+                            <span class="badge bg-danger">PDF</span>
+                        </div>
+                        <div class="file-icon">
+                            <i class="fas fa-file-pdf" style="color: #e63946;"></i>
+                        </div>
+                        <div class="text-center">
+                            <h6 class="fw-bold mb-1">گزارش مالی سال ۱۴۰۳</h6>
+                            <small class="text-muted d-block">۲.۴ MB • ۱۴۰۳/۱۲/۲۵</small>
+                            <div class="mt-2">
+                                <span class="badge bg-light"><i class="fas fa-lock-open"></i> عمومی</span>
+                                <span class="badge bg-light ms-1">مدیریت</span>
+                            </div>
+                            <div class="mt-3 d-flex justify-content-center gap-2">
+                                <button class="btn btn-sm btn-outline-primary" onclick="downloadFile(1)">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-secondary" onclick="viewFile(1)">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-success" onclick="shareFile(1)">
+                                    <i class="fas fa-share-alt"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-danger" onclick="deleteFile(1)">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="file-card">
+                        <div class="file-type-badge">
+                            <span class="badge bg-success">تصویر</span>
+                        </div>
+                        <div class="file-icon">
+                            <i class="fas fa-file-image" style="color: #2a9d8f;"></i>
+                        </div>
+                        <div class="text-center">
+                            <h6 class="fw-bold mb-1">مدرک تأیید خیریه</h6>
+                            <small class="text-muted d-block">۱.۱ MB • ۱۴۰۴/۰۱/۲۰</small>
+                            <div class="mt-2">
+                                <span class="badge bg-warning text-dark"><i class="fas fa-lock"></i> حفاظت شده</span>
+                            </div>
+                            <div class="mt-3 d-flex justify-content-center gap-2">
+                                <button class="btn btn-sm btn-outline-primary">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-secondary">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-danger">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="file-card">
+                        <div class="file-type-badge">
+                            <span class="badge bg-success">Excel</span>
+                        </div>
+                        <div class="file-icon">
+                            <i class="fas fa-file-excel" style="color: #1e8449;"></i>
+                        </div>
+                        <div class="text-center">
+                            <h6 class="fw-bold mb-1">کمک‌های فروردین ۱۴۰۴</h6>
+                            <small class="text-muted d-block">۸۵۰ KB • ۱۴۰۴/۰۱/۲۲</small>
+                            <div class="mt-2">
+                                <span class="badge bg-light"><i class="fas fa-globe"></i> عمومی</span>
+                            </div>
+                            <div class="mt-3 d-flex justify-content-center gap-2">
+                                <button class="btn btn-sm btn-outline-primary">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-secondary">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-info">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="file-card">
+                        <div class="file-type-badge">
+                            <span class="badge bg-primary">Word</span>
+                        </div>
+                        <div class="file-icon">
+                            <i class="fas fa-file-word" style="color: #2b5797;"></i>
+                        </div>
+                        <div class="text-center">
+                            <h6 class="fw-bold mb-1">گزارش میدانی منطقه</h6>
+                            <small class="text-muted d-block">۳.۲ MB • ۱۴۰۴/۰۱/۱۸</small>
+                            <div class="mt-2">
+                                <span class="badge bg-secondary">خصوصی</span>
+                            </div>
+                            <div class="mt-3 d-flex justify-content-center gap-2">
+                                <button class="btn btn-sm btn-outline-primary">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-secondary">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- صفحه‌بندی -->
+            <div class="d-flex justify-content-center mt-4">
+                <nav>
+                    <ul class="pagination">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#">قبلی</a>
+                        </li>
+                        <li class="page-item active"><a class="page-link" href="#">۱</a></li>
+                        <li class="page-item"><a class="page-link" href="#">۲</a></li>
+                        <li class="page-item"><a class="page-link" href="#">۳</a></li>
+                        <li class="page-item"><a class="page-link" href="#">۴</a></li>
+                        <li class="page-item"><a class="page-link" href="#">بعدی</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <!-- ===== تب 3: خروجی‌گیری (پیشرفته) ===== -->
+        <div class="tab-pane fade" id="export" role="tabpanel">
+            <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+                <div>
+                    <h4 class="fw-bold" style="color: var(--primary-deep);">
+                        <i class="fas fa-download ms-2"></i> سامانه خروجی‌گیری هوشمند
+                    </h4>
+                    <p class="text-muted">تولید گزارش در فرمت‌های مختلف با تمپلیت‌های سفارشی</p>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-lg-8">
+                    <div class="dashboard-card" data-aos="fade-left">
+                        <div class="card-header-custom">
+                            <h5 class="card-title">
+                                <i class="fas fa-file-export"></i>
+                                تمپلیت‌های خروجی
+                            </h5>
+                        </div>
+                        <div class="row g-4">
+                            <div class="col-md-4">
+                                <div class="export-template-card selected">
+                                    <i class="fas fa-chart-bar fa-3x" style="color: var(--accent-gold);"></i>
+                                    <h6 class="fw-bold mt-3">خلاصه فروش و کمک‌ها</h6>
+                                    <small class="text-muted">گزارش جامع عملکرد مالی</small>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="export-template-card">
+                                    <i class="fas fa-hand-holding-heart fa-3x" style="color: var(--accent-teal);"></i>
+                                    <h6 class="fw-bold mt-3">کمک‌های تفکیکی</h6>
+                                    <small class="text-muted">جزئیات کامل هر کمک</small>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="export-template-card">
+                                    <i class="fas fa-clipboard-check fa-3x" style="color: var(--accent-orange);"></i>
+                                    <h6 class="fw-bold mt-3">گزارش نیازها</h6>
+                                    <small class="text-muted">پیشرفت و وضعیت نیازها</small>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="export-template-card">
+                                    <i class="fas fa-file-invoice-dollar fa-3x" style="color: var(--accent-purple);"></i>
+                                    <h6 class="fw-bold mt-3">صورت مالی</h6>
+                                    <small class="text-muted">درآمد و هزینه</small>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="export-template-card">
+                                    <i class="fas fa-building fa-3x" style="color: var(--primary-deep);"></i>
+                                    <h6 class="fw-bold mt-3">عملکرد خیریه‌ها</h6>
+                                    <small class="text-muted">تحلیل تأثیر خیریه‌ها</small>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="export-template-card">
+                                    <i class="fas fa-boxes fa-3x" style="color: #e67e22;"></i>
+                                    <h6 class="fw-bold mt-3">گزارش انبار</h6>
+                                    <small class="text-muted">موجودی و کمبودها</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="my-4">
+
+                        <div class="row g-4">
+                            <div class="col-md-4">
+                                <label class="filter-label">فرمت خروجی</label>
+                                <select class="form-select">
+                                    <option value="excel" selected>📊 Excel (XLSX)</option>
+                                    <option value="pdf">📄 PDF</option>
+                                    <option value="csv">📈 CSV</option>
+                                    <option value="json">🔧 JSON</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="filter-label">بازه زمانی</label>
+                                <select class="form-select">
+                                    <option>ماه جاری</option>
+                                    <option>ماه گذشته</option>
+                                    <option>سه ماه اخیر</option>
+                                    <option>سال جاری</option>
+                                    <option selected>سفارشی</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="filter-label">خیریه</label>
+                                <select class="form-select">
+                                    <option>همه خیریه‌ها</option>
+                                    <option>خیریه امام رضا</option>
+                                    <option>مؤسسه مهر سبز</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mt-4">
+                            <button class="btn btn-primary-charity w-100" onclick="exportReport()">
+                                <i class="fas fa-download ms-2"></i> تولید و دانلود خروجی
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="dashboard-card" data-aos="fade-right">
+                        <div class="card-header-custom">
+                            <h5 class="card-title">
+                                <i class="fas fa-history"></i>
+                                آخرین خروجی‌ها
+                            </h5>
+                            <a href="#" class="small">پاک‌سازی</a>
+                        </div>
+                        <div class="list-group list-group-flush">
+                            <div class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                <div>
+                                    <i class="fas fa-file-excel ms-2" style="color: #1e8449;"></i>
+                                    <span>گزارش_کمک_فروردین.xlsx</span>
+                                    <br><small class="text-muted">۱۰ دقیقه پیش</small>
+                                </div>
+                                <button class="btn btn-sm btn-link">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                            <div class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                <div>
+                                    <i class="fas fa-file-pdf ms-2" style="color: #e63946;"></i>
+                                    <span>صورت_مالی_۱۴۰۳.pdf</span>
+                                    <br><small class="text-muted">۲ ساعت پیش</small>
+                                </div>
+                                <button class="btn btn-sm btn-link">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                            <div class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                <div>
+                                    <i class="fas fa-file-csv ms-2" style="color: #0a2c3d;"></i>
+                                    <span>محصولات_کم‌موجود.csv</span>
+                                    <br><small class="text-muted">دیروز</small>
+                                </div>
+                                <button class="btn btn-sm btn-link">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card mt-4" data-aos="fade-up">
+                        <div class="card-header-custom">
+                            <h5 class="card-title">
+                                <i class="fas fa-clock"></i>
+                                زمانبندی خروجی
+                            </h5>
+                        </div>
+                        <div class="form-check form-switch mb-3">
+                            <input class="form-check-input" type="checkbox" id="autoExport" checked>
+                            <label class="form-check-label fw-bold" for="autoExport">خروجی خودکار ماهانه</label>
+                            <div class="small text-muted">اول هر ماه میلادی</div>
+                        </div>
+                        <div class="form-check form-switch mb-3">
+                            <input class="form-check-input" type="checkbox" id="emailExport">
+                            <label class="form-check-label fw-bold" for="emailExport">ارسال به ایمیل</label>
+                            <div class="small text-muted">admin@charity.org</div>
+                        </div>
+                        <button class="btn btn-outline-gold w-100 mt-2">
+                            <i class="fas fa-cog ms-1"></i> تنظیمات زمانبندی
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== تب 4: تحلیل پیشرفته ===== -->
+        <div class="tab-pane fade" id="analytics" role="tabpanel">
+            <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+                <div>
+                    <h4 class="fw-bold" style="color: var(--primary-deep);">
+                        <i class="fas fa-brain ms-2"></i> تحلیل پیشرفته و هوش تجاری
+                    </h4>
+                    <p class="text-muted">تحلیل‌های پیش‌بینی‌کننده و هوشمند</p>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <div class="dashboard-card">
+                        <h5 class="fw-bold mb-3">
+                            <i class="fas fa-trend-up" style="color: var(--accent-teal);"></i>
+                            پیش‌بینی روند کمک‌ها
+                        </h5>
+                        <div id="forecastChart" style="height: 300px;"></div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="dashboard-card">
+                        <h5 class="fw-bold mb-3">
+                            <i class="fas fa-chart-simple" style="color: var(--accent-purple);"></i>
+                            تحلیل خوشه‌بندی خیریه‌ها
+                        </h5>
+                        <div id="clusteringChart" style="height: 300px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== مودال آپلود فایل پیشرفته ===== -->
+<div class="modal fade modal-modern" id="uploadFileModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold">
+                    <i class="fas fa-cloud-upload-alt ms-2" style="color: var(--accent-gold);"></i>
+                    آپلود سند جدید
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="dropzone-custom" id="fileUploadDropzone">
+                    <i class="fas fa-cloud-upload-alt fa-4x" style="color: var(--accent-gold);"></i>
+                    <h5 class="mt-3 fw-bold">فایل خود را بکشید و رها کنید</h5>
+                    <p class="text-muted">یا برای انتخاب فایل کلیک کنید</p>
+                    <button class="btn btn-sm btn-outline-gold mt-2">انتخاب فایل</button>
+                    <div class="small text-muted mt-3">
+                        فرمت‌های مجاز: JPG, PNG, PDF, DOC, XLS (حداکثر ۱۰MB)
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">عنوان سند</label>
+                        <input type="text" class="form-control" placeholder="مثال: گزارش مالی فروردین">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">موجودیت مرتبط</label>
+                        <select class="form-select">
+                            <option value="need">نیاز</option>
+                            <option value="donation">کمک</option>
+                            <option value="charity">خیریه</option>
+                            <option value="user">کاربر</option>
+                            <option value="report" selected>گزارش</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">دسته‌بندی</label>
+                        <select class="form-select">
+                            <option>گزارش مالی</option>
+                            <option>مدارک خیریه</option>
+                            <option>گزارش عملکرد</option>
+                            <option>صورت‌جلسه</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">برچسب‌ها</label>
+                        <input type="text" class="form-control" placeholder="مهم, سالانه, مالی">
+                    </div>
+                </div>
+
+                <div class="mt-3">
+                    <label class="form-label fw-bold">توضیحات</label>
+                    <textarea class="form-control" rows="2" placeholder="توضیحات تکمیلی..."></textarea>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">سطح دسترسی</label>
+                        <select class="form-select">
+                            <option value="public">🔓 عمومی - قابل مشاهده برای همه</option>
+                            <option value="protected" selected>🔐 حفاظت شده - فقط کاربران مجاز</option>
+                            <option value="private">🔒 خصوصی - فقط من</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 d-flex align-items-center">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="encryptFile">
+                            <label class="form-check-label fw-bold" for="encryptFile">
+                                رمزنگاری فایل
+                            </label>
+                            <div class="small text-muted">پیشنهاد برای اسناد حساس</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">انصراف</button>
+                <button type="button" class="btn btn-primary-charity" onclick="uploadFile()">
+                    <i class="fas fa-cloud-upload-alt ms-2"></i> آپلود سند
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ==================== تنظیمات اولیه ====================
+    let donationsTrendChart = null;
+    let donationsPieChart = null;
+    let forecastChart = null;
+    let clusteringChart = null;
+
+    // ==================== نمودارهای تحلیلی ====================
+    function initDonationsTrendChart() {
+        const options = {
+            chart: {
+                type: 'area',
+                height: 380,
+                fontFamily: 'Vazir',
+                toolbar: {
+                    show: true,
+                    tools: {
+                        download: true,
+                        selection: true,
+                        zoom: true,
+                        pan: true
+                    }
+                },
+                animations: {
+                    enabled: true,
+                    easing: 'easeinout',
+                    speed: 800
+                }
+            },
+            series: [{
+                name: 'کمک‌ها (میلیون تومان)',
+                data: [124, 187, 152, 224, 198, 265, 312, 289, 345, 412, 398, 425]
+            }],
+            xaxis: {
+                categories: ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند'],
+                labels: {
+                    style: {
+                        fontFamily: 'Vazir',
+                        fontWeight: 500
+                    }
+                }
+            },
+            colors: ['#e6b31e'],
+            dataLabels: { enabled: false },
+            stroke: { curve: 'smooth', width: 3 },
+            fill: {
+                type: 'gradient',
+                gradient: {
+                    shadeIntensity: 1,
+                    opacityFrom: 0.7,
+                    opacityTo: 0.2,
+                    stops: [0, 90, 100]
+                }
+            },
+            tooltip: {
+                theme: 'light',
+                y: {
+                    formatter: function(val) {
+                        return val.toFixed(1) + ' میلیون تومان';
+                    }
+                }
+            },
+            grid: {
+                borderColor: 'var(--gray-200)',
+                strokeDashArray: 5
+            }
+        };
+
+        if (donationsTrendChart) donationsTrendChart.destroy();
+        donationsTrendChart = new ApexCharts(document.querySelector("#donationsTrendChart"), options);
+        donationsTrendChart.render();
+    }
+
+    function initDonationsPieChart() {
+        const options = {
+            chart: {
+                type: 'donut',
+                height: 280,
+                fontFamily: 'Vazir',
+                toolbar: { show: false }
+            },
+            series: [42, 28, 18, 12],
+            labels: ['خیریه امام رضا', 'مؤسسه مهر سبز', 'خیریه نورالهدی', 'سایر'],
+            colors: ['#e6b31e', '#2a9d8f', '#ff8a5c', '#6c5ce7'],
+            legend: { show: false },
+            dataLabels: { enabled: false },
+            plotOptions: {
+                pie: {
+                    donut: {
+                        size: '65%',
+                        labels: {
+                            show: true,
+                            total: {
+                                show: true,
+                                label: 'کل کمک‌ها',
+                                fontSize: '14px',
+                                fontWeight: 'bold',
+                                color: '#0a2c3d',
+                                formatter: function(w) {
+                                    return '۸۴۲M';
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            responsive: [{
+                breakpoint: 480,
+                options: {
+                    chart: { width: 300 },
+                    legend: { position: 'bottom' }
+                }
+            }]
+        };
+
+        if (donationsPieChart) donationsPieChart.destroy();
+        donationsPieChart = new ApexCharts(document.querySelector("#donationsPieChart"), options);
+        donationsPieChart.render();
+    }
+
+    function initForecastChart() {
+        const options = {
+            chart: {
+                type: 'line',
+                height: 300,
+                fontFamily: 'Vazir',
+                toolbar: { show: false }
+            },
+            series: [
+                {
+                    name: 'کمک‌های واقعی',
+                    data: [425, 398, 412, 385, 365, 398, 425]
+                },
+                {
+                    name: 'پیش‌بینی',
+                    data: [430, 415, 445, 460, 480, 495, 520]
+                }
+            ],
+            xaxis: {
+                categories: ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'مهر'],
+                labels: { style: { fontFamily: 'Vazir' } }
+            },
+            colors: ['#2a9d8f', '#e6b31e'],
+            stroke: { curve: 'smooth', width: [3, 3], dashArray: [0, 5] }
+        };
+
+        if (forecastChart) forecastChart.destroy();
+        forecastChart = new ApexCharts(document.querySelector("#forecastChart"), options);
+        forecastChart.render();
+    }
+
+    // ==================== توابع گزارش ====================
+    function generateReport() {
+        const reportType = document.getElementById('reportTypeSelect').value;
+        const period = document.getElementById('periodSelect').value;
+        const dateFrom = document.getElementById('dateFrom').value;
+        const dateTo = document.getElementById('dateTo').value;
+
+        showNotification(`در حال تولید گزارش ${getReportTypeName(reportType)}...`, 'info');
+
+        // شبیه‌سازی فراخوانی API
+        setTimeout(() => {
+            showNotification('گزارش با موفقیت تولید شد', 'success');
+        }, 2000);
+    }
+
+    function getReportTypeName(type) {
+        const names = {
+            'donations': 'کمک‌های مالی',
+            'sales': 'فروش محصولات',
+            'needs': 'نیازها',
+            'financial': 'مالی',
+            'products': 'محصولات',
+            'charities': 'خیریه‌ها'
+        };
+        return names[type] || type;
+    }
+
+    function resetFilters() {
+        document.getElementById('dateFrom').value = '';
+        document.getElementById('dateTo').value = '';
+        showNotification('فیلترها بازنشانی شدند', 'info');
+    }
+
+    function saveReportTemplate() {
+        showNotification('تمپلیت گزارش ذخیره شد', 'success');
+    }
+
+    // ==================== توابع خروجی‌گیری ====================
+    function exportReport() {
+        showNotification('در حال تولید فایل خروجی...', 'info');
+        setTimeout(() => {
+            showNotification('فایل با موفقیت دانلود شد', 'success');
+        }, 2000);
+    }
+
+    function exportToExcel() {
+        showNotification('در حال خروجی‌گیری به اکسل...', 'info');
+        setTimeout(() => showNotification('فایل اکسل با موفقیت تولید شد', 'success'), 1500);
+    }
+
+    function exportToPDF() {
+        showNotification('در حال تولید فایل PDF...', 'info');
+        setTimeout(() => showNotification('گزارش PDF با موفقیت تولید شد', 'success'), 1500);
+    }
+
+    // ==================== توابع مدیریت فایل ====================
+    function downloadFile(fileId) {
+        showNotification(`در حال دانلود فایل ${fileId}...`, 'info');
+        setTimeout(() => showNotification('دانلود با موفقیت انجام شد', 'success'), 1000);
+    }
+
+    function viewFile(fileId) {
+        showNotification(`مشاهده فایل ${fileId}`, 'info');
+    }
+
+    function deleteFile(fileId) {
+        if (confirm('آیا از حذف این فایل اطمینان دارید؟')) {
+            showNotification(`فایل ${fileId} با موفقیت حذف شد`, 'success');
+        }
+    }
+
+    function shareFile(fileId) {
+        showNotification('لینک اشتراک‌گذاری کپی شد', 'success');
+    }
+
+    function uploadFile() {
+        showNotification('در حال آپلود فایل...', 'info');
+        setTimeout(() => {
+            showNotification('فایل با موفقیت آپلود شد', 'success');
+            $('#uploadFileModal').modal('hide');
+        }, 2000);
+    }
+
+    // ==================== سیستم اعلان ====================
+    function showNotification(message, type = 'success') {
+        Toastify({
+            text: message,
+            duration: 3000,
+            gravity: "bottom",
+            position: "right",
+            backgroundColor: type === 'success' ? 'linear-gradient(135deg, #10b981, #059669)' :
+                           type === 'error' ? 'linear-gradient(135deg, #ef4444, #dc2626)' :
+                           type === 'warning' ? 'linear-gradient(135deg, #f59e0b, #d97706)' :
+                           'linear-gradient(135deg, #3b82f6, #2563eb)',
+            className: "rounded-pill px-4 py-2",
+            close: true
+        }).showToast();
+    }
+
+    function showNotifications() {
+        showNotification('۳ اعلان خوانده نشده', 'info');
+    }
+
+    // ==================== خروج ====================
+    function logout() {
+        showNotification('در حال خروج از سیستم...', 'info');
+        setTimeout(() => {
+            window.location.href = '/login';
+        }, 1500);
+    }
+
+    // ==================== Dropzone ====================
+    function initDropzone() {
+        if (typeof Dropzone !== 'undefined') {
+            Dropzone.autoDiscover = false;
+            const dropzone = new Dropzone("#fileUploadDropzone", {
+                url: "/api/v1/endpoints/files/upload",
+                dictDefaultMessage: "فایل خود را بکشید و اینجا رها کنید",
+                dictFallbackMessage: "مرورگر شما از Drag & Drop پشتیبانی نمی‌کند",
+                dictInvalidFileType: "نوع فایل مجاز نیست",
+                dictFileTooBig: "حجم فایل بیش از حد مجاز است",
+                maxFilesize: 10,
+                acceptedFiles: ".jpg,.jpeg,.png,.pdf,.doc,.docx,.xls,.xlsx,.csv",
+                addRemoveLinks: true,
+                dictRemoveFile: "حذف",
+                dictCancelUpload: "لغو",
+                dictUploadCanceled: "آپلود لغو شد",
+                dictMaxFilesExceeded: "تنها یک فایل مجاز است"
+            });
+        }
+    }
+
+    // ==================== Persian Datepicker ====================
+    function initDatepickers() {
+        // در محیط واقعی از persian-datepicker استفاده کنید
+        document.querySelectorAll('.datepicker').forEach(el => {
+            el.placeholder = '۱۴۰۴/۰۱/۰۱';
+        });
+    }
+
+    // ==================== AOS ====================
+    function initAOS() {
+        if (typeof AOS !== 'undefined') {
+            AOS.init({
+                duration: 800,
+                once: true,
+                disable: 'mobile'
+            });
+        }
+    }
+
+    // ==================== جستجوی سراسری ====================
+    function initGlobalSearch() {
+        const searchInput = document.getElementById('globalSearch');
+        if (searchInput) {
+            searchInput.addEventListener('keyup', function(e) {
+                if (e.key === 'Enter') {
+                    showNotification(`جستجو برای: ${this.value}`, 'info');
+                }
+            });
+        }
+    }
+
+    // ==================== مقداردهی اولیه ====================
+    $(document).ready(function() {
+        initDonationsTrendChart();
+        initDonationsPieChart();
+        initForecastChart();
+        initDropzone();
+        initDatepickers();
+        initAOS();
+        initGlobalSearch();
+
+        showNotification('به سامانه گزارش‌گیری هوشمند خوش آمدید', 'success');
+    });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
