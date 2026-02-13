@@ -12,6 +12,7 @@ class UserCreate(BaseModel):
     phone: Optional[str]
     password: constr(min_length=6)
     role_key: Optional[str] = "USER"
+    captcha_token: Optional[str] = None
 
     class Config:
         json_schema_extra = {

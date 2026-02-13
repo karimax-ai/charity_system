@@ -1,0 +1,2064 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>مدیریت خیریه‌ها | خیریه‌آنلاین</title>
+
+    <!-- Bootstrap 5 RTL -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
+
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <!-- Vazir Font -->
+    <link href="https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.css" rel="stylesheet">
+
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Toastify -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
+    <!-- Select2 -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+    <!-- Persian Datepicker -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/shahtheme/persian-datepicker@1.2.0/dist/css/persian-datepicker.min.css">
+
+    <style>
+        :root {
+            --primary-deep: #0a2c3d;
+            --primary-soft: #1e4a5f;
+            --primary-gradient: linear-gradient(145deg, #0a2c3d, #1e4a5f);
+            --accent-gold: #e6b31e;
+            --accent-gold-soft: rgba(230, 179, 30, 0.12);
+            --accent-gold-gradient: linear-gradient(135deg, #e6b31e, #ffd166);
+            --accent-orange: #ff8a5c;
+            --accent-orange-soft: rgba(255, 138, 92, 0.12);
+            --accent-teal: #2a9d8f;
+            --accent-teal-soft: rgba(42, 157, 143, 0.12);
+            --accent-purple: #6c5ce7;
+            --accent-purple-soft: rgba(108, 92, 231, 0.12);
+            --accent-red: #e63946;
+            --accent-red-soft: rgba(230, 57, 70, 0.12);
+            --gray-50: #f8fafc;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --gray-600: #475569;
+            --gray-900: #0f172a;
+            --shadow-sm: 0 4px 6px -2px rgba(0,0,0,0.05);
+            --shadow-md: 0 12px 16px -4px rgba(0,0,0,0.06);
+            --shadow-lg: 0 20px 24px -6px rgba(0,0,0,0.08);
+            --shadow-xl: 0 32px 48px -12px rgba(0,0,0,0.12);
+            --shadow-gold: 0 12px 24px -8px rgba(230,179,30,0.24);
+            --radius-sm: 10px;
+            --radius-md: 14px;
+            --radius-lg: 20px;
+            --radius-xl: 28px;
+            --radius-full: 9999px;
+            --font-primary: 'Vazir', sans-serif;
+            --transition-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+            --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: var(--font-primary);
+        }
+
+        body {
+            background-color: var(--gray-50);
+            overflow-x: hidden;
+            color: var(--gray-900);
+            line-height: 1.6;
+        }
+
+        /* ===== اسکرولبار سفارشی ===== */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track { background: var(--gray-100); border-radius: var(--radius-full); }
+        ::-webkit-scrollbar-thumb { background: var(--gray-600); border-radius: var(--radius-full); }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary-deep); }
+
+        /* ===== Header Styles ===== */
+        .main-header {
+            background: white;
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 1050;
+            padding: 16px 0;
+        }
+
+        .brand-logo {
+            width: 48px;
+            height: 48px;
+            background: var(--accent-gold-gradient);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            color: var(--primary-deep);
+            box-shadow: var(--shadow-gold);
+        }
+
+        .nav-link-custom {
+            font-weight: 600;
+            color: var(--gray-900);
+            padding: 10px 16px !important;
+            border-radius: var(--radius-full);
+            transition: all 0.3s;
+        }
+
+        .nav-link-custom:hover,
+        .nav-link-custom.active {
+            background: var(--accent-gold-soft);
+            color: var(--primary-deep);
+        }
+
+        .nav-link-custom.active {
+            position: relative;
+        }
+
+        .nav-link-custom.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 50%;
+            transform: translateX(50%);
+            width: 24px;
+            height: 3px;
+            background: var(--accent-gold);
+            border-radius: var(--radius-full);
+        }
+
+        .btn-login {
+            background: transparent;
+            border: 2px solid var(--accent-gold);
+            color: var(--primary-deep);
+            border-radius: var(--radius-full);
+            padding: 8px 24px;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+
+        .btn-login:hover {
+            background: var(--accent-gold);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-gold);
+        }
+
+        .btn-register {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            border-radius: var(--radius-full);
+            padding: 10px 28px;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+
+        .btn-register:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            color: white;
+        }
+
+        /* ===== Filter Section ===== */
+        .filter-section {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: 32px;
+            box-shadow: var(--shadow-xl);
+            margin-bottom: 32px;
+            border: 1px solid var(--gray-200);
+        }
+
+        .filter-title {
+            font-weight: 700;
+            color: var(--primary-deep);
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+        }
+
+        .filter-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--gray-600);
+            margin-bottom: 8px;
+            display: block;
+            letter-spacing: 0.5px;
+        }
+
+        .form-control, .form-select, .input-group-text {
+            border-radius: var(--radius-md);
+            border: 1.5px solid var(--gray-200);
+            padding: 12px 16px;
+            transition: all 0.2s;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 0 4px var(--accent-gold-soft);
+        }
+
+        .btn-outline-gold {
+            background: transparent;
+            border: 2px solid var(--accent-gold);
+            color: var(--primary-deep);
+            border-radius: var(--radius-full);
+            padding: 10px 24px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-outline-gold:hover {
+            background: var(--accent-gold);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-gold);
+        }
+
+        .btn-primary-charity {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            border-radius: var(--radius-full);
+            padding: 12px 28px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-primary-charity:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            color: white;
+        }
+
+        /* ===== Charity Card ===== */
+        .charity-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.4s var(--transition-bounce);
+            border: 1px solid var(--gray-200);
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .charity-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+            border-color: transparent;
+        }
+
+        .charity-logo {
+            width: 70px;
+            height: 70px;
+            border-radius: var(--radius-md);
+            background: var(--accent-gold-soft);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--primary-deep);
+        }
+
+        .charity-badge {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            padding: 6px 16px;
+            border-radius: var(--radius-full);
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .badge-verified {
+            background: var(--accent-teal);
+            color: white;
+        }
+
+        .badge-pending {
+            background: #f59e0b;
+            color: white;
+        }
+
+        .badge-inactive {
+            background: var(--gray-600);
+            color: white;
+        }
+
+        .follow-btn {
+            background: transparent;
+            border: 1.5px solid var(--accent-gold);
+            color: var(--primary-deep);
+            border-radius: var(--radius-full);
+            padding: 6px 16px;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+        }
+
+        .follow-btn:hover {
+            background: var(--accent-gold);
+            color: var(--primary-deep);
+        }
+
+        .follow-btn.following {
+            background: var(--accent-teal);
+            border-color: var(--accent-teal);
+            color: white;
+        }
+
+        .follow-btn.following:hover {
+            background: var(--accent-red);
+            border-color: var(--accent-red);
+        }
+
+        /* ===== Stat Cards ===== */
+        .stat-card-mini {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s;
+            height: 100%;
+        }
+
+        .stat-card-mini:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .stat-icon-mini {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            margin-bottom: 16px;
+        }
+
+        /* ===== Detail Page ===== */
+        .charity-header {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: 32px;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 32px;
+            border: 1px solid var(--gray-200);
+        }
+
+        .stat-box {
+            background: var(--gray-50);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            text-align: center;
+            border: 1px solid var(--gray-200);
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary-deep);
+        }
+
+        .stat-label {
+            color: var(--gray-600);
+            font-size: 0.9rem;
+        }
+
+        .info-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        /* ===== Tabs ===== */
+        .nav-tabs-custom {
+            border-bottom: none;
+            background: white;
+            padding: 8px;
+            border-radius: var(--radius-full);
+            display: inline-flex;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-tabs-custom .nav-link {
+            border: none;
+            color: var(--primary-deep);
+            font-weight: 600;
+            padding: 10px 24px;
+            border-radius: var(--radius-full);
+            transition: all 0.3s;
+        }
+
+        .nav-tabs-custom .nav-link.active {
+            background: var(--primary-gradient);
+            color: white;
+        }
+
+        /* ===== Need Card ===== */
+        .need-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            border: 1px solid var(--gray-200);
+            transition: all 0.3s;
+            margin-bottom: 16px;
+        }
+
+        .need-card:hover {
+            transform: translateX(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: transparent;
+        }
+
+        .progress-custom {
+            height: 8px;
+            background: var(--gray-200);
+            border-radius: var(--radius-full);
+            overflow: hidden;
+        }
+
+        .progress-bar-custom {
+            background: var(--primary-gradient);
+            border-radius: var(--radius-full);
+            transition: width 0.6s ease;
+        }
+
+        /* ===== Follower Item ===== */
+        .follower-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .follower-item:last-child {
+            border-bottom: none;
+        }
+
+        .follower-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--accent-gold-soft);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--primary-deep);
+        }
+
+        /* ===== Pagination ===== */
+        .pagination-custom {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 40px;
+            margin-bottom: 24px;
+        }
+
+        .page-item-custom {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-md);
+            background: white;
+            border: 1px solid var(--gray-200);
+            color: var(--gray-600);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .page-item-custom:hover:not(.disabled) {
+            background: var(--accent-gold-soft);
+            border-color: var(--accent-gold);
+            color: var(--primary-deep);
+        }
+
+        .page-item-custom.active {
+            background: var(--primary-gradient);
+            color: white;
+            border-color: transparent;
+        }
+
+        .page-item-custom.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* ===== Skeleton Loading ===== */
+        .skeleton {
+            background: linear-gradient(90deg, var(--gray-200) 25%, var(--gray-100) 50%, var(--gray-200) 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+            border-radius: var(--radius-sm);
+        }
+
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* ===== Empty State ===== */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            background: white;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .empty-state-icon {
+            font-size: 4rem;
+            color: var(--gray-300);
+            margin-bottom: 20px;
+        }
+
+        /* ===== Animations ===== */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s var(--transition-smooth);
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 992px) {
+            .filter-section { padding: 24px; }
+            .charity-card { padding: 20px; }
+        }
+
+        @media (max-width: 768px) {
+            .filter-section { padding: 20px; }
+            .charity-header { padding: 24px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== Header ===== -->
+<header class="main-header">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid px-0">
+                <a class="navbar-brand d-flex align-items-center gap-2" href="/">
+                    <div class="brand-logo">
+                        <i class="fas fa-hand-holding-heart"></i>
+                    </div>
+                    <span class="fw-bold fs-3" style="color: var(--primary-deep);">خیریه‌آنلاین</span>
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarMain">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-custom" href="/">صفحه اصلی</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-custom" href="/needs">آگهی‌های نیاز</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-custom" href="/shop">فروشگاه خیریه</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-custom active" href="/charities">خیریه‌ها</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-custom" href="/reports">گزارش‌گیری</a>
+                        </li>
+                    </ul>
+
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-login" onclick="showLoginModal()">
+                            <i class="fas fa-sign-in-alt ms-2"></i> ورود
+                        </button>
+                        <button class="btn btn-register" onclick="window.location.href='/register'">
+                            ثبت‌نام <i class="fas fa-arrow-left ms-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<!-- ===== Main Content ===== -->
+<main class="container py-4">
+    <!-- ===== Breadcrumb ===== -->
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/" class="text-decoration-none text-muted">خانه</a></li>
+            <li class="breadcrumb-item active" aria-current="page">خیریه‌ها</li>
+        </ol>
+    </nav>
+
+    <!-- ===== Page Title & Stats ===== -->
+    <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="fw-bold" style="color: var(--primary-deep);">
+                <i class="fas fa-building ms-2" style="color: var(--accent-gold);"></i>
+                خیریه‌ها
+            </h1>
+            <p class="text-muted">مشاهده و جستجوی پیشرفته خیریه‌های عضو پلتفرم</p>
+        </div>
+        <div class="d-flex gap-2">
+            <span class="badge bg-success px-4 py-2" id="activeCharitiesCount">
+                <i class="fas fa-check-circle ms-1"></i>
+                ۷۸ خیریه فعال
+            </span>
+            <span class="badge bg-warning px-4 py-2" id="pendingCharitiesCount">
+                <i class="fas fa-clock ms-1"></i>
+                ۱۲ در انتظار تأیید
+            </span>
+        </div>
+    </div>
+
+    <!-- ===== فیلترهای پیشرفته ===== -->
+    <div class="filter-section" data-aos="fade-up">
+        <div class="filter-title">
+            <i class="fas fa-sliders-h" style="color: var(--accent-gold);"></i>
+            فیلترهای جستجو
+        </div>
+
+        <div class="row g-3 mb-4">
+            <div class="col-lg-4">
+                <label class="filter-label">جستجو</label>
+                <input type="text" class="form-control" id="searchInput"
+                       placeholder="نام خیریه، توضیحات، شماره ثبت..."
+                       onkeyup="handleSearchKeyup(event)">
+                <div id="searchSuggestions" class="position-absolute bg-white shadow-lg rounded-3 mt-1 p-2" style="width: 90%; z-index: 1000; display: none;"></div>
+            </div>
+            <div class="col-lg-2">
+                <label class="filter-label">نوع خیریه</label>
+                <select class="form-select" id="charityTypeFilter" onchange="applyFilters()">
+                    <option value="">همه انواع</option>
+                    <option value="public">عمومی</option>
+                    <option value="private">خصوصی</option>
+                    <option value="ngo">سمن</option>
+                    <option value="religious">مذهبی</option>
+                </select>
+            </div>
+            <div class="col-lg-2">
+                <label class="filter-label">وضعیت</label>
+                <select class="form-select" id="statusFilter" onchange="applyFilters()">
+                    <option value="">همه</option>
+                    <option value="active">فعال</option>
+                    <option value="inactive">غیرفعال</option>
+                    <option value="pending">در انتظار تأیید</option>
+                    <option value="suspended">مسدود</option>
+                </select>
+            </div>
+            <div class="col-lg-2">
+                <label class="filter-label">تأیید شده</label>
+                <select class="form-select" id="verifiedFilter" onchange="applyFilters()">
+                    <option value="">همه</option>
+                    <option value="true">تأیید شده</option>
+                    <option value="false">تأیید نشده</option>
+                </select>
+            </div>
+            <div class="col-lg-2">
+                <label class="filter-label">مرتب‌سازی</label>
+                <select class="form-select" id="sortFilter" onchange="applyFilters()">
+                    <option value="created_at.desc">🆕 جدیدترین</option>
+                    <option value="name.asc">📝 نام (الفبا)</option>
+                    <option value="followers_count.desc">👥 پرطرفدارترین</option>
+                    <option value="donations_sum.desc">💰 بیشترین کمک</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <button class="btn btn-link text-decoration-none" onclick="resetFilters()">
+                    <i class="fas fa-redo-alt ms-1"></i>
+                    بازنشانی
+                </button>
+            </div>
+            <div class="d-flex gap-2">
+                <button class="btn btn-outline-gold rounded-pill px-4" onclick="applyFilters()">
+                    <i class="fas fa-filter ms-2"></i>
+                    اعمال فیلتر
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== آمار سریع ===== -->
+    <div class="row g-4 mb-4">
+        <div class="col-md-3 col-6">
+            <div class="stat-card-mini">
+                <div class="stat-icon-mini" style="background: var(--accent-gold-soft); color: var(--accent-gold);">
+                    <i class="fas fa-building"></i>
+                </div>
+                <h4 class="fw-bold mb-1" id="totalCharitiesCount">۱۲۴</h4>
+                <p class="text-muted mb-0">کل خیریه‌ها</p>
+            </div>
+        </div>
+        <div class="col-md-3 col-6">
+            <div class="stat-card-mini">
+                <div class="stat-icon-mini" style="background: var(--accent-teal-soft); color: var(--accent-teal);">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h4 class="fw-bold mb-1" id="verifiedCharitiesCount">۸۹</h4>
+                <p class="text-muted mb-0">تأیید شده</p>
+            </div>
+        </div>
+        <div class="col-md-3 col-6">
+            <div class="stat-card-mini">
+                <div class="stat-icon-mini" style="background: var(--accent-orange-soft); color: var(--accent-orange);">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <h4 class="fw-bold mb-1" id="pendingCharitiesCountDetail">۱۲</h4>
+                <p class="text-muted mb-0">در انتظار</p>
+            </div>
+        </div>
+        <div class="col-md-3 col-6">
+            <div class="stat-card-mini">
+                <div class="stat-icon-mini" style="background: var(--accent-purple-soft); color: var(--accent-purple);">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h4 class="fw-bold mb-1" id="totalFollowersCount">۲,۸۴۰</h4>
+                <p class="text-muted mb-0">دنبال‌کنندگان</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== لیست خیریه‌ها (Grid View) ===== -->
+    <div class="row g-4" id="charitiesGridContainer">
+        <!-- اسکلتون لودینگ -->
+        <div class="col-lg-4 col-md-6 skeleton-loading">
+            <div class="charity-card">
+                <div class="skeleton" style="height: 80px; width: 80px; border-radius: 16px; margin-bottom: 16px;"></div>
+                <div class="skeleton" style="height: 24px; width: 70%; margin-bottom: 12px;"></div>
+                <div class="skeleton" style="height: 20px; width: 50%; margin-bottom: 12px;"></div>
+                <div class="skeleton" style="height: 16px; width: 40%; margin-bottom: 16px;"></div>
+                <div class="skeleton" style="height: 40px; width: 100%;"></div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 skeleton-loading">
+            <div class="charity-card">
+                <div class="skeleton" style="height: 80px; width: 80px; border-radius: 16px; margin-bottom: 16px;"></div>
+                <div class="skeleton" style="height: 24px; width: 70%; margin-bottom: 12px;"></div>
+                <div class="skeleton" style="height: 20px; width: 50%; margin-bottom: 12px;"></div>
+                <div class="skeleton" style="height: 16px; width: 40%; margin-bottom: 16px;"></div>
+                <div class="skeleton" style="height: 40px; width: 100%;"></div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 skeleton-loading">
+            <div class="charity-card">
+                <div class="skeleton" style="height: 80px; width: 80px; border-radius: 16px; margin-bottom: 16px;"></div>
+                <div class="skeleton" style="height: 24px; width: 70%; margin-bottom: 12px;"></div>
+                <div class="skeleton" style="height: 20px; width: 50%; margin-bottom: 12px;"></div>
+                <div class="skeleton" style="height: 16px; width: 40%; margin-bottom: 16px;"></div>
+                <div class="skeleton" style="height: 40px; width: 100%;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== صفحه‌بندی ===== -->
+    <div class="pagination-custom" id="pagination"></div>
+
+    <!-- ===== خیریه‌های پرطرفدار ===== -->
+    <section class="mt-5">
+        <h2 class="fw-bold mb-4" style="color: var(--primary-deep);">
+            <i class="fas fa-fire ms-2" style="color: var(--accent-orange);"></i>
+            خیریه‌های پرطرفدار
+        </h2>
+        <div class="row g-4" id="popularCharitiesContainer"></div>
+    </section>
+</main>
+
+<!-- ===== مودال جزئیات خیریه ===== -->
+<div class="modal fade" id="charityDetailModal" tabindex="-1" data-bs-backdrop="static">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+        <div class="modal-content" style="border-radius: var(--radius-lg);">
+            <div class="modal-header border-0">
+                <h5 class="modal-title fw-bold" id="charityDetailTitle">
+                    <i class="fas fa-building ms-2" style="color: var(--accent-gold);"></i>
+                    جزئیات خیریه
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body p-4" id="charityDetailContent">
+                <!-- محتوای داینامیک با JS پر می‌شود -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== مودال تأیید خیریه ===== -->
+<div class="modal fade" id="verifyCharityModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="border-radius: var(--radius-lg);">
+            <div class="modal-header border-0">
+                <h5 class="modal-title fw-bold">
+                    <i class="fas fa-check-circle ms-2" style="color: var(--accent-teal);"></i>
+                    تأیید خیریه
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body p-4">
+                <div class="mb-3">
+                    <label class="form-label fw-bold">وضعیت</label>
+                    <select class="form-select" id="verifyStatus">
+                        <option value="approved">✅ تأیید</option>
+                        <option value="rejected">❌ رد</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold">توضیحات</label>
+                    <textarea class="form-control" id="verifyComment" rows="3"
+                              placeholder="دلیل تأیید یا رد را وارد کنید..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer border-0">
+                <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-bs-dismiss="modal">
+                    انصراف
+                </button>
+                <button type="button" class="btn btn-primary-charity rounded-pill px-4" onclick="submitVerification()">
+                    ثبت
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== مودال ورود ===== -->
+<div class="modal fade" id="loginModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="border-radius: var(--radius-lg);">
+            <div class="modal-header border-0">
+                <h5 class="modal-title fw-bold">
+                    <i class="fas fa-sign-in-alt ms-2" style="color: var(--accent-gold);"></i>
+                    ورود به پنل کاربری
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body p-4">
+                <ul class="nav nav-pills mb-3 justify-content-center" id="loginTabs">
+                    <li class="nav-item">
+                        <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#passwordLogin">رمز عبور</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link" data-bs-toggle="pill" data-bs-target="#otpLogin">پیامک</button>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="passwordLogin">
+                        <form onsubmit="handlePasswordLogin(event)">
+                            <div class="mb-3">
+                                <input type="email" class="form-control" placeholder="ایمیل">
+                            </div>
+                            <div class="mb-3">
+                                <input type="password" class="form-control" placeholder="رمز عبور">
+                            </div>
+                            <button type="submit" class="btn btn-primary-charity w-100">
+                                ورود
+                            </button>
+                        </form>
+                    </div>
+                    <div class="tab-pane fade" id="otpLogin">
+                        <div class="mb-3">
+                            <input type="tel" class="form-control" placeholder="شماره موبایل">
+                        </div>
+                        <button class="btn btn-outline-gold w-100" onclick="sendOtp()">
+                            ارسال کد
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+<script>
+    // ==================== کانفیگ Axios ====================
+    const api = axios.create({
+        baseURL: '/api/v1',
+        timeout: 15000,
+        headers: { 'Content-Type': 'application/json' }
+    });
+
+    // توکن احراز هویت
+    const authToken = localStorage.getItem('access_token');
+    if (authToken) {
+        api.defaults.headers.common['Authorization'] = `Bearer ${authToken}`;
+    }
+
+    // ==================== State مدیریت ====================
+    const state = {
+        currentPage: 1,
+        pageSize: 12,
+        totalPages: 0,
+        totalItems: 0,
+        filters: {
+            charity_type: null,
+            status: null,
+            verified: null,
+            search_text: null,
+            sort_by: 'created_at',
+            sort_order: 'desc'
+        },
+        charities: [],
+        popularCharities: [],
+        currentCharity: null
+    };
+
+    // ==================== 1️⃣ لیست خیریه‌ها با فیلتر ====================
+    // GET /api/v1/charities/
+    async function loadCharities(page = 1) {
+        showLoading();
+
+        try {
+            const params = {
+                page: page,
+                limit: state.pageSize,
+                sort_by: state.filters.sort_by,
+                sort_order: state.filters.sort_order
+            };
+
+            if (state.filters.charity_type) params.charity_type = state.filters.charity_type;
+            if (state.filters.status) params.status = state.filters.status;
+            if (state.filters.verified !== null) params.verified = state.filters.verified;
+            if (state.filters.search_text) params.search_text = state.filters.search_text;
+
+            // const response = await api.get('/charities/', { params });
+            // const data = response.data;
+
+            // دیتای شبیه‌سازی شده
+            const data = {
+                items: [
+                    {
+                        id: 1,
+                        name: 'خیریه امام رضا (ع)',
+                        charity_type: 'religious',
+                        status: 'active',
+                        verified: true,
+                        description: 'فعال در زمینه کمک به نیازمندان و ایتام',
+                        city: 'مشهد',
+                        province: 'خراسان رضوی',
+                        manager_name: 'علی رضایی',
+                        followers_count: 1240,
+                        needs_count: 28,
+                        donations_sum: 124500000,
+                        logo_url: 'https://img.icons8.com/fluency/96/mosque.png',
+                        created_at: '2024-01-15T10:30:00Z'
+                    },
+                    {
+                        id: 2,
+                        name: 'مؤسسه مهر سبز',
+                        charity_type: 'ngo',
+                        status: 'active',
+                        verified: true,
+                        description: 'حمایت از محیط زیست و توسعه پایدار',
+                        city: 'تهران',
+                        province: 'تهران',
+                        manager_name: 'سارا محمدی',
+                        followers_count: 856,
+                        needs_count: 15,
+                        donations_sum: 78200000,
+                        logo_url: 'https://img.icons8.com/fluency/96/green-earth.png',
+                        created_at: '2024-02-20T14:20:00Z'
+                    },
+                    {
+                        id: 3,
+                        name: 'خیریه نورالهدی',
+                        charity_type: 'public',
+                        status: 'pending',
+                        verified: false,
+                        description: 'کمک به بیماران صعب‌العلاج',
+                        city: 'اصفهان',
+                        province: 'اصفهان',
+                        manager_name: 'محمد کریمی',
+                        followers_count: 560,
+                        needs_count: 9,
+                        donations_sum: 45600000,
+                        logo_url: 'https://img.icons8.com/fluency/96/light.png',
+                        created_at: '2024-03-10T09:15:00Z'
+                    },
+                    {
+                        id: 4,
+                        name: 'خیریه حضرت علی (ع)',
+                        charity_type: 'religious',
+                        status: 'active',
+                        verified: true,
+                        description: 'تأمین جهیزیه و کمک هزینه ازدواج',
+                        city: 'شیراز',
+                        province: 'فارس',
+                        manager_name: 'رضا احمدی',
+                        followers_count: 345,
+                        needs_count: 12,
+                        donations_sum: 23400000,
+                        logo_url: 'https://img.icons8.com/fluency/96/hand-with-pen.png',
+                        created_at: '2024-04-05T11:45:00Z'
+                    }
+                ],
+                total: 124,
+                total_pages: 11,
+                page: page,
+                limit: state.pageSize
+            };
+
+            state.totalItems = data.total;
+            state.totalPages = data.total_pages;
+            state.currentPage = page;
+
+            updateStats(data);
+            renderCharities(data.items);
+            renderPagination(data.total_pages, page);
+
+        } catch (error) {
+            console.error('Error loading charities:', error);
+            showNotification('خطا در دریافت لیست خیریه‌ها', 'error');
+        } finally {
+            hideLoading();
+        }
+    }
+
+    // ==================== 2️⃣ دریافت جزئیات یک خیریه ====================
+    // GET /api/v1/charities/{charity_id}
+    async function loadCharityDetails(charityId) {
+        try {
+            // const response = await api.get(`/charities/${charityId}`);
+            // const charity = response.data;
+
+            // دیتای شبیه‌سازی شده
+            const charity = state.charities.find(c => c.id === charityId) || {
+                id: charityId,
+                name: 'خیریه امام رضا (ع)',
+                charity_type: 'religious',
+                status: 'active',
+                verified: true,
+                description: 'فعال در زمینه کمک به نیازمندان و ایتام از سال ۱۳۸۵',
+                full_description: 'خیریه امام رضا (ع) با هدف کمک به نیازمندان و ایتام در شهر مشهد تأسیس شده است. این خیریه با همکاری بیش از ۵۰۰ خیر و ۵۰ داوطلب فعال، خدمات متنوعی از جمله کمک‌های نقدی، تأمین جهیزیه، کمک هزینه درمان و تحصیل را ارائه می‌دهد.',
+                address: 'مشهد، خیابان امام رضا، نبش کوچه ۱۲',
+                phone: '۰۵۱-۱۲۳۴۵۶۷۸',
+                website: 'https://emamreza.ir',
+                email: 'info@emamreza.ir',
+                registration_number: '۱۲۳۴۵',
+                manager_id: 1,
+                manager_name: 'علی رضایی',
+                followers_count: 1240,
+                needs_count: 28,
+                donations_count: 342,
+                donations_sum: 124500000,
+                created_at: '2024-01-15T10:30:00Z'
+            };
+
+            state.currentCharity = charity;
+            renderCharityDetails(charity);
+
+            // بارگذاری نیازها و دنبال‌کنندگان
+            loadCharityNeeds(charityId);
+            loadCharityFollowers(charityId);
+            loadCharityVerifications(charityId);
+
+        } catch (error) {
+            console.error('Error loading charity details:', error);
+            showNotification('خطا در دریافت جزئیات خیریه', 'error');
+        }
+    }
+
+    // ==================== 3️⃣ نیازهای یک خیریه ====================
+    // GET /api/v1/charities/{charity_id}/needs
+    async function loadCharityNeeds(charityId) {
+        try {
+            // const response = await api.get(`/charities/${charityId}/needs`, {
+            //     params: { limit: 5 }
+            // });
+            // const needs = response.data.items;
+
+            const needs = [
+                {
+                    id: 1,
+                    title: 'کمک به دانشجویان بی‌بضاعت',
+                    target_amount: 50000000,
+                    collected_amount: 32500000,
+                    percentage: 65,
+                    status: 'active',
+                    is_urgent: false,
+                    created_at: '2025-01-20T14:20:00Z'
+                },
+                {
+                    id: 2,
+                    title: 'تأمین جهیزیه نوعروسان',
+                    target_amount: 30000000,
+                    collected_amount: 28500000,
+                    percentage: 95,
+                    status: 'active',
+                    is_urgent: true,
+                    created_at: '2025-02-10T09:15:00Z'
+                },
+                {
+                    id: 3,
+                    title: 'کمک هزینه درمان',
+                    target_amount: 15000000,
+                    collected_amount: 4200000,
+                    percentage: 28,
+                    status: 'active',
+                    is_urgent: false,
+                    created_at: '2025-02-25T11:45:00Z'
+                }
+            ];
+
+            renderCharityNeeds(needs);
+
+        } catch (error) {
+            console.error('Error loading charity needs:', error);
+        }
+    }
+
+    // ==================== 4️⃣ دنبال‌کنندگان یک خیریه ====================
+    // GET /api/v1/charities/{charity_id}/followers
+    async function loadCharityFollowers(charityId) {
+        try {
+            // const response = await api.get(`/charities/${charityId}/followers`, {
+            //     params: { limit: 5 }
+            // });
+            // const followers = response.data.items;
+
+            const followers = [
+                {
+                    user_id: 101,
+                    user_name: 'احمد رضایی',
+                    followed_at: '2025-03-01T10:30:00Z',
+                    avatar_url: null
+                },
+                {
+                    user_id: 102,
+                    user_name: 'فاطمه محمدی',
+                    followed_at: '2025-02-28T14:20:00Z',
+                    avatar_url: null
+                },
+                {
+                    user_id: 103,
+                    user_name: 'علی کریمی',
+                    followed_at: '2025-02-25T09:15:00Z',
+                    avatar_url: null
+                }
+            ];
+
+            renderCharityFollowers(followers);
+
+        } catch (error) {
+            console.error('Error loading charity followers:', error);
+        }
+    }
+
+    // ==================== 5️⃣ تأییدیه‌های داده شده توسط خیریه ====================
+    // GET /api/v1/charities/{charity_id}/verifications/given
+    async function loadCharityVerifications(charityId) {
+        try {
+            // const response = await api.get(`/charities/${charityId}/verifications/given`, {
+            //     params: { limit: 5 }
+            // });
+            // const verifications = response.data.items;
+
+            const verifications = [
+                {
+                    id: 1,
+                    need_id: 5,
+                    need_title: 'کمک به بیماران سرطانی',
+                    need_charity: 'مؤسسه مهر سبز',
+                    status: 'approved',
+                    verified_at: '2025-02-15T11:30:00Z'
+                },
+                {
+                    id: 2,
+                    need_id: 8,
+                    need_title: 'خرید ویلچر',
+                    need_charity: 'خیریه نورالهدی',
+                    status: 'approved',
+                    verified_at: '2025-02-10T09:45:00Z'
+                }
+            ];
+
+            renderCharityVerifications(verifications);
+
+        } catch (error) {
+            console.error('Error loading charity verifications:', error);
+        }
+    }
+
+    // ==================== 6️⃣ دنبال کردن خیریه ====================
+    // POST /api/v1/charities/{charity_id}/follow
+    async function followCharity(charityId) {
+        try {
+            await api.post(`/charities/${charityId}/follow`);
+            showNotification('خیریه با موفقیت دنبال شد', 'success');
+
+            // بروزرسانی UI
+            const followBtn = document.getElementById(`follow-btn-${charityId}`);
+            if (followBtn) {
+                followBtn.classList.add('following');
+                followBtn.innerHTML = '<i class="fas fa-check-circle ms-1"></i> دنبال می‌کنید';
+            }
+        } catch (error) {
+            if (error.response?.status === 400) {
+                showNotification('قبلاً این خیریه را دنبال کرده‌اید', 'info');
+            } else {
+                showNotification('خطا در دنبال کردن خیریه', 'error');
+            }
+        }
+    }
+
+    // ==================== 7️⃣ لغو دنبال کردن خیریه ====================
+    // DELETE /api/v1/charities/{charity_id}/unfollow
+    async function unfollowCharity(charityId) {
+        try {
+            await api.delete(`/charities/${charityId}/unfollow`);
+            showNotification('دنبال کردن خیریه لغو شد', 'success');
+
+            // بروزرسانی UI
+            const followBtn = document.getElementById(`follow-btn-${charityId}`);
+            if (followBtn) {
+                followBtn.classList.remove('following');
+                followBtn.innerHTML = '<i class="fas fa-plus-circle ms-1"></i> دنبال کنید';
+            }
+        } catch (error) {
+            showNotification('خطا در لغو دنبال کردن', 'error');
+        }
+    }
+
+    // ==================== 8️⃣ تأیید خیریه ====================
+    // POST /api/v1/charities/{charity_id}/verify
+    async function verifyCharity(charityId) {
+        try {
+            const status = document.getElementById('verifyStatus').value;
+            const comment = document.getElementById('verifyComment').value;
+
+            const verificationData = {
+                status: status,
+                comment: comment
+            };
+
+            await api.post(`/charities/${charityId}/verify`, verificationData);
+            showNotification(`خیریه با موفقیت ${status === 'approved' ? 'تأیید' : 'رد'} شد`, 'success');
+
+            bootstrap.Modal.getInstance(document.getElementById('verifyCharityModal')).hide();
+            loadCharities(state.currentPage);
+
+        } catch (error) {
+            showNotification('خطا در ثبت تأییدیه', 'error');
+        }
+    }
+
+    // ==================== 9️⃣ خیریه‌های پرطرفدار ====================
+    // GET /api/v1/charities/popular
+    async function loadPopularCharities() {
+        try {
+            // const response = await api.get('/charities/popular', {
+            //     params: { period_days: 30, limit: 4 }
+            // });
+            // const popular = response.data.popular_charities;
+
+            const popular = [
+                {
+                    id: 1,
+                    name: 'خیریه امام رضا (ع)',
+                    logo_url: 'https://img.icons8.com/fluency/96/mosque.png',
+                    followers_count: 1240,
+                    donations_amount: 124500000,
+                    completed_needs_count: 18,
+                    popularity_score: 1240
+                },
+                {
+                    id: 2,
+                    name: 'مؤسسه مهر سبز',
+                    logo_url: 'https://img.icons8.com/fluency/96/green-earth.png',
+                    followers_count: 856,
+                    donations_amount: 78200000,
+                    completed_needs_count: 12,
+                    popularity_score: 856
+                },
+                {
+                    id: 3,
+                    name: 'خیریه نورالهدی',
+                    logo_url: 'https://img.icons8.com/fluency/96/light.png',
+                    followers_count: 560,
+                    donations_amount: 45600000,
+                    completed_needs_count: 7,
+                    popularity_score: 560
+                },
+                {
+                    id: 4,
+                    name: 'خیریه حضرت علی (ع)',
+                    logo_url: 'https://img.icons8.com/fluency/96/hand-with-pen.png',
+                    followers_count: 345,
+                    donations_amount: 23400000,
+                    completed_needs_count: 9,
+                    popularity_score: 345
+                }
+            ];
+
+            renderPopularCharities(popular);
+
+        } catch (error) {
+            console.error('Error loading popular charities:', error);
+        }
+    }
+
+    // ==================== 🔟 رندر خیریه‌ها ====================
+    function renderCharities(charities) {
+        const container = document.getElementById('charitiesGridContainer');
+        state.charities = charities;
+
+        if (!charities || charities.length === 0) {
+            container.innerHTML = `
+                <div class="col-12">
+                    <div class="empty-state">
+                        <div class="empty-state-icon">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <h5 class="fw-bold mb-2">خیریه‌ای یافت نشد</h5>
+                        <p class="text-muted">با تغییر فیلترها مجدداً جستجو کنید</p>
+                    </div>
+                </div>
+            `;
+            return;
+        }
+
+        let html = '';
+        charities.forEach(charity => {
+            const statusClass = charity.status === 'active' ? 'success' :
+                               charity.status === 'pending' ? 'warning' : 'danger';
+            const statusText = charity.status === 'active' ? 'فعال' :
+                              charity.status === 'pending' ? 'در انتظار' : 'غیرفعال';
+
+            html += `
+                <div class="col-lg-4 col-md-6" data-aos="fade-up">
+                    <div class="charity-card">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div class="charity-logo">
+                                <img src="${charity.logo_url || 'https://img.icons8.com/fluency/96/building.png'}"
+                                     alt="${charity.name}" style="width: 70px; height: 70px; object-fit: contain;">
+                            </div>
+                            <span class="charity-badge badge-${statusClass}">
+                                ${statusText}
+                            </span>
+                        </div>
+
+                        <div class="mt-3">
+                            <h5 class="fw-bold mb-1">${charity.name}</h5>
+                            <p class="small text-muted mb-2">
+                                <i class="fas fa-map-marker-alt ms-1"></i>
+                                ${charity.city || ''}، ${charity.province || ''}
+                            </p>
+                            <p class="small text-muted mb-3">
+                                ${charity.description?.substring(0, 100)}...
+                            </p>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-3">
+                            <div>
+                                <small class="text-muted d-block">دنبال‌کنندگان</small>
+                                <span class="fw-bold">${formatNumber(charity.followers_count)}</span>
+                            </div>
+                            <div>
+                                <small class="text-muted d-block">نیازها</small>
+                                <span class="fw-bold">${charity.needs_count}</span>
+                            </div>
+                            <div>
+                                <small class="text-muted d-block">کمک‌ها</small>
+                                <span class="fw-bold">${formatNumber(charity.donations_sum)}</span>
+                            </div>
+                        </div>
+
+                        <div class="d-flex gap-2">
+                            <button class="flex-grow-1 follow-btn ${isFollowing(charity.id) ? 'following' : ''}"
+                                    id="follow-btn-${charity.id}"
+                                    onclick="toggleFollow(${charity.id})">
+                                <i class="fas ${isFollowing(charity.id) ? 'fa-check-circle' : 'fa-plus-circle'} ms-1"></i>
+                                ${isFollowing(charity.id) ? 'دنبال می‌کنید' : 'دنبال کنید'}
+                            </button>
+                            <button class="btn btn-outline-primary" onclick="viewCharityDetails(${charity.id})">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            ${canVerify() ? `
+                                <button class="btn btn-outline-success" onclick="showVerifyModal(${charity.id})">
+                                    <i class="fas fa-check-double"></i>
+                                </button>
+                            ` : ''}
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+
+        container.innerHTML = html;
+    }
+
+    // ==================== 1️⃣1️⃣ رندر جزئیات خیریه ====================
+    function renderCharityDetails(charity) {
+        const container = document.getElementById('charityDetailContent');
+
+        let html = `
+            <div class="charity-header">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <div class="d-flex align-items-center gap-4">
+                            <div class="charity-logo" style="width: 100px; height: 100px; font-size: 2.5rem;">
+                                <img src="${charity.logo_url || 'https://img.icons8.com/fluency/96/building.png'}"
+                                     alt="${charity.name}" style="width: 100px; height: 100px; object-fit: contain;">
+                            </div>
+                            <div>
+                                <h3 class="fw-bold mb-2">${charity.name}</h3>
+                                <div class="d-flex gap-3 mb-2">
+                                    <span class="badge ${charity.verified ? 'bg-success' : 'bg-warning'} px-3 py-2">
+                                        ${charity.verified ? '✓ تأیید شده' : '⏳ در انتظار تأیید'}
+                                    </span>
+                                    <span class="badge bg-light text-dark px-3 py-2">
+                                        ${getCharityTypeLabel(charity.charity_type)}
+                                    </span>
+                                </div>
+                                <p class="text-muted mb-0">
+                                    <i class="fas fa-map-marker-alt ms-2"></i>
+                                    ${charity.address || `${charity.city}، ${charity.province}`}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-start">
+                        <button class="btn ${isFollowing(charity.id) ? 'btn-outline-danger' : 'btn-outline-gold'} rounded-pill px-4"
+                                onclick="toggleFollow(${charity.id})">
+                            <i class="fas ${isFollowing(charity.id) ? 'fa-times-circle' : 'fa-plus-circle'} ms-2"></i>
+                            ${isFollowing(charity.id) ? 'لغو دنبال کردن' : 'دنبال کنید'}
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- آمار -->
+            <div class="row g-4 mb-4">
+                <div class="col-md-3 col-6">
+                    <div class="stat-box">
+                        <div class="stat-value">${formatNumber(charity.followers_count)}</div>
+                        <div class="stat-label">دنبال‌کننده</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-box">
+                        <div class="stat-value">${charity.needs_count}</div>
+                        <div class="stat-label">نیاز فعال</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-box">
+                        <div class="stat-value">${formatNumber(charity.donations_count || 0)}</div>
+                        <div class="stat-label">کمک</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-box">
+                        <div class="stat-value">${formatNumber(charity.donations_sum)}</div>
+                        <div class="stat-label">تومان کمک</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- اطلاعات تماس و تب‌ها -->
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card border-0 bg-light p-4 rounded-4 mb-4">
+                        <h6 class="fw-bold mb-3">اطلاعات تماس</h6>
+                        <div class="info-row">
+                            <i class="fas fa-phone text-primary" style="width: 24px;"></i>
+                            <span>${charity.phone || 'ثبت نشده'}</span>
+                        </div>
+                        <div class="info-row">
+                            <i class="fas fa-envelope text-primary" style="width: 24px;"></i>
+                            <span>${charity.email || 'ثبت نشده'}</span>
+                        </div>
+                        <div class="info-row">
+                            <i class="fas fa-globe text-primary" style="width: 24px;"></i>
+                            <a href="${charity.website}" target="_blank" class="text-decoration-none">${charity.website || 'ندارد'}</a>
+                        </div>
+                        <div class="info-row">
+                            <i class="fas fa-id-card text-primary" style="width: 24px;"></i>
+                            <span>شماره ثبت: ${charity.registration_number || 'نامشخص'}</span>
+                        </div>
+                    </div>
+
+                    <div class="card border-0 bg-light p-4 rounded-4">
+                        <h6 class="fw-bold mb-3">مدیر خیریه</h6>
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="follower-avatar">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                            <div>
+                                <div class="fw-bold">${charity.manager_name || 'نامشخص'}</div>
+                                <small class="text-muted">مدیر عامل</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-8">
+                    <ul class="nav nav-tabs-custom" id="detailTabs">
+                        <li class="nav-item">
+                            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#description">توضیحات</button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#needs">نیازها</button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#followers">دنبال‌کنندگان</button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#verifications">تأییدیه‌ها</button>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content mt-4">
+                        <div class="tab-pane fade show active" id="description">
+                            <p class="lead">${charity.full_description || charity.description}</p>
+                            <hr>
+                            <small class="text-muted">تاریخ عضویت: ${new Date(charity.created_at).toLocaleDateString('fa-IR')}</small>
+                        </div>
+                        <div class="tab-pane fade" id="needs">
+                            <div id="charityNeedsList"></div>
+                        </div>
+                        <div class="tab-pane fade" id="followers">
+                            <div id="charityFollowersList"></div>
+                        </div>
+                        <div class="tab-pane fade" id="verifications">
+                            <div id="charityVerificationsList"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        container.innerHTML = html;
+    }
+
+    // ==================== 1️⃣2️⃣ رندر نیازهای خیریه ====================
+    function renderCharityNeeds(needs) {
+        const container = document.getElementById('charityNeedsList');
+
+        if (!needs || needs.length === 0) {
+            container.innerHTML = '<p class="text-muted">نیازی ثبت نشده است</p>';
+            return;
+        }
+
+        let html = '';
+        needs.forEach(need => {
+            html += `
+                <div class="need-card">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <h6 class="fw-bold mb-1">${need.title}</h6>
+                            <div class="d-flex gap-3 mb-2">
+                                <small class="text-muted">
+                                    <i class="fas fa-flag ms-1"></i>
+                                    ${getCategoryLabel(need.category)}
+                                </small>
+                                <small class="text-muted">
+                                    <i class="fas fa-clock ms-1"></i>
+                                    ${new Date(need.created_at).toLocaleDateString('fa-IR')}
+                                </small>
+                            </div>
+                        </div>
+                        ${need.is_urgent ? '<span class="badge bg-danger">فوری</span>' : ''}
+                    </div>
+                    <div class="row align-items-center mt-2">
+                        <div class="col-6">
+                            <div class="progress-custom">
+                                <div class="progress-bar-custom" style="width: ${need.percentage}%;"></div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="d-flex justify-content-between">
+                                <span>${formatNumber(need.collected_amount)}</span>
+                                <span class="text-muted">از ${formatNumber(need.target_amount)}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-start mt-2">
+                        <button class="btn btn-sm btn-link" onclick="viewNeed(${need.id})">
+                            مشاهده جزئیات
+                        </button>
+                    </div>
+                </div>
+            `;
+        });
+
+        container.innerHTML = html;
+    }
+
+    // ==================== 1️⃣3️⃣ رندر دنبال‌کنندگان ====================
+    function renderCharityFollowers(followers) {
+        const container = document.getElementById('charityFollowersList');
+
+        if (!followers || followers.length === 0) {
+            container.innerHTML = '<p class="text-muted">هنوز دنبال‌کننده‌ای ندارد</p>';
+            return;
+        }
+
+        let html = '';
+        followers.forEach(follower => {
+            html += `
+                <div class="follower-item">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="follower-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div>
+                            <div class="fw-bold">${follower.user_name}</div>
+                            <small class="text-muted">
+                                از ${new Date(follower.followed_at).toLocaleDateString('fa-IR')}
+                            </small>
+                        </div>
+                    </div>
+                    <button class="btn btn-sm btn-outline-primary" onclick="viewUser(${follower.user_id})">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+            `;
+        });
+
+        container.innerHTML = html;
+    }
+
+    // ==================== 1️⃣4️⃣ رندر تأییدیه‌ها ====================
+    function renderCharityVerifications(verifications) {
+        const container = document.getElementById('charityVerificationsList');
+
+        if (!verifications || verifications.length === 0) {
+            container.innerHTML = '<p class="text-muted">تاکنون تأییدیه‌ای صادر نکرده است</p>';
+            return;
+        }
+
+        let html = '';
+        verifications.forEach(v => {
+            html += `
+                <div class="need-card">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h6 class="fw-bold mb-1">${v.need_title}</h6>
+                            <small class="text-muted">${v.need_charity}</small>
+                        </div>
+                        <span class="badge bg-success">✓ تأیید شده</span>
+                    </div>
+                    <div class="mt-2">
+                        <small class="text-muted">
+                            <i class="fas fa-calendar ms-1"></i>
+                            ${new Date(v.verified_at).toLocaleDateString('fa-IR')}
+                        </small>
+                    </div>
+                </div>
+            `;
+        });
+
+        container.innerHTML = html;
+    }
+
+    // ==================== 1️⃣5️⃣ رندر خیریه‌های پرطرفدار ====================
+    function renderPopularCharities(charities) {
+        const container = document.getElementById('popularCharitiesContainer');
+
+        let html = '';
+        charities.forEach(charity => {
+            html += `
+                <div class="col-lg-3 col-md-6">
+                    <div class="charity-card text-center">
+                        <div class="charity-logo mx-auto" style="width: 60px; height: 60px;">
+                            <img src="${charity.logo_url || 'https://img.icons8.com/fluency/96/building.png'}"
+                                 alt="${charity.name}" style="width: 60px; height: 60px; object-fit: contain;">
+                        </div>
+                        <h6 class="fw-bold mt-3 mb-2">${charity.name}</h6>
+                        <div class="d-flex justify-content-center gap-3 mb-2">
+                            <div>
+                                <small class="text-muted d-block">دنبال‌کننده</small>
+                                <span class="fw-bold">${formatNumber(charity.followers_count)}</span>
+                            </div>
+                            <div>
+                                <small class="text-muted d-block">کمک‌ها</small>
+                                <span class="fw-bold">${formatNumber(charity.donations_amount / 1000000)}M</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-outline-gold btn-sm w-100 mt-2" onclick="viewCharityDetails(${charity.id})">
+                            مشاهده
+                        </button>
+                    </div>
+                </div>
+            `;
+        });
+
+        container.innerHTML = html;
+    }
+
+    // ==================== 1️⃣6️⃣ صفحه‌بندی ====================
+    function renderPagination(totalPages, currentPage) {
+        const container = document.getElementById('pagination');
+
+        if (totalPages <= 1) {
+            container.innerHTML = '';
+            return;
+        }
+
+        let html = '';
+
+        // دکمه قبلی
+        html += `
+            <div class="page-item-custom ${currentPage === 1 ? 'disabled' : ''}"
+                 onclick="${currentPage > 1 ? `loadCharities(${currentPage - 1})` : ''}">
+                <i class="fas fa-chevron-right"></i>
+            </div>
+        `;
+
+        // صفحه اول
+        if (currentPage > 3) {
+            html += `<div class="page-item-custom" onclick="loadCharities(1)">1</div>`;
+            if (currentPage > 4) {
+                html += `<div class="page-item-custom disabled">...</div>`;
+            }
+        }
+
+        // صفحات اطراف صفحه جاری
+        for (let i = Math.max(1, currentPage - 2); i <= Math.min(totalPages, currentPage + 2); i++) {
+            html += `
+                <div class="page-item-custom ${i === currentPage ? 'active' : ''}"
+                     onclick="loadCharities(${i})">
+                    ${i}
+                </div>
+            `;
+        }
+
+        // صفحه آخر
+        if (currentPage < totalPages - 2) {
+            if (currentPage < totalPages - 3) {
+                html += `<div class="page-item-custom disabled">...</div>`;
+            }
+            html += `<div class="page-item-custom" onclick="loadCharities(${totalPages})">${totalPages}</div>`;
+        }
+
+        // دکمه بعدی
+        html += `
+            <div class="page-item-custom ${currentPage === totalPages ? 'disabled' : ''}"
+                 onclick="${currentPage < totalPages ? `loadCharities(${currentPage + 1})` : ''}">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+        `;
+
+        container.innerHTML = html;
+    }
+
+    // ==================== 1️⃣7️⃣ جستجوی پیشنهادی ====================
+    // GET /api/v1/charities/search/autocomplete
+    let searchTimeout;
+    async function handleSearchKeyup(event) {
+        const query = event.target.value.trim();
+
+        clearTimeout(searchTimeout);
+
+        if (query.length < 2) {
+            document.getElementById('searchSuggestions').style.display = 'none';
+            return;
+        }
+
+        searchTimeout = setTimeout(async () => {
+            try {
+                // const response = await api.get('/charities/search/autocomplete', {
+                //     params: { q: query, limit: 5 }
+                // });
+                // const suggestions = response.data.suggestions;
+
+                const suggestions = [
+                    { id: 1, name: 'خیریه امام رضا (ع)', description: 'مشهد' },
+                    { id: 2, name: 'مؤسسه مهر سبز', description: 'تهران' },
+                    { id: 3, name: 'خیریه نورالهدی', description: 'اصفهان' }
+                ].filter(s => s.name.includes(query));
+
+                renderSearchSuggestions(suggestions);
+            } catch (error) {
+                console.error('Error fetching suggestions:', error);
+            }
+        }, 500);
+    }
+
+    function renderSearchSuggestions(suggestions) {
+        const container = document.getElementById('searchSuggestions');
+
+        if (!suggestions || suggestions.length === 0) {
+            container.style.display = 'none';
+            return;
+        }
+
+        let html = '<div class="list-group list-group-flush">';
+        suggestions.forEach(s => {
+            html += `
+                <a href="#" class="list-group-item list-group-item-action d-flex align-items-center gap-3"
+                   onclick="selectCharity(${s.id}, '${s.name}')">
+                    <i class="fas fa-building text-muted"></i>
+                    <div>
+                        <div>${s.name}</div>
+                        <small class="text-muted">${s.description || ''}</small>
+                    </div>
+                </a>
+            `;
+        });
+        html += '</div>';
+
+        container.innerHTML = html;
+        container.style.display = 'block';
+    }
+
+    function selectCharity(id, name) {
+        document.getElementById('searchInput').value = name;
+        document.getElementById('searchSuggestions').style.display = 'none';
+        state.filters.search_text = name;
+        loadCharities(1);
+    }
+
+    // ==================== 1️⃣8️⃣ توابع کمکی ====================
+    function formatNumber(num) {
+        if (!num) return '۰';
+        return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    function getCharityTypeLabel(type) {
+        const labels = {
+            'public': 'عمومی',
+            'private': 'خصوصی',
+            'ngo': 'سمن',
+            'religious': 'مذهبی'
+        };
+        return labels[type] || type || 'نامشخص';
+    }
+
+    function getCategoryLabel(category) {
+        const labels = {
+            'educational': 'آموزشی',
+            'health': 'درمانی',
+            'livelihood': 'معیشتی',
+            'dowry': 'جهیزیه',
+            'housing': 'مسکن'
+        };
+        return labels[category] || category || 'سایر';
+    }
+
+    function isFollowing(charityId) {
+        const following = JSON.parse(localStorage.getItem('following') || '[]');
+        return following.includes(charityId);
+    }
+
+    function canVerify() {
+        // بررسی دسترسی ادمین/مدیر
+        const roles = JSON.parse(localStorage.getItem('user_roles') || '[]');
+        return roles.includes('ADMIN') || roles.includes('CHARITY_MANAGER');
+    }
+
+    function showLoading() {
+        // اسکلتون‌ها در HTML هستند
+    }
+
+    function hideLoading() {
+        document.querySelectorAll('.skeleton-loading').forEach(el => el.remove());
+    }
+
+    function updateStats(data) {
+        const activeCount = data.items.filter(c => c.status === 'active').length;
+        const pendingCount = data.items.filter(c => c.status === 'pending').length;
+        const verifiedCount = data.items.filter(c => c.verified).length;
+
+        document.getElementById('activeCharitiesCount').innerHTML = `
+            <i class="fas fa-check-circle ms-1"></i>
+            ${activeCount} خیریه فعال
+        `;
+        document.getElementById('pendingCharitiesCount').innerHTML = `
+            <i class="fas fa-clock ms-1"></i>
+            ${pendingCount} در انتظار تأیید
+        `;
+        document.getElementById('totalCharitiesCount').innerText = formatNumber(data.total);
+        document.getElementById('verifiedCharitiesCount').innerText = formatNumber(verifiedCount);
+        document.getElementById('pendingCharitiesCountDetail').innerText = formatNumber(pendingCount);
+    }
+
+    // ==================== 1️⃣9️⃣ توابع عملیاتی ====================
+    function applyFilters() {
+        state.filters.charity_type = document.getElementById('charityTypeFilter').value || null;
+        state.filters.status = document.getElementById('statusFilter').value || null;
+        state.filters.verified = document.getElementById('verifiedFilter').value === 'true' ? true :
+                                document.getElementById('verifiedFilter').value === 'false' ? false : null;
+        state.filters.search_text = document.getElementById('searchInput').value || null;
+
+        const sortValue = document.getElementById('sortFilter').value;
+        if (sortValue) {
+            [state.filters.sort_by, state.filters.sort_order] = sortValue.split('.');
+        }
+
+        loadCharities(1);
+        document.getElementById('searchSuggestions').style.display = 'none';
+    }
+
+    function resetFilters() {
+        document.getElementById('charityTypeFilter').value = '';
+        document.getElementById('statusFilter').value = '';
+        document.getElementById('verifiedFilter').value = '';
+        document.getElementById('searchInput').value = '';
+        document.getElementById('sortFilter').value = 'created_at.desc';
+
+        state.filters = {
+            sort_by: 'created_at',
+            sort_order: 'desc'
+        };
+
+        loadCharities(1);
+        showNotification('فیلترها بازنشانی شدند', 'info');
+    }
+
+    function toggleFollow(charityId) {
+        if (isFollowing(charityId)) {
+            unfollowCharity(charityId);
+            const following = JSON.parse(localStorage.getItem('following') || '[]');
+            const index = following.indexOf(charityId);
+            if (index > -1) following.splice(index, 1);
+            localStorage.setItem('following', JSON.stringify(following));
+        } else {
+            followCharity(charityId);
+            const following = JSON.parse(localStorage.getItem('following') || '[]');
+            following.push(charityId);
+            localStorage.setItem('following', JSON.stringify(following));
+        }
+    }
+
+    function viewCharityDetails(id) {
+        loadCharityDetails(id);
+        new bootstrap.Modal(document.getElementById('charityDetailModal')).show();
+    }
+
+    function showVerifyModal(charityId) {
+        document.getElementById('verifyStatus').value = 'approved';
+        document.getElementById('verifyComment').value = '';
+        new bootstrap.Modal(document.getElementById('verifyCharityModal')).show();
+    }
+
+    function submitVerification() {
+        if (state.currentCharity) {
+            verifyCharity(state.currentCharity.id);
+        }
+    }
+
+    function viewNeed(id) {
+        window.location.href = `/needs/${id}`;
+    }
+
+    function viewUser(id) {
+        window.location.href = `/users/${id}`;
+    }
+
+    // ==================== 2️⃣0️⃣ توابع احراز هویت ====================
+    function showLoginModal() {
+        new bootstrap.Modal(document.getElementById('loginModal')).show();
+    }
+
+    function handlePasswordLogin(event) {
+        event.preventDefault();
+        showNotification('در حال ورود...', 'info');
+
+        setTimeout(() => {
+            showNotification('ورود موفقیت‌آمیز بود', 'success');
+            bootstrap.Modal.getInstance(document.getElementById('loginModal')).hide();
+        }, 1500);
+    }
+
+    function sendOtp() {
+        showNotification('کد تأیید به شماره شما ارسال شد', 'success');
+    }
+
+    function showNotification(message, type = 'success') {
+        Toastify({
+            text: message,
+            duration: 3000,
+            gravity: "bottom",
+            position: "right",
+            backgroundColor: type === 'success' ? 'linear-gradient(135deg, #10b981, #059669)' :
+                           type === 'error' ? 'linear-gradient(135deg, #ef4444, #dc2626)' :
+                           type === 'info' ? 'linear-gradient(135deg, #3b82f6, #2563eb)' :
+                           'linear-gradient(135deg, #f59e0b, #d97706)',
+            className: "rounded-pill px-4 py-2",
+            close: true
+        }).showToast();
+    }
+
+    // ==================== مقداردهی اولیه ====================
+    document.addEventListener('DOMContentLoaded', function() {
+        AOS.init({
+            duration: 800,
+            once: true,
+            easing: 'ease-in-out'
+        });
+
+        $('.form-select').select2({
+            language: 'fa',
+            minimumResultsForSearch: 10,
+            width: '100%'
+        });
+
+        loadCharities(1);
+        loadPopularCharities();
+
+        // Click outside to close suggestions
+        document.addEventListener('click', function(event) {
+            const suggestions = document.getElementById('searchSuggestions');
+            if (!event.target.closest('#searchSuggestions') && !event.target.closest('#searchInput')) {
+                suggestions.style.display = 'none';
+            }
+        });
+
+        // Escape key to close suggestions
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                document.getElementById('searchSuggestions').style.display = 'none';
+            }
+        });
+    });
+</script>
+</body>
+</html>

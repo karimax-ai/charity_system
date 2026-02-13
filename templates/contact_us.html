@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>تماس با ما | خیریه‌آنلاین</title>
+
+    <!-- Bootstrap 5 RTL -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
+
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <!-- Vazir Font -->
+    <link href="https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.css" rel="stylesheet">
+
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Toastify -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-deep: #0a2c3d;
+            --primary-soft: #1e4a5f;
+            --primary-gradient: linear-gradient(145deg, #0a2c3d, #1e4a5f);
+            --accent-gold: #e6b31e;
+            --accent-gold-soft: rgba(230, 179, 30, 0.12);
+            --accent-gold-gradient: linear-gradient(135deg, #e6b31e, #ffd166);
+            --accent-orange: #ff8a5c;
+            --accent-orange-soft: rgba(255, 138, 92, 0.12);
+            --accent-teal: #2a9d8f;
+            --accent-teal-soft: rgba(42, 157, 143, 0.12);
+            --accent-purple: #6c5ce7;
+            --accent-purple-soft: rgba(108, 92, 231, 0.12);
+            --accent-red: #e63946;
+            --accent-red-soft: rgba(230, 57, 70, 0.12);
+            --gray-50: #f8fafc;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --gray-600: #475569;
+            --gray-900: #0f172a;
+            --shadow-sm: 0 4px 6px -2px rgba(0,0,0,0.05);
+            --shadow-md: 0 12px 16px -4px rgba(0,0,0,0.06);
+            --shadow-lg: 0 20px 24px -6px rgba(0,0,0,0.08);
+            --shadow-xl: 0 32px 48px -12px rgba(0,0,0,0.12);
+            --shadow-gold: 0 12px 24px -8px rgba(230,179,30,0.24);
+            --radius-sm: 10px;
+            --radius-md: 14px;
+            --radius-lg: 20px;
+            --radius-xl: 28px;
+            --radius-full: 9999px;
+            --font-primary: 'Vazirmatn', 'Vazir', sans-serif;
+            --transition-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+            --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: var(--font-primary);
+        }
+
+        body {
+            background-color: var(--gray-50);
+            overflow-x: hidden;
+            color: var(--gray-900);
+            line-height: 1.6;
+        }
+
+        /* ===== اسکرولبار سفارشی ===== */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track { background: var(--gray-100); border-radius: var(--radius-full); }
+        ::-webkit-scrollbar-thumb { background: var(--gray-600); border-radius: var(--radius-full); }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary-deep); }
+
+        /* ===== Header Styles ===== */
+        .main-header {
+            background: white;
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 1050;
+            padding: 16px 0;
+        }
+
+        .brand-logo {
+            width: 48px;
+            height: 48px;
+            background: var(--accent-gold-gradient);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            color: var(--primary-deep);
+            box-shadow: var(--shadow-gold);
+        }
+
+        .nav-link-custom {
+            font-weight: 600;
+            color: var(--gray-900);
+            padding: 10px 16px !important;
+            border-radius: var(--radius-full);
+            transition: all 0.3s;
+        }
+
+        .nav-link-custom:hover,
+        .nav-link-custom.active {
+            background: var(--accent-gold-soft);
+            color: var(--primary-deep);
+        }
+
+        .nav-link-custom.active {
+            position: relative;
+        }
+
+        .nav-link-custom.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 50%;
+            transform: translateX(50%);
+            width: 24px;
+            height: 3px;
+            background: var(--accent-gold);
+            border-radius: var(--radius-full);
+        }
+
+        .btn-login {
+            background: transparent;
+            border: 2px solid var(--accent-gold);
+            color: var(--primary-deep);
+            border-radius: var(--radius-full);
+            padding: 8px 24px;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+
+        .btn-login:hover {
+            background: var(--accent-gold);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-gold);
+        }
+
+        .btn-register {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            border-radius: var(--radius-full);
+            padding: 10px 28px;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+
+        .btn-register:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            color: white;
+        }
+
+        /* ===== Hero Section ===== */
+        .contact-hero {
+            background: linear-gradient(135deg, var(--primary-deep) 0%, var(--primary-soft) 100%);
+            padding: 60px 0 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.1"><path d="M10,50 Q30,30 50,50 T90,50" stroke="%23e6b31e" fill="none" stroke-width="2"/><circle cx="50" cy="50" r="5" fill="%23e6b31e"/></svg>') repeat;
+            background-size: 100px 100px;
+            pointer-events: none;
+        }
+
+        .contact-hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: white;
+        }
+
+        .contact-hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .contact-hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .hero-wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            line-height: 0;
+        }
+
+        /* ===== Contact Info Cards ===== */
+        .info-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            box-shadow: var(--shadow-xl);
+            text-align: center;
+            transition: all 0.4s var(--transition-bounce);
+            border: 1px solid var(--gray-200);
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            margin-top: -40px;
+            z-index: 10;
+        }
+
+        .info-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+            border-color: transparent;
+        }
+
+        .info-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--accent-gold-soft);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--accent-gold);
+            margin: 0 auto 24px;
+            transition: all 0.3s;
+        }
+
+        .info-card:hover .info-icon {
+            background: var(--accent-gold);
+            color: white;
+            transform: rotateY(180deg);
+        }
+
+        .info-card h3 {
+            font-weight: 700;
+            color: var(--primary-deep);
+            margin-bottom: 12px;
+        }
+
+        .info-card p {
+            color: var(--gray-600);
+            margin-bottom: 8px;
+        }
+
+        .info-card .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .info-card .social-links a {
+            width: 44px;
+            height: 44px;
+            background: var(--gray-100);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-deep);
+            transition: all 0.3s;
+        }
+
+        .info-card .social-links a:hover {
+            background: var(--accent-gold);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* ===== Contact Form ===== */
+        .contact-form-container {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: 48px;
+            box-shadow: var(--shadow-xl);
+            margin-top: 60px;
+        }
+
+        .form-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary-deep);
+            margin-bottom: 32px;
+            position: relative;
+            padding-bottom: 16px;
+        }
+
+        .form-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 80px;
+            height: 4px;
+            background: var(--accent-gold-gradient);
+            border-radius: var(--radius-full);
+        }
+
+        .form-control, .form-select {
+            border-radius: var(--radius-md);
+            border: 2px solid var(--gray-200);
+            padding: 14px 18px;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 0 4px var(--accent-gold-soft);
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: var(--gray-600);
+            margin-bottom: 8px;
+        }
+
+        .submit-btn {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            border-radius: var(--radius-full);
+            padding: 16px 48px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* ===== FAQ Section ===== */
+        .faq-section {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: 48px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .faq-category {
+            margin-bottom: 40px;
+        }
+
+        .faq-category h4 {
+            font-weight: 700;
+            color: var(--primary-deep);
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--accent-gold-soft);
+        }
+
+        .accordion-item {
+            border: none;
+            margin-bottom: 16px;
+            border-radius: var(--radius-lg) !important;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .accordion-button {
+            font-weight: 600;
+            color: var(--gray-900);
+            background: white;
+            padding: 20px 24px;
+            border: none;
+        }
+
+        .accordion-button:not(.collapsed) {
+            background: var(--accent-gold-soft);
+            color: var(--primary-deep);
+        }
+
+        .accordion-button:focus {
+            box-shadow: none;
+            border-color: transparent;
+        }
+
+        .accordion-body {
+            padding: 24px;
+            background: white;
+            color: var(--gray-600);
+            line-height: 1.8;
+        }
+
+        /* ===== Map Section ===== */
+        .map-container {
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            box-shadow: var(--shadow-xl);
+            height: 450px;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* ===== Newsletter Section ===== */
+        .newsletter-section {
+            background: linear-gradient(135deg, var(--primary-deep) 0%, var(--primary-soft) 100%);
+            border-radius: var(--radius-xl);
+            padding: 60px;
+            color: white;
+            margin-top: 60px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 12px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            border: none;
+            border-radius: var(--radius-full);
+            padding: 16px 24px;
+            font-size: 1rem;
+        }
+
+        .newsletter-form button {
+            background: var(--accent-gold);
+            color: var(--primary-deep);
+            border: none;
+            border-radius: var(--radius-full);
+            padding: 16px 32px;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+
+        .newsletter-form button:hover {
+            background: white;
+            transform: translateY(-2px);
+        }
+
+        /* ===== Footer ===== */
+        .footer {
+            background: var(--primary-deep);
+            color: white;
+            padding: 60px 0 30px;
+            margin-top: 60px;
+        }
+
+        .social-links a {
+            width: 44px;
+            height: 44px;
+            background: rgba(255,255,255,0.1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            color: white;
+            margin-left: 8px;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--accent-gold);
+            color: var(--primary-deep);
+            transform: translateY(-3px);
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-gold);
+            padding-right: 5px;
+        }
+
+        /* ===== Floating WhatsApp ===== */
+        .floating-whatsapp {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 60px;
+            height: 60px;
+            background: #25d366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 1000;
+            animation: pulse-green 2s infinite;
+        }
+
+        .floating-whatsapp:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(37, 211, 102, 0.6);
+        }
+
+        @keyframes pulse-green {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        /* ===== Animations ===== */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s var(--transition-smooth);
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 992px) {
+            .contact-hero h1 { font-size: 2.5rem; }
+            .contact-form-container { padding: 32px; }
+            .faq-section { padding: 32px; }
+            .newsletter-section { padding: 40px; }
+        }
+
+        @media (max-width: 768px) {
+            .contact-hero h1 { font-size: 2rem; }
+            .info-card { margin-top: 20px; }
+            .newsletter-form { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== Header ===== -->
+<header class="main-header">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid px-0">
+                <a class="navbar-brand d-flex align-items-center gap-2" href="/">
+                    <div class="brand-logo">
+                        <i class="fas fa-hand-holding-heart"></i>
+                    </div>
+                    <span class="fw-bold fs-3" style="color: var(--primary-deep);">خیریه‌آنلاین</span>
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarMain">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-custom" href="/">صفحه اصلی</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-custom" href="/needs">آگهی‌های نیاز</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-custom" href="/shop">فروشگاه خیریه</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-custom" href="/charities">خیریه‌ها</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-custom" href="/reports">گزارش‌گیری</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-custom active" href="/contact">تماس با ما</a>
+                        </li>
+                    </ul>
+
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-login" onclick="showLoginModal()">
+                            <i class="fas fa-sign-in-alt ms-2"></i> ورود
+                        </button>
+                        <button class="btn btn-register" onclick="window.location.href='/register'">
+                            ثبت‌نام <i class="fas fa-arrow-left ms-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<!-- ===== Hero Section ===== -->
+<section class="contact-hero">
+    <div class="container contact-hero-content" data-aos="fade-up">
+        <h1>با ما در ارتباط باشید</h1>
+        <p>پشتیبانی ۲۴ ساعته، ۷ روز هفته | پاسخگویی سریع به تمام سوالات و نیازهای شما</p>
+    </div>
+    <div class="hero-wave">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" preserveAspectRatio="none" style="display: block;">
+            <path fill="#f8fafc" fill-opacity="1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,170.7C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+        </svg>
+    </div>
+</section>
+
+<!-- ===== Contact Info Cards ===== -->
+<div class="container" style="margin-top: -60px;">
+    <div class="row g-4">
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="info-card">
+                <div class="info-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <h3>آدرس دفتر مرکزی</h3>
+                <p>تهران، خیابان ولیعصر، بالاتر از میدان ونک</p>
+                <p>برج نیکوکاری، طبقه ۵، واحد ۵۰۴</p>
+                <p class="mt-3">
+                    <i class="fas fa-clock ms-2" style="color: var(--accent-gold);"></i>
+                    شنبه تا چهارشنبه ۹ الی ۱۸
+                </p>
+            </div>
+        </div>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="info-card">
+                <div class="info-icon">
+                    <i class="fas fa-phone-alt"></i>
+                </div>
+                <h3>شماره‌های تماس</h3>
+                <p class="dir-ltr" style="direction: ltr;">۰۲۱-۱۲۳۴۵۶۷۸</p>
+                <p class="dir-ltr" style="direction: ltr;">۰۲۱-۸۷۶۵۴۳۲۱</p>
+                <p class="mt-3">
+                    <i class="fas fa-mobile-alt ms-2" style="color: var(--accent-gold);"></i>
+                    ۰۹۱۲-۱۲۳۴۵۶۷ (پشتیبانی واتساپ)
+                </p>
+            </div>
+        </div>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+            <div class="info-card">
+                <div class="info-icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <h3>ایمیل‌های ارتباطی</h3>
+                <p>info@charityonline.ir</p>
+                <p>support@charityonline.ir</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-telegram"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#"><i class="fab fa-eita"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== Contact Form & Map ===== -->
+<div class="container mt-5">
+    <div class="row g-5">
+        <!-- Contact Form -->
+        <div class="col-lg-6" data-aos="fade-left">
+            <div class="contact-form-container">
+                <h2 class="form-title">ارسال پیام</h2>
+
+                <form id="contactForm" onsubmit="handleContactSubmit(event)">
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <label class="form-label">نام و نام خانوادگی</label>
+                            <input type="text" class="form-control" id="name" required placeholder="مثال: علی رضایی">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">ایمیل</label>
+                            <input type="email" class="form-control" id="email" required placeholder="info@example.com">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">شماره تماس</label>
+                            <input type="tel" class="form-control" id="phone" placeholder="۰۹۱۲۱۲۳۴۵۶۷">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">موضوع</label>
+                            <select class="form-select" id="subject">
+                                <option value="general">سوال عمومی</option>
+                                <option value="support">پشتیبانی فنی</option>
+                                <option value="donation">مشکل در کمک‌رسانی</option>
+                                <option value="charity">ثبت خیریه جدید</option>
+                                <option value="cooperation">همکاری با ما</option>
+                                <option value="report">گزارش تخلف</option>
+                            </select>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">پیام</label>
+                            <textarea class="form-control" id="message" rows="6" required placeholder="پیام خود را بنویسید..."></textarea>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="privacy" required>
+                                <label class="form-check-label" for="privacy">
+                                    <a href="#" class="text-decoration-none" style="color: var(--accent-teal);">قوانین حریم خصوصی</a> را مطالعه کرده و می‌پذیرم
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="submit-btn">
+                                <i class="fas fa-paper-plane ms-2"></i>
+                                ارسال پیام
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Tracking Ticket -->
+                <div class="mt-4 pt-4 border-top">
+                    <div class="d-flex align-items-center gap-3">
+                        <i class="fas fa-ticket-alt fa-2x" style="color: var(--accent-gold);"></i>
+                        <div class="flex-grow-1">
+                            <h6 class="fw-bold mb-1">پیگیری درخواست قبلی</h6>
+                            <p class="small text-muted mb-2">کد پیگیری خود را وارد کنید</p>
+                            <div class="d-flex gap-2">
+                                <input type="text" class="form-control" id="ticketCode" placeholder="مثال: TKT-۱۲۳۴۵">
+                                <button class="btn btn-outline-gold" onclick="trackTicket()">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Map -->
+        <div class="col-lg-6" data-aos="fade-right">
+            <div class="map-container">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d404.9812845706184!2d51.39153111928824!3d35.77352864771237!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f8e07539b0d0c3f%3A0x6b4a5e3b7b0c3f!2sTehran%2C%20Vanak%20Square%2C%20Iran!5e0!3m2!1sen!2s!4v1620000000000!5m2!1sen!2s"
+                    allowfullscreen=""
+                    loading="lazy">
+                </iframe>
+            </div>
+
+            <!-- Quick Support -->
+            <div class="row g-3 mt-4">
+                <div class="col-md-4">
+                    <div class="d-flex align-items-center gap-2 p-3 bg-white rounded-4 shadow-sm">
+                        <i class="fab fa-whatsapp fa-2x" style="color: #25d366;"></i>
+                        <div>
+                            <small class="text-muted d-block">واتساپ</small>
+                            <span class="fw-bold">پشتیبانی</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="d-flex align-items-center gap-2 p-3 bg-white rounded-4 shadow-sm">
+                        <i class="fab fa-telegram fa-2x" style="color: #0088cc;"></i>
+                        <div>
+                            <small class="text-muted d-block">تلگرام</small>
+                            <span class="fw-bold">@charity_support</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="d-flex align-items-center gap-2 p-3 bg-white rounded-4 shadow-sm">
+                        <i class="fas fa-phone-alt fa-2x" style="color: var(--accent-teal);"></i>
+                        <div>
+                            <small class="text-muted d-block">خط ویژه</small>
+                            <span class="fw-bold dir-ltr">۰۲۱-۱۲۳۴</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== FAQ Section ===== -->
+<section class="container mt-5">
+    <div class="faq-section" data-aos="fade-up">
+        <h2 class="form-title">سوالات متداول</h2>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="faq-category">
+                    <h4><i class="fas fa-question-circle ms-2" style="color: var(--accent-gold);"></i>حساب کاربری</h4>
+                    <div class="accordion" id="faqAccount">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                    چگونه می‌توانم ثبت‌نام کنم؟
+                                </button>
+                            </h2>
+                            <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccount">
+                                <div class="accordion-body">
+                                    برای ثبت‌نام، روی دکمه "ثبت‌نام" در بالای صفحه کلیک کنید. می‌توانید با ایمیل، شماره موبایل (OTP) یا حساب گوگل ثبت‌نام کنید. پس از ثبت‌نام اولیه، برای دسترسی به برخی امکانات نیاز به تأیید هویت دارید.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                    چگونه رمز عبور خود را بازیابی کنم؟
+                                </button>
+                            </h2>
+                            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccount">
+                                <div class="accordion-body">
+                                    در صفحه ورود، گزینه "رمز عبور را فراموش کرده‌اید" را انتخاب کنید. ایمیل خود را وارد کنید تا لینک بازیابی برای شما ارسال شود. همچنین می‌توانید از ورود با OTP استفاده کنید.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="faq-category">
+                    <h4><i class="fas fa-hand-holding-heart ms-2" style="color: var(--accent-gold);"></i>کمک‌رسانی</h4>
+                    <div class="accordion" id="faqDonation">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                    چگونه می‌توانم کمک کنم؟
+                                </button>
+                            </h2>
+                            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqDonation">
+                                <div class="accordion-body">
+                                    می‌توانید به روش‌های مختلف کمک کنید: ۱) کمک مستقیم به آگهی‌های نیاز، ۲) خرید از فروشگاه خیریه که درصدی از فروش به خیریه اختصاص می‌یابد، ۳) ثبت نیاز جدید اگر نیازمند هستید.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                                    آیا رسید مالیاتی دریافت می‌کنم؟
+                                </button>
+                            </h2>
+                            <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqDonation">
+                                <div class="accordion-body">
+                                    بله، پس از هر کمک موفق، می‌توانید رسید مالیاتی رسمی دریافت کنید. این رسیدها در پنل کاربری شما در بخش "کمک‌های من" قابل دانلود هستند.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="faq-category">
+                    <h4><i class="fas fa-store ms-2" style="color: var(--accent-gold);"></i>فروشگاه خیریه</h4>
+                    <div class="accordion" id="faqShop">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+                                    چگونه می‌توانم فروشنده شوم؟
+                                </button>
+                            </h2>
+                            <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqShop">
+                                <div class="accordion-body">
+                                    برای فروشنده شدن، ابتدا ثبت‌نام کنید و نقش "فروشنده" را انتخاب کنید. سپس باید مدارک خود را ارسال کنید تا پس از تأیید، بتوانید محصولات خود را ثبت کنید.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq6">
+                                    درصد کمک به خیریه چگونه محاسبه می‌شود؟
+                                </button>
+                            </h2>
+                            <div id="faq6" class="accordion-collapse collapse" data-bs-parent="#faqShop">
+                                <div class="accordion-body">
+                                    هر فروشنده می‌تواند درصد مشخصی از فروش خود را به خیریه اختصاص دهد. این درصد در صفحه محصول نمایش داده می‌شود. همچنین می‌توانید کمک خود را به یک نیاز خاص اختصاص دهید.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="faq-category">
+                    <h4><i class="fas fa-building ms-2" style="color: var(--accent-gold);"></i>خیریه‌ها</h4>
+                    <div class="accordion" id="faqCharity">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq7">
+                                    چگونه خیریه خود را ثبت کنم؟
+                                </button>
+                            </h2>
+                            <div id="faq7" class="accordion-collapse collapse" data-bs-parent="#faqCharity">
+                                <div class="accordion-body">
+                                    برای ثبت خیریه، باید حساب کاربری با نقش "مدیر خیریه" داشته باشید. سپس از طریق پنل مدیریت، گزینه "ثبت خیریه جدید" را انتخاب کنید و مدارک معتبر را بارگذاری کنید. پس از تأیید، خیریه شما فعال می‌شود.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq8">
+                                    تأییدیه‌ها چگونه صادر می‌شوند؟
+                                </button>
+                            </h2>
+                            <div id="faq8" class="accordion-collapse collapse" data-bs-parent="#faqCharity">
+                                <div class="accordion-body">
+                                    خیریه‌ها می‌توانند برای نیازهای ثبت شده، تأییدیه صادر کنند. این تأییدیه‌ها به شفافیت و اعتماد بیشتر کمک می‌کند. هر نیاز برای فعال شدن نیاز به حداقل ۳ تأییدیه دارد.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-4">
+            <button class="btn btn-outline-gold rounded-pill px-5 py-3" onclick="window.location.href='/faq'">
+                مشاهده همه سوالات
+                <i class="fas fa-arrow-left ms-2"></i>
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Newsletter Section ===== -->
+<section class="container mt-5">
+    <div class="newsletter-section" data-aos="zoom-in">
+        <div class="text-center mb-4">
+            <i class="fas fa-envelope-open-text fa-3x mb-3" style="color: var(--accent-gold);"></i>
+            <h3 class="fw-bold">عضویت در خبرنامه</h3>
+            <p class="text-white-50">با عضویت در خبرنامه، از آخرین اخبار، نیازهای فوری و رویدادها مطلع شوید</p>
+        </div>
+
+        <div class="newsletter-form">
+            <input type="email" id="newsletterEmail" placeholder="ایمیل خود را وارد کنید">
+            <button onclick="subscribeNewsletter()">
+                <i class="fas fa-paper-plane ms-2"></i>
+                عضویت
+            </button>
+        </div>
+        <div class="text-center mt-3">
+            <small class="text-white-50">
+                با عضویت، <a href="#" class="text-white">قوانین حریم خصوصی</a> را می‌پذیرم
+            </small>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer class="footer">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-4">
+                <div class="d-flex align-items-center gap-3 mb-4">
+                    <div class="brand-logo">
+                        <i class="fas fa-hand-holding-heart"></i>
+                    </div>
+                    <h4 class="fw-bold text-white mb-0">خیریه‌آنلاین</h4>
+                </div>
+                <p class="text-white-50 mb-4">
+                    بزرگترین پلتفرم نیکوکاری هوشمند ایران با هدف ایجاد شفافیت، سرعت و اعتماد در امور خیریه
+                </p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-telegram"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#"><i class="fab fa-eita"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+
+            <div class="col-lg-2 col-md-4">
+                <h6 class="fw-bold text-white mb-4">دسترسی سریع</h6>
+                <ul class="list-unstyled footer-links">
+                    <li class="mb-2"><a href="/">صفحه اصلی</a></li>
+                    <li class="mb-2"><a href="/needs">آگهی‌های نیاز</a></li>
+                    <li class="mb-2"><a href="/shop">فروشگاه خیریه</a></li>
+                    <li class="mb-2"><a href="/charities">خیریه‌ها</a></li>
+                    <li class="mb-2"><a href="/reports">گزارش‌گیری</a></li>
+                </ul>
+            </div>
+
+            <div class="col-lg-2 col-md-4">
+                <h6 class="fw-bold text-white mb-4">خدمات</h6>
+                <ul class="list-unstyled footer-links">
+                    <li class="mb-2"><a href="/reporting">گزارش‌گیری</a></li>
+                    <li class="mb-2"><a href="/tax-receipt">رسید مالیاتی</a></li>
+                    <li class="mb-2"><a href="/verification">تأییدیه‌ها</a></li>
+                    <li class="mb-2"><a href="/faq">سوالات متداول</a></li>
+                    <li class="mb-2"><a href="/support">پشتیبانی</a></li>
+                </ul>
+            </div>
+
+            <div class="col-lg-4 col-md-4">
+                <h6 class="fw-bold text-white mb-4">اطلاعات تماس</h6>
+                <ul class="list-unstyled">
+                    <li class="mb-3 text-white-50">
+                        <i class="fas fa-map-marker-alt ms-2"></i>
+                        تهران، خیابان ولیعصر، برج نیکوکاری، طبقه ۵
+                    </li>
+                    <li class="mb-3 text-white-50">
+                        <i class="fas fa-phone ms-2"></i>
+                        ۰۲۱-۱۲۳۴۵۶۷۸
+                    </li>
+                    <li class="mb-3 text-white-50">
+                        <i class="fas fa-envelope ms-2"></i>
+                        info@charityonline.ir
+                    </li>
+                    <li class="mb-3 text-white-50">
+                        <i class="fas fa-clock ms-2"></i>
+                        شنبه تا پنجشنبه ۹ الی ۱۸
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <hr class="bg-white-50 my-4">
+
+        <div class="row align-items-center">
+            <div class="col-md-6 text-center text-md-start">
+                <small class="text-white-50">
+                    © ۱۴۰۴ خیریه‌آنلاین. تمامی حقوق محفوظ است.
+                </small>
+            </div>
+            <div class="col-md-6 text-center text-md-end">
+                <img src="https://img.icons8.com/fluency/48/000000/security-checked.png" width="40" class="ms-2" alt="Secure">
+                <img src="https://img.icons8.com/fluency/48/000000/ssl-certificate.png" width="40" class="ms-2" alt="SSL">
+                <img src="https://img.icons8.com/fluency/48/000000/zarinpal.png" width="40" alt="Zarinpal">
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- ===== Floating WhatsApp ===== -->
+<div class="floating-whatsapp" onclick="openWhatsApp()">
+    <i class="fab fa-whatsapp"></i>
+</div>
+
+<!-- ===== Login Modal ===== -->
+<div class="modal fade" id="loginModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="border-radius: var(--radius-lg);">
+            <div class="modal-header border-0">
+                <h5 class="modal-title fw-bold">
+                    <i class="fas fa-sign-in-alt ms-2" style="color: var(--accent-gold);"></i>
+                    ورود به پنل کاربری
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body p-4">
+                <ul class="nav nav-pills mb-3 justify-content-center" id="loginTabs">
+                    <li class="nav-item">
+                        <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#passwordLogin">رمز عبور</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link" data-bs-toggle="pill" data-bs-target="#otpLogin">پیامک</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link" data-bs-toggle="pill" data-bs-target="#googleLogin">گوگل</button>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="passwordLogin">
+                        <form onsubmit="handlePasswordLogin(event)">
+                            <div class="mb-3">
+                                <input type="email" class="form-control" placeholder="ایمیل یا نام کاربری">
+                            </div>
+                            <div class="mb-3">
+                                <input type="password" class="form-control" placeholder="رمز عبور">
+                            </div>
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="rememberMe">
+                                <label class="form-check-label" for="rememberMe">مرا به خاطر بسپار</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary-charity w-100">
+                                ورود
+                            </button>
+                        </form>
+                    </div>
+                    <div class="tab-pane fade" id="otpLogin">
+                        <div class="mb-3">
+                            <input type="tel" class="form-control" placeholder="شماره موبایل">
+                        </div>
+                        <button class="btn btn-outline-gold w-100" onclick="sendOtp()">
+                            ارسال کد
+                        </button>
+                    </div>
+                    <div class="tab-pane fade" id="googleLogin">
+                        <button class="btn btn-outline-secondary w-100" onclick="handleGoogleLogin()">
+                            <i class="fab fa-google ms-2"></i>
+                            ورود با گوگل
+                        </button>
+                    </div>
+                </div>
+                <div class="mt-4 text-center">
+                    <span class="text-muted">کاربر جدید هستید؟</span>
+                    <a href="/register" class="fw-bold" style="color: var(--accent-teal);">ثبت‌نام</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+<script>
+    // ==================== AOS Initialization ====================
+    AOS.init({
+        duration: 800,
+        once: true,
+        easing: 'ease-in-out'
+    });
+
+    // ==================== Contact Form Handler ====================
+    async function handleContactSubmit(event) {
+        event.preventDefault();
+
+        const formData = {
+            name: document.getElementById('name').value,
+            email: document.getElementById('email').value,
+            phone: document.getElementById('phone').value,
+            subject: document.getElementById('subject').value,
+            message: document.getElementById('message').value
+        };
+
+        try {
+            showLoading('در حال ارسال پیام...');
+
+            // ارسال به API
+            // const response = await api.post('/contact', formData);
+
+            // شبیه‌سازی ارسال موفق
+            setTimeout(() => {
+                hideLoading();
+                showNotification('پیام شما با موفقیت ارسال شد. به زودی با شما تماس می‌گیریم.', 'success');
+                document.getElementById('contactForm').reset();
+            }, 1500);
+
+        } catch (error) {
+            hideLoading();
+            showNotification('خطا در ارسال پیام. لطفاً دوباره تلاش کنید.', 'error');
+        }
+    }
+
+    // ==================== Newsletter Subscription ====================
+    async function subscribeNewsletter() {
+        const email = document.getElementById('newsletterEmail').value;
+
+        if (!email || !validateEmail(email)) {
+            showNotification('لطفاً یک ایمیل معتبر وارد کنید', 'warning');
+            return;
+        }
+
+        try {
+            showLoading('در حال ثبت‌نام...');
+
+            // ارسال به API
+            // await api.post('/newsletter/subscribe', { email });
+
+            setTimeout(() => {
+                hideLoading();
+                showNotification('عضویت شما با موفقیت ثبت شد', 'success');
+                document.getElementById('newsletterEmail').value = '';
+            }, 1000);
+
+        } catch (error) {
+            hideLoading();
+            showNotification('خطا در ثبت‌نام. لطفاً دوباره تلاش کنید.', 'error');
+        }
+    }
+
+    // ==================== Track Ticket ====================
+    function trackTicket() {
+        const ticketCode = document.getElementById('ticketCode').value;
+
+        if (!ticketCode) {
+            showNotification('لطفاً کد پیگیری را وارد کنید', 'warning');
+            return;
+        }
+
+        // شبیه‌سازی پیگیری
+        showNotification(`درخواست ${ticketCode} در حال بررسی است`, 'info');
+    }
+
+    // ==================== WhatsApp ====================
+    function openWhatsApp() {
+        window.open('https://wa.me/989121234567', '_blank');
+    }
+
+    // ==================== Login Functions ====================
+    function showLoginModal() {
+        new bootstrap.Modal(document.getElementById('loginModal')).show();
+    }
+
+    function handlePasswordLogin(event) {
+        event.preventDefault();
+        showNotification('در حال ورود...', 'info');
+
+        setTimeout(() => {
+            showNotification('ورود موفقیت‌آمیز بود', 'success');
+            bootstrap.Modal.getInstance(document.getElementById('loginModal')).hide();
+        }, 1500);
+    }
+
+    function sendOtp() {
+        showNotification('کد تأیید به شماره شما ارسال شد', 'success');
+    }
+
+    function handleGoogleLogin() {
+        showNotification('اتصال به حساب گوگل...', 'info');
+    }
+
+    // ==================== Utility Functions ====================
+    function validateEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+    }
+
+    function showNotification(message, type = 'success') {
+        Toastify({
+            text: message,
+            duration: 3000,
+            gravity: "bottom",
+            position: "right",
+            backgroundColor: type === 'success' ? 'linear-gradient(135deg, #10b981, #059669)' :
+                           type === 'error' ? 'linear-gradient(135deg, #ef4444, #dc2626)' :
+                           type === 'info' ? 'linear-gradient(135deg, #3b82f6, #2563eb)' :
+                           'linear-gradient(135deg, #f59e0b, #d97706)',
+            className: "rounded-pill px-4 py-2",
+            close: true
+        }).showToast();
+    }
+
+    function showLoading(message = 'لطفاً صبر کنید...') {
+        Toastify({
+            text: message,
+            duration: -1,
+            gravity: "bottom",
+            position: "right",
+            backgroundColor: 'linear-gradient(135deg, #0a2c3d, #1e4a5f)',
+            className: "rounded-pill px-4 py-2",
+            close: false
+        }).showToast();
+    }
+
+    function hideLoading() {
+        // Toastify را نمی‌توان مستقیماً بست، بنابراین از setTimeout استفاده می‌کنیم
+        setTimeout(() => {
+            // این تابع ساده شده، در عمل باید Toastify reference را نگه دارید
+        }, 100);
+    }
+
+    // ==================== Initialization ====================
+    document.addEventListener('DOMContentLoaded', function() {
+        // Add animation to info cards on hover
+        const infoCards = document.querySelectorAll('.info-card');
+        infoCards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px)';
+            });
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    });
+</script>
+</body>
+</html>

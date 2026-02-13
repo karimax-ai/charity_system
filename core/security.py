@@ -29,17 +29,19 @@ def create_access_token(subject: str, expires_minutes: int = None, extra_data: d
         expires_minutes = settings.ACCESS_TOKEN_EXPIRE_MINUTES
 
     expire = datetime.utcnow() + timedelta(minutes=expires_minutes)
+    jti = str(uuid.uuid4())
     payload = {
         "sub": subject,
         "exp": expire,
-        "type": "access",
-        "iat": datetime.utcnow()
+        "type": "refresh",
+        "jti": jti
     }
 
     if extra_data:
         payload.update(extra_data)
 
-    return jwt.encode(payload, settings.SECRET_KEY, algorithm=ALGORITHM)
+    token = jwt.encode(payload, settings.SECRET_KEY, algorithm=ALGORITHM)
+    return token, jti
 
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/auth/login")
@@ -48,18 +50,18 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/auth/login")
 def decode_token(token: str = Depends(oauth2_scheme)) -> str:
     try:
         payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[ALGORITHM])
-        user_id: str = payload.get("sub")
-        if user_id is None:
-            raise HTTPException(
-                status_code=status.HTTP_401_UNAUTHORIZED,
-                detail="Invalid token",
-            )
+
+        if payload.get("type") != "access":
+            raise HTTPException(401, "Invalid token type")
+
+        user_id = payload.get("sub")
+        if not user_id:
+            raise HTTPException(401, "Invalid token")
+
         return user_id
+
     except JWTError:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Invalid or expired token",
-        )
+        raise HTTPException(401, "Invalid or expired token")
 
 
 def create_refresh_token(subject: str, expires_days: int = 30):

@@ -1,65 +1,156 @@
 # app/api/v1/router.py
 from fastapi import APIRouter
 from api.v1.endpoints import (
-    # Authentication & Users
+
+    # ========= Auth & Users =========
     auth,
     roles,
 
-    # Charity & Needs
+    # ========= Charity & Needs =========
     charity,
     need_ad,
     need_emergency,
     need_attachments,
 
-    # Donations & Payments
+    # ========= Donations & Payments =========
     donation,
 
-    # Shop & Products
+    # ========= Shop & Orders =========
     shop,
     product,
     order,
 
-    # Dashboard & Reports
+    # ========= Dashboard & Reports =========
     dashboard,
     report,
     export,
 
-    # Notifications & Files
+    # ========= Notifications & Files =========
     notification,
     files,
 
-    # Other
-    frontend
+    # ========= Campaigns =========
+    campaign,
+
+    # ========= Frontend =========
 )
 
 api_router = APIRouter()
 
-# ========== 1️⃣ Authentication & Users ==========
-api_router.include_router(auth.router, prefix="/auth", tags=["Authentication"])
-api_router.include_router(roles.router, prefix="/roles", tags=["Roles & Permissions"])
+# ======================================================
+# 1️⃣ Authentication & Authorization
+# ======================================================
+api_router.include_router(
+    auth.router,
+    prefix="/auth",
+    tags=["Authentication"]
+)
 
-# ========== 2️⃣ Charity & Needs ==========
-api_router.include_router(charity.router, prefix="/charities", tags=["Charities"])
-api_router.include_router(need_ad.router, prefix="/needs", tags=["Needs"])
-api_router.include_router(need_emergency.router, prefix="/needs", tags=["Needs - Emergency"])
-api_router.include_router(need_attachments.router, prefix="/needs", tags=["Needs - Attachments"])
+api_router.include_router(
+    roles.router,
+    prefix="/roles",
+    tags=["Roles & Permissions"]
+)
 
-# ========== 3️⃣ Donations & Payments ==========
-api_router.include_router(donation.router, prefix="/donations", tags=["Donations & Payments"])
+# ======================================================
+# 2️⃣ Charities & Needs
+# ======================================================
+api_router.include_router(
+    charity.router,
+    prefix="/charities",
+    tags=["Charities"]
+)
 
-# ========== 4️⃣ Shop & Products ==========
-api_router.include_router(shop.router, prefix="/shops", tags=["Shops"])
-api_router.include_router(product.router, prefix="/products", tags=["Products"])
-api_router.include_router(order.router, prefix="/orders", tags=["Orders & Cart"])
+api_router.include_router(
+    need_ad.router,
+    prefix="/needs",
+    tags=["Needs"]
+)
 
-# ========== 5️⃣ Dashboard & Reports ==========
-api_router.include_router(dashboard.router, prefix="/dashboard", tags=["Dashboard"])
-api_router.include_router(report.router, prefix="/reports", tags=["Reports"])
-api_router.include_router(export.router, prefix="/export", tags=["Export"])
+api_router.include_router(
+    need_emergency.router,
+    prefix="/needs/emergency",
+    tags=["Needs - Emergency"]
+)
 
-# ========== 6️⃣ Notifications & Files ==========
-api_router.include_router(notification.router, prefix="/notifications", tags=["Notifications"])
-api_router.include_router(files.router, prefix="/files", tags=["Files"])
+api_router.include_router(
+    need_attachments.router,
+    prefix="/needs/attachments",
+    tags=["Needs - Attachments"]
+)
 
-# ========== 7️⃣ Frontend ==========
-api_router.include_router(frontend.router, prefix="", tags=["Frontend"])
+# ======================================================
+# 3️⃣ Donations & Payments
+# ======================================================
+api_router.include_router(
+    donation.router,
+    prefix="/donations",
+    tags=["Donations & Payments"]
+)
+
+# ======================================================
+# 4️⃣ Shops, Products & Orders
+# ======================================================
+api_router.include_router(
+    shop.router,
+    prefix="/shops",
+    tags=["Shops"]
+)
+
+api_router.include_router(
+    product.router,
+    prefix="/products",
+    tags=["Products"]
+)
+
+api_router.include_router(
+    order.router,
+    prefix="/orders",
+    tags=["Orders"]
+)
+
+# ======================================================
+# 5️⃣ Dashboard, Reports & Export
+# ======================================================
+api_router.include_router(
+    dashboard.router,
+    prefix="/dashboard",
+    tags=["Dashboard"]
+)
+
+api_router.include_router(
+    report.router,
+    prefix="/reports",
+    tags=["Reports"]
+)
+
+api_router.include_router(
+    export.router,
+    prefix="/exports",
+    tags=["Export"]
+)
+
+# ======================================================
+# 6️⃣ Notifications & Files
+# ======================================================
+api_router.include_router(
+    notification.router,
+    prefix="/notifications",
+    tags=["Notifications"]
+)
+
+api_router.include_router(
+    files.router,
+    prefix="/files",
+    tags=["Files"]
+)
+
+# ======================================================
+# 7️⃣ Campaigns (Peer-to-Peer)
+# ======================================================
+api_router.include_router(
+    campaign.router,
+    prefix="/campaigns",
+    tags=["Campaigns"]
+)
+

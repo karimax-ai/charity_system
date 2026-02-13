@@ -2,7 +2,8 @@
 import math
 
 from fastapi import APIRouter, Depends, HTTPException, Query, status, Body, UploadFile, Form, File
-from sqlalchemy import func
+from requests import request
+from sqlalchemy import func, select, case
 from sqlalchemy.ext.asyncio import AsyncSession
 from typing import List, Optional, Dict, Any
 from datetime import datetime
@@ -721,3 +722,694 @@ async def add_need_attachment(
     from services.need_service import NeedService
     service = NeedService(db)
     return await service.add_attachment_to_need(need_id, file, current_user, description)
+
+
+@router.get("/stats", response_model=Dict[str, Any])
+async def get_needs_stats(
+        db: AsyncSession = Depends(get_db),
+        current_user: Optional[User] = Depends(get_current_user)
+):
+    """
+    آمار کلی آگهی‌ها (تعداد کل، فوری، تکمیل شده، در حال کمک، تأییدیه‌ها)
+    استفاده در صفحه اصلی و داشبوردها
+    """
+    service = NeedService(db)
+
+    # آمار کلی
+    total_query = select(func.count()).select_from(NeedAd)
+    total = await db.scalar(total_query)
+
+    # آگهی‌های فعال (approved, active)
+    active_query = select(func.count()).select_from(NeedAd).where(
+        NeedAd.status.in_(["approved", "active"])
+    )
+    active = await db.scalar(active_query)
+
+    # آگهی‌های تکمیل شده
+    completed_query = select(func.count()).select_from(NeedAd).where(
+        NeedAd.status == "completed"
+    )
+    completed = await db.scalar(completed_query)
+
+    # آگهی‌های فوری
+    urgent_query = select(func.count()).select_from(NeedAd).where(
+        NeedAd.is_urgent == True
+    )
+    urgent = await db.scalar(urgent_query)
+
+    # آگهی‌های اضطراری (بحران)
+    emergency_query = select(func.count()).select_from(NeedAd).where(
+        NeedAd.is_emergency == True
+    )
+    emergency = await db.scalar(emergency_query)
+
+    # مجموع مبلغ کمک‌های جمع‌آوری شده
+    total_collected_query = select(func.coalesce(func.sum(NeedAd.collected_amount), 0)).where(
+        NeedAd.status.in_(["active", "completed"])
+    )
+    total_collected = await db.scalar(total_collected_query)
+
+    # مجموع مبلغ هدف
+    total_target_query = select(func.coalesce(func.sum(NeedAd.target_amount), 0)).where(
+        NeedAd.status.in_(["approved", "active"])
+    )
+    total_target = await db.scalar(total_target_query)
+
+    # آگهی‌های دارای تأییدیه
+    from models.need_verification import NeedVerification
+    verified_needs_subquery = select(NeedVerification.need_id).where(
+        NeedVerification.status == "approved"
+    ).distinct()
+    verified_query = select(func.count()).select_from(
+        select(NeedAd.id).where(
+            NeedAd.id.in_(verified_needs_subquery),
+            NeedAd.status.in_(["approved", "active"])
+        ).subquery()
+    )
+    verified = await db.scalar(verified_query)
+
+    # میانگین پیشرفت
+    avg_progress_query = select(
+        func.avg(
+            func.coalesce(NeedAd.collected_amount, 0) /
+            func.nullif(NeedAd.target_amount, 0) * 100
+        )
+    ).where(NeedAd.status.in_(["approved", "active"]))
+    avg_progress = await db.scalar(avg_progress_query) or 0
+
+    return {
+        "total_needs": total or 0,
+        "active_needs": active or 0,
+        "completed_needs": completed or 0,
+        "urgent_needs": urgent or 0,
+        "emergency_needs": emergency or 0,
+        "verified_needs": verified or 0,
+        "total_collected_amount": float(total_collected or 0),
+        "total_target_amount": float(total_target or 0),
+        "average_progress": round(float(avg_progress), 2),
+        "success_rate": round((completed or 0) / (total or 1) * 100, 2),
+        "verified_rate": round((verified or 0) / (active or 1) * 100, 2)
+    }
+
+
+@router.get("/stats/by-category")
+async def get_needs_stats_by_category(
+        db: AsyncSession = Depends(get_db)
+):
+    """آمار آگهی‌ها به تفکیک دسته‌بندی"""
+
+    from sqlalchemy import func, case
+
+    # کوئری گروه‌بندی بر اساس دسته‌بندی
+    query = select(
+        NeedAd.category,
+        func.count().label('count'),
+        func.sum(NeedAd.target_amount).label('total_target'),
+        func.sum(NeedAd.collected_amount).label('total_collected'),
+        func.avg(
+            case(
+                (NeedAd.target_amount > 0,
+                 NeedAd.collected_amount / NeedAd.target_amount * 100),
+                else_=0
+            )
+        ).label('avg_progress')
+    ).where(
+        NeedAd.status.in_(["approved", "active", "completed"])
+    ).group_by(NeedAd.category)
+
+    result = await db.execute(query)
+    rows = result.all()
+
+    stats = {}
+    for row in rows:
+        category = row.category or 'other'
+        stats[category] = {
+            "count": row.count,
+            "total_target": float(row.total_target or 0),
+            "total_collected": float(row.total_collected or 0),
+            "average_progress": round(float(row.avg_progress or 0), 2)
+        }
+
+    return stats
+
+
+@router.get("/stats/by-province")
+async def get_needs_stats_by_province(
+        db: AsyncSession = Depends(get_db),
+        limit: int = Query(10, ge=1, le=50)
+):
+    """آمار آگهی‌ها به تفکیک استان"""
+
+    query = select(
+        NeedAd.province,
+        func.count().label('count'),
+        func.sum(NeedAd.target_amount).label('total_target'),
+        func.sum(NeedAd.collected_amount).label('total_collected')
+    ).where(
+        NeedAd.province.isnot(None),
+        NeedAd.status.in_(["approved", "active"])
+    ).group_by(NeedAd.province).order_by(
+        func.count().desc()
+    ).limit(limit)
+
+    result = await db.execute(query)
+    rows = result.all()
+
+    stats = []
+    for row in rows:
+        if row.province:
+            stats.append({
+                "province": row.province,
+                "needs_count": row.count,
+                "total_target": float(row.total_target or 0),
+                "total_collected": float(row.total_collected or 0)
+            })
+
+    return {"items": stats, "total": len(stats)}
+
+
+@router.get("/stats/over-time")
+async def get_needs_stats_over_time(
+        db: AsyncSession = Depends(get_db),
+        period: str = Query("month", regex="^(day|week|month|year)$"),
+        limit: int = Query(12, ge=1, le=36)
+):
+    """آمار روند زمانی آگهی‌ها"""
+
+    from sqlalchemy import func, extract
+
+    if period == "day":
+        group_by = func.date(NeedAd.created_at)
+        order_by = func.date(NeedAd.created_at)
+    elif period == "week":
+        group_by = func.concat(
+            extract('year', NeedAd.created_at), '-',
+            extract('week', NeedAd.created_at)
+        )
+        order_by = func.min(NeedAd.created_at)
+    elif period == "month":
+        group_by = func.concat(
+            extract('year', NeedAd.created_at), '-',
+            extract('month', NeedAd.created_at)
+        )
+        order_by = func.min(NeedAd.created_at)
+    else:  # year
+        group_by = extract('year', NeedAd.created_at)
+        order_by = extract('year', NeedAd.created_at)
+
+    query = select(
+        group_by.label('period'),
+        func.count().label('total_created'),
+        func.sum(case((NeedAd.status == "completed", 1), else_=0)).label('completed_count'),
+        func.sum(NeedAd.target_amount).label('total_target'),
+        func.sum(NeedAd.collected_amount).label('total_collected')
+    ).group_by(group_by).order_by(order_by.desc()).limit(limit)
+
+    result = await db.execute(query)
+    rows = result.all()
+
+    timeline = []
+    for row in reversed(rows):
+        timeline.append({
+            "period": str(row.period),
+            "needs_created": row.total_created,
+            "needs_completed": row.completed_count or 0,
+            "target_amount": float(row.total_target or 0),
+            "collected_amount": float(row.total_collected or 0)
+        })
+
+    return {"items": timeline, "period": period}
+
+
+# ==================== بخش جدید: لیست استان‌های دارای آگهی ====================
+
+@router.get("/provinces")
+async def get_provinces_list(
+        db: AsyncSession = Depends(get_db),
+        search: Optional[str] = Query(None, min_length=1)
+):
+    """
+    لیست استان‌های دارای آگهی فعال
+    برای فیلتر جستجو و نقشه
+    """
+
+    query = select(
+        NeedAd.province,
+        func.count().label('needs_count'),
+        func.sum(NeedAd.collected_amount).label('total_collected'),
+        func.count(case((NeedAd.is_emergency == True, 1))).label('emergency_count')
+    ).where(
+        NeedAd.province.isnot(None),
+        NeedAd.province != '',
+        NeedAd.status.in_(["approved", "active"])
+    )
+
+    if search:
+        query = query.where(NeedAd.province.ilike(f"%{search}%"))
+
+    query = query.group_by(NeedAd.province).order_by(func.count().desc())
+
+    result = await db.execute(query)
+    rows = result.all()
+
+    provinces = []
+    for row in rows:
+        provinces.append({
+            "name": row.province,
+            "needs_count": row.needs_count,
+            "total_collected": float(row.total_collected or 0),
+            "emergency_count": row.emergency_count or 0
+        })
+
+    return {"provinces": provinces, "total": len(provinces)}
+
+
+@router.get("/cities")
+async def get_cities_list(
+        db: AsyncSession = Depends(get_db),
+        province: Optional[str] = Query(None)
+):
+    """لیست شهرهای دارای آگهی فعال بر اساس استان"""
+
+    query = select(
+        NeedAd.city,
+        NeedAd.province,
+        func.count().label('needs_count')
+    ).where(
+        NeedAd.city.isnot(None),
+        NeedAd.city != '',
+        NeedAd.status.in_(["approved", "active"])
+    )
+
+    if province:
+        query = query.where(NeedAd.province == province)
+
+    query = query.group_by(NeedAd.city, NeedAd.province).order_by(func.count().desc())
+
+    result = await db.execute(query)
+    rows = result.all()
+
+    cities = []
+    for row in rows:
+        cities.append({
+            "name": row.city,
+            "province": row.province,
+            "needs_count": row.needs_count
+        })
+
+    return {"cities": cities, "total": len(cities)}
+
+
+@router.get("/provinces/with-coordinates")
+async def get_provinces_with_coordinates(
+        db: AsyncSession = Depends(get_db)
+):
+    """
+    دریافت اطلاعات استان‌ها با مختصات جغرافیایی برای نقشه
+    """
+
+    query = select(
+        NeedAd.province,
+        func.count().label('needs_count'),
+        func.avg(NeedAd.latitude).label('avg_latitude'),
+        func.avg(NeedAd.longitude).label('avg_longitude'),
+        func.sum(NeedAd.collected_amount).label('total_collected')
+    ).where(
+        NeedAd.province.isnot(None),
+        NeedAd.latitude.isnot(None),
+        NeedAd.longitude.isnot(None),
+        NeedAd.status.in_(["approved", "active"])
+    ).group_by(NeedAd.province)
+
+    result = await db.execute(query)
+    rows = result.all()
+
+    provinces = []
+    for row in rows:
+        provinces.append({
+            "name": row.province,
+            "needs_count": row.needs_count,
+            "latitude": float(row.avg_latitude or 0),
+            "longitude": float(row.avg_longitude or 0),
+            "total_collected": float(row.total_collected or 0)
+        })
+
+    return {"provinces": provinces}
+
+
+# ==================== بخش جدید: اشتراک‌گذاری اجتماعی ====================
+
+@router.post("/{need_id}/share")
+async def share_need(
+        need_id: int,
+        platform: str = Body(..., embed=True, regex="^(telegram|whatsapp|twitter|facebook|linkedin|email|copylink)$"),
+        current_user: Optional[User] = Depends(get_current_user),
+        db: AsyncSession = Depends(get_db)
+):
+    """ثبت اشتراک‌گذاری نیاز در شبکه اجتماعی"""
+    from services.need_service import NeedService
+    from models import NeedAd
+    from models.audit_log import AuditLog
+
+    need = await db.get(NeedAd, need_id)
+    if not need:
+        raise HTTPException(status_code=404, detail="Need not found")
+
+    service = NeedService(db)
+    share_stats = await service.increment_social_share(need_id, platform, current_user.id if current_user else None, db=db)
+
+    # ثبت لاگ اشتراک‌گذاری
+    log = AuditLog(
+        action="need_shared",
+        user_id=current_user.id if current_user else None,
+        need_id=need_id,
+        metadata={"platform": platform},
+        ip_address=None  # اگر بخواهید، می‌توانید IP کاربر را از request بگیرید
+    )
+    db.add(log)
+    await db.commit()
+
+    return {
+        "success": True,
+        "need_id": need_id,
+        "platform": platform,
+        "total_shares": share_stats["share_count"],
+        "message": f"با موفقیت در {platform} به اشتراک گذاشته شد"
+    }
+
+
+@router.get("/{need_id}/share-stats")
+async def get_share_stats(
+        need_id: int,
+        db: AsyncSession = Depends(get_db)
+):
+    """دریافت آمار اشتراک‌گذاری یک نیاز"""
+    from services.need_service import NeedService
+    from models import NeedAd
+
+    need = await db.get(NeedAd, need_id)
+    if not need:
+        raise HTTPException(status_code=404, detail="Need not found")
+
+    service = NeedService(db)
+    stats = await service.get_social_shares(need_id, db=db)
+
+    return {
+        "need_id": need_id,
+        "shares": stats  # {"telegram": 10, "facebook": 5, ...}
+    }
+
+
+# ==================== بخش جدید: نشان اعتماد و امتیاز ====================
+
+@router.get("/{need_id}/trust-score")
+async def get_need_trust_score(
+        need_id: int,
+        db: AsyncSession = Depends(get_db)
+):
+    """دریافت امتیاز اعتماد و نشان آگهی"""
+
+    service = NeedService(db)
+    trust_score = await service._calculate_trust_score(need_id)
+    verified_by_list = await service._get_verified_by_list(need_id)
+
+    # تعیین سطح نشان
+    if trust_score >= 80:
+        badge_level = "platinum"
+        verified_badge = True
+    elif trust_score >= 60:
+        badge_level = "gold"
+        verified_badge = True
+    elif trust_score >= 40:
+        badge_level = "silver"
+        verified_badge = True
+    elif trust_score >= 20:
+        badge_level = "bronze"
+        verified_badge = True
+    else:
+        badge_level = None
+        verified_badge = False
+
+    return {
+        "need_id": need_id,
+        "trust_score": trust_score,
+        "verified_badge": verified_badge,
+        "badge_level": badge_level,
+        "verified_by_count": len(verified_by_list),
+        "verified_by_list": verified_by_list[:5]  # فقط ۵ تا آخرین
+    }
+
+
+@router.post("/{need_id}/recalculate-trust")
+async def recalculate_trust_score(
+        need_id: int,
+        current_user: User = Depends(require_roles("ADMIN", "CHARITY_MANAGER")),
+        db: AsyncSession = Depends(get_db)
+):
+    """بازمحاسبه امتیاز اعتماد (فقط مدیر)"""
+
+    service = NeedService(db)
+    need = await service._get_need(need_id)
+
+    trust_score = await service._calculate_trust_score(need_id)
+    need.trust_score = trust_score
+
+    # به‌روزرسانی نشان
+    if trust_score >= 80:
+        need.verified_badge = True
+        need.badge_level = "platinum"
+    elif trust_score >= 60:
+        need.verified_badge = True
+        need.badge_level = "gold"
+    elif trust_score >= 40:
+        need.verified_badge = True
+        need.badge_level = "silver"
+    elif trust_score >= 20:
+        need.verified_badge = True
+        need.badge_level = "bronze"
+    else:
+        need.verified_badge = False
+        need.badge_level = None
+
+    # به‌روزرسانی لیست تأییدکنندگان
+    need.verified_by_list = await service._get_verified_by_list(need_id)
+
+    db.add(need)
+    await db.commit()
+
+    return {
+        "need_id": need_id,
+        "trust_score": trust_score,
+        "verified_badge": need.verified_badge,
+        "badge_level": need.badge_level,
+        "verified_by_count": len(need.verified_by_list)
+    }
+
+
+# ==================== بخش جدید: کمپین زمان‌دار ====================
+
+@router.post("/{need_id}/campaign")
+async def add_campaign_to_need(
+        need_id: int,
+        campaign_data: Dict[str, Any] = Body(...),
+        current_user: User = Depends(require_roles("ADMIN", "CHARITY_MANAGER")),
+        db: AsyncSession = Depends(get_db)
+):
+    """اضافه کردن کمپین زمان‌دار به نیاز"""
+
+    service = NeedService(db)
+    need = await service.add_campaign_settings(need_id, campaign_data, current_user)
+
+    return {
+        "need_id": need_id,
+        "campaign_settings": need.campaign_settings,
+        "message": "کمپین با موفقیت ایجاد شد"
+    }
+
+
+@router.patch("/{need_id}/campaign")
+async def update_campaign_progress(
+        need_id: int,
+        campaign_update: Dict[str, Any] = Body(...),
+        current_user: User = Depends(require_roles("ADMIN", "CHARITY_MANAGER")),
+        db: AsyncSession = Depends(get_db)
+):
+    """به‌روزرسانی پیشرفت کمپین"""
+
+    need = await db.get(NeedAd, need_id)
+    if not need:
+        raise HTTPException(status_code=404, detail="Need not found")
+
+    if not need.campaign_settings or not need.campaign_settings.get("is_campaign"):
+        raise HTTPException(status_code=400, detail="This need is not a campaign")
+
+    # به‌روزرسانی
+    need.campaign_settings.update(campaign_update)
+
+    db.add(need)
+    await db.commit()
+    await db.refresh(need)
+
+    return need.campaign_settings
+
+
+# ==================== بخش جدید: پیشرفت بصری ====================
+
+@router.get("/{need_id}/visual-progress")
+async def get_visual_progress(
+        need_id: int,
+        db: AsyncSession = Depends(get_db)
+):
+    """دریافت داده‌های پیشرفت بصری برای Progress Bar دایره‌ای"""
+
+    service = NeedService(db)
+    progress_data = await service.get_visual_progress_data(need_id)
+
+    return progress_data
+
+
+# ==================== بخش جدید: لینک محصول به نیاز ====================
+
+@router.post("/{need_id}/link-product/{product_id}")
+async def link_product_to_need_endpoint(
+        need_id: int,
+        product_id: int,
+        donation_amount: Optional[float] = Body(None),
+        charity_percentage: Optional[float] = Body(None),
+        current_user: User = Depends(require_roles("ADMIN", "CHARITY_MANAGER", "VENDOR")),
+        db: AsyncSession = Depends(get_db)
+):
+    """لینک کردن محصول فروشگاهی به نیاز خاص"""
+
+    service = NeedService(db)
+    need = await service.link_product_to_need(
+        need_id, product_id, current_user,
+        donation_amount, charity_percentage
+    )
+
+    return {
+        "need_id": need_id,
+        "product_id": product_id,
+        "linked_products": need.linked_product_ids,
+        "message": "محصول با موفقیت به نیاز لینک شد"
+    }
+
+
+@router.get("/{need_id}/linked-products")
+async def get_linked_products(
+        need_id: int,
+        db: AsyncSession = Depends(get_db),
+        current_user: Optional[User] = Depends(get_current_user)
+):
+    """دریافت لیست محصولات لینک شده به نیاز"""
+
+    need = await db.get(NeedAd, need_id)
+    if not need:
+        raise HTTPException(status_code=404, detail="Need not found")
+
+    service = NeedService(db)
+    if not service._check_view_permission(need, current_user):
+        raise HTTPException(status_code=403, detail="Not authorized")
+
+    from models.product import Product
+    from models.association_tables import product_need_association
+
+    # دریافت محصولات لینک شده با جزئیات
+    query = select(
+        Product,
+        product_need_association.c.donation_amount,
+        product_need_association.c.charity_percentage,
+        product_need_association.c.created_at.label('linked_at')
+    ).join(
+        product_need_association,
+        Product.id == product_need_association.c.product_id
+    ).where(
+        product_need_association.c.need_id == need_id
+    )
+
+    result = await db.execute(query)
+    rows = result.all()
+
+    products = []
+    for product, donation_amount, charity_percentage, linked_at in rows:
+        products.append({
+            "id": product.id,
+            "name": product.name,
+            "price": product.price,
+            "shop_id": product.shop_id,
+            "shop_name": product.shop.name if product.shop else None,
+            "charity_percentage": charity_percentage or product.charity_percentage,
+            "donation_amount": donation_amount,
+            "linked_at": linked_at.isoformat() if linked_at else None,
+            "image_url": product.image_url
+        })
+
+    return {"products": products, "total": len(products)}
+
+
+# ==================== بخش جدید: پیشرفت دستی ====================
+
+@router.patch("/{need_id}/progress")
+async def update_need_progress_manual(
+        need_id: int,
+        collected_amount: float = Body(..., embed=True, ge=0),
+        notes: Optional[str] = Body(None),
+        current_user: User = Depends(require_roles("ADMIN", "CHARITY_MANAGER")),
+        db: AsyncSession = Depends(get_db)
+):
+    """به‌روزرسانی دستی پیشرفت پرداخت توسط مدیر"""
+
+    service = NeedService(db)
+    need = await service.update_need_progress(need_id, collected_amount, current_user, notes)
+
+    return {
+        "need_id": need_id,
+        "collected_amount": need.collected_amount,
+        "target_amount": need.target_amount,
+        "progress_percentage": round((need.collected_amount or 0) / need.target_amount * 100,
+                                     2) if need.target_amount > 0 else 0,
+        "status": need.status,
+        "message": "پیشرفت با موفقیت به‌روزرسانی شد"
+    }
+
+
+@router.get("/{need_id}/progress-history")
+async def get_progress_history(
+        need_id: int,
+        db: AsyncSession = Depends(get_db),
+        current_user: User = Depends(require_roles("ADMIN", "CHARITY_MANAGER"))
+):
+    """دریافت تاریخچه به‌روزرسانی پیشرفت"""
+
+    need = await db.get(NeedAd, need_id)
+    if not need:
+        raise HTTPException(status_code=404, detail="Need not found")
+
+    history = getattr(need, 'progress_history', [])
+
+    # مرتب‌سازی نزولی بر اساس تاریخ
+    history = sorted(
+        history,
+        key=lambda x: x.get('updated_at', ''),
+        reverse=True
+    )
+
+    return {"history": history, "total": len(history)}
+
+
+# ==================== بخش جدید: Wizard ثبت نیاز ====================
+
+@router.post("/wizard/full", response_model=NeedAdDetail)
+async def create_need_with_wizard(
+        wizard_data: Dict[str, Any] = Body(...),
+        current_user: User = Depends(get_current_user),
+        db: AsyncSession = Depends(get_db)
+):
+    """ایجاد نیاز با استفاده از Wizard 5 مرحله‌ای"""
+
+    service = NeedService(db)
+    need = await service.create_need_with_wizard(wizard_data, current_user)
+
+    return await service.get_need(need.id, current_user)
+
+

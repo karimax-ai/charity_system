@@ -126,26 +126,26 @@ async def assign_role_to_user(
         user_id: int,
         role_key: str,
         db: AsyncSession = Depends(get_db),
-        admin: User = Depends(require_roles("SUPER_ADMIN", "CHARITY_MANAGER"))
+        admin: User = Depends(require_roles("SUPER_ADMIN"))
 ):
-    """اختصاص نقش به کاربر"""
-    # بررسی وجود کاربر
-    result = await db.execute(
-        select(User).where(User.id == user_id)
-    )
+    """اختصاص نقش (فقط سوپر ادمین)"""
+
+    # user
+    result = await db.execute(select(User).where(User.id == user_id))
     user = result.scalar_one_or_none()
     if not user:
-        raise HTTPException(status_code=404, detail="User not found")
+        raise HTTPException(404, "User not found")
 
-    # بررسی وجود نقش
-    result = await db.execute(
-        select(Role).where(Role.key == role_key)
-    )
+    # role
+    result = await db.execute(select(Role).where(Role.key == role_key))
     role = result.scalar_one_or_none()
     if not role:
-        raise HTTPException(status_code=404, detail="Role not found")
+        raise HTTPException(404, "Role not found")
 
-    # اضافه کردن نقش
+    # prevent assigning system critical roles
+    if role.key == "SUPER_ADMIN" and not admin.is_superuser:
+        raise HTTPException(403, "Cannot assign super admin")
+
     if role not in user.roles:
         user.roles.append(role)
         await db.commit()

@@ -141,3 +141,9 @@ class NeedAd(Base):
     )
 
     comments = relationship("NeedComment", back_populates="need")
+
+    campaigns = relationship(
+        "Campaign",
+        back_populates="need",
+        cascade="all, delete-orphan"
+    )

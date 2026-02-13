@@ -8,6 +8,7 @@ import math
 
 from models.need_ad import NeedAd
 from models.charity import Charity
+from models.need_social_share import NeedSocialShare
 from models.user import User
 from models.need_verification import NeedVerification, VerificationStatus
 from core.permissions import get_current_user
@@ -439,27 +440,40 @@ class NeedService:
     async def update_verification_status(
             self, verification_id: int, status: str, user: User, comment: Optional[str] = None
     ) -> NeedVerification:
-        """تغییر وضعیت تأییدیه (توسط ادمین/مدیر خیریه)"""
         verification = await self.db.get(NeedVerification, verification_id)
         if not verification:
             raise HTTPException(status_code=404, detail="Verification not found")
 
-        # بررسی مجوز
-        need = verification.need
-        user_roles = [r.key for r in user.roles]
-        if "ADMIN" not in user_roles and \
-                "CHARITY_MANAGER" not in user_roles and \
-                need.charity.manager_id != user.id:
-            raise HTTPException(status_code=403, detail="Not authorized")
+        # ... مجوزها (فعلی)
 
         verification.status = status
         verification.comment = comment
         if status == "approved":
             verification.verified_at = datetime.utcnow()
 
-        self.db.add(verification)
+        # ──────────────────────────────── اضافه کردن این بلوک ────────────────────────────────
+        need = verification.need
+
+        # شمارش تأییدیه‌های approved
+        approved_count = sum(1 for v in need.verifications if v.status == "approved")
+
+        # اگر حداقل ۱ تأیید شد و هنوز pending است → منتشر کن
+        if approved_count >= 1 and need.status == "pending":
+            need.status = "approved"  # یا "active" بسته به منطق پروژه
+            need.verified_at = datetime.utcnow()
+            need.verified_by = user.id  # اختیاری
+
+            # اختیاری: محاسبه اولیه trust_score
+            need.trust_score = await self._calculate_trust_score(need.id)
+
+            # نوتیفیکیشن به نیازمند (بعداً پیاده‌سازی شود)
+            # await send_notification(need.needy_user, "نیاز شما تأیید و منتشر شد")
+
+        # ───────────────────────────────────────────────────────────────────────────────────────
+
         await self.db.commit()
         await self.db.refresh(verification)
+        await self.db.refresh(need)  # مهم!
         return verification
 
     # ---------- Helper Methods ----------
@@ -763,32 +777,46 @@ async def add_campaign_settings(
     return need
 
 
-async def increment_social_share(
-        self,
-        need_id: int,
-        platform: str
-) -> Dict[str, Any]:
-    """افزایش شمارنده اشتراک‌گذاری اجتماعی"""
+async def increment_social_share(self, need_id: int, platform: str, user_id: int | None = None,
+                                 db: AsyncSession | None = None):
+    """ثبت یک اشتراک جدید برای نیاز"""
+    if db is None:
+        db = self.db
 
-    need = await self._get_need(need_id)
+    share = NeedSocialShare(
+        need_id=need_id,
+        platform=platform,
+        user_id=user_id
+    )
+    db.add(share)
+    await db.commit()
 
-    if not need.social_sharing:
-        need.social_sharing = {
-            "share_count": 0,
-            "telegram": 0,
-            "whatsapp": 0,
-            "twitter": 0,
-            "facebook": 0,
-            "linkedin": 0
-        }
+    # شمارش کل اشتراک‌ها برای این نیاز و پلتفرم
+    count_query = select(func.count()).where(
+        NeedSocialShare.need_id == need_id,
+        NeedSocialShare.platform == platform
+    )
+    total = await db.scalar(count_query)
+    return {"platform": platform, "share_count": total}
 
-    need.social_sharing["share_count"] += 1
-    need.social_sharing[platform] = need.social_sharing.get(platform, 0) + 1
 
-    self.db.add(need)
-    await self.db.commit()
+async def get_social_shares(self, need_id: int, db: AsyncSession | None = None):
+    """گرفتن آمار اشتراک به تفکیک پلتفرم"""
+    if db is None:
+        db = self.db
 
-    return need.social_sharing
+    query = select(
+        NeedSocialShare.platform,
+        func.count().label("count")
+    ).where(
+        NeedSocialShare.need_id == need_id
+    ).group_by(NeedSocialShare.platform)
+
+    result = await db.execute(query)
+    rows = result.all()
+
+    stats = {row.platform: row.count for row in rows}
+    return stats
 
 
 async def get_need_statistics(self, need_id: int) -> Dict[str, Any]:

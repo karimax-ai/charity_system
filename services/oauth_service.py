@@ -1,15 +1,33 @@
-# app/services/oauth_service.py
-from fastapi import HTTPException, status
+from fastapi import HTTPException
 import httpx
+from core.config import settings
+
 
 class GoogleOAuthService:
-    GOOGLE_TOKEN_INFO_URL = "https://oauth2.googleapis.com/tokeninfo"
+
+    GOOGLE_URL = "https://oauth2.googleapis.com/tokeninfo"
 
     @staticmethod
-    async def verify_token(token: str) -> dict:
-        async with httpx.AsyncClient() as client:
-            resp = await client.get(f"{GoogleOAuthService.GOOGLE_TOKEN_INFO_URL}?id_token={token}")
-            if resp.status_code != 200:
-                raise HTTPException(status_code=400, detail="Invalid Google token")
-            data = resp.json()
-            return {"email": data["email"], "name": data.get("name")}
+    async def verify_token(token: str):
+
+        async with httpx.AsyncClient(timeout=5) as client:
+            r = await client.get(GoogleOAuthService.GOOGLE_URL, params={"id_token": token})
+
+        if r.status_code != 200:
+            raise HTTPException(400, "Invalid Google token")
+
+        data = r.json()
+
+        if data["aud"] != settings.GOOGLE_CLIENT_ID:
+            raise HTTPException(400, "Invalid audience")
+
+        if data["iss"] not in ("accounts.google.com", "https://accounts.google.com"):
+            raise HTTPException(400, "Invalid issuer")
+
+        if data.get("email_verified") != "true":
+            raise HTTPException(400, "Email not verified")
+
+        return {
+            "email": data["email"],
+            "name": data.get("name")
+        }

@@ -148,7 +148,7 @@ class FraudDetectionService:
             "yopmail", "throwaway", "disposable"
         ]
 
-        return any(domain in d for d in disposable_domains)
+        return any(d in domain for d in disposable_domains)
 
     async def _check_request_rate(self, ip: str) -> bool:
         """بررسی سرعت درخواست‌ها از یک IP"""

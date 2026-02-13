@@ -1,3 +1,7 @@
+import asyncio
+import hashlib
+import random
+
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, and_, or_
 from models.user import User, UserStatus
@@ -14,57 +18,58 @@ from services.otp_service import OTPService
 from core.config import settings
 
 
+
+
+ALLOWED_PUBLIC_ROLES = {"USER", "DONOR", "NEEDY", "VENDOR"}
+
+
+class DeviceVerificationRequired(Exception):
+    pass
+
+
 class AuthService:
-    def __init__(self, db: AsyncSession, request: Optional[Request] = None):
+    def __init__(self, db: AsyncSession, request=None):
         self.db = db
         self.request = request
 
-    # ✅ ثبت‌نام با امنیت بالا
+    # ------------------------------------------------
+    # REGISTER
+    # ------------------------------------------------
     async def register_user(
-            self,
-            email: str,
-            password: str,
-            username: str = None,
-            phone: str = None,
-            role_key: str = "USER",
-            captcha_token: str = None,
-            ip_address: str = None
+        self,
+        email: str,
+        password: str,
+        username: str = None,
+        phone: str = None,
+        role_key: str = "USER",
+        captcha_token: str = None,
+        ip_address: str = None
     ):
-        # 1. بررسی CAPTCHA
+        # captcha
         if settings.ENABLE_CAPTCHA:
             from services.captcha_service import CaptchaService
             await CaptchaService.verify(captcha_token)
 
-        # 2. بررسی تکراری بودن
+        # role restriction
+        if role_key not in ALLOWED_PUBLIC_ROLES:
+            raise HTTPException(403, "Invalid role")
+
+        # duplicate check
         result = await self.db.execute(
-            select(User).where(
-                or_(
-                    User.email == email,
-                    User.phone == phone if phone else False
-                )
-            )
+            select(User).where(or_(User.email == email, User.phone == phone if phone else False))
         )
-        existing = result.scalar_one_or_none()
-        if existing:
-            if existing.email == email:
-                raise HTTPException(status_code=400, detail="Email already registered")
-            if phone and existing.phone == phone:
-                raise HTTPException(status_code=400, detail="Phone number already registered")
+        if result.scalar_one_or_none():
+            raise HTTPException(400, "User already exists")
 
-        # 3. بررسی رمز عبور قوی
+        # password strength
         if not self._is_strong_password(password):
-            raise HTTPException(
-                status_code=400,
-                detail="Password must be at least 8 characters with uppercase, lowercase, number and special character"
-            )
+            raise HTTPException(400, "Weak password")
 
-        # 4. نقش
-        result = await self.db.execute(select(Role).where(Role.key == role_key))
-        role = result.scalar_one_or_none()
+        # role
+        role = (await self.db.execute(select(Role).where(Role.key == role_key))).scalar_one_or_none()
         if not role:
-            raise HTTPException(status_code=400, detail="Role not found")
+            raise HTTPException(400, "Role not found")
 
-        # 5. ایجاد کاربر
         user = User(
             email=email,
             username=username,
@@ -79,73 +84,57 @@ class AuthService:
         await self.db.commit()
         await self.db.refresh(user)
 
-        # 6. ارسال OTP تأیید شماره (اختیاری)
         if phone and settings.ENABLE_PHONE_VERIFICATION:
             await OTPService.send_otp(phone, purpose="register")
 
         return user
 
-    # ✅ ورود با تشخیص حمله و قفل خودکار
-    async def authenticate_user(
-            self,
-            email: str,
-            password: str,
-            ip_address: str = None,
-            device_id: str = None
-    ):
-        # 1. یافتن کاربر
+    # ------------------------------------------------
+    # LOGIN
+    # ------------------------------------------------
+    async def authenticate_user(self, email: str, password: str, ip_address=None, device_id=None):
+
         result = await self.db.execute(
-            select(User).where(
-                or_(
-                    User.email == email,
-                    User.phone == email  # امکان ورود با شماره
-                )
-            )
+            select(User).where(or_(User.email == email, User.phone == email))
         )
         user = result.scalar_one_or_none()
 
         if not user:
-            # جلوگیری از تشخیص وجود کاربر
-            await self._fake_login_delay()
-            raise HTTPException(status_code=401, detail="Invalid credentials")
+            await self._fake_delay()
+            raise HTTPException(401, "Invalid credentials")
 
-        # 2. بررسی قفل بودن حساب
+        if user.deleted_at:
+            raise HTTPException(403, "Account disabled")
+
+        # lock check
         if user.locked_until and user.locked_until > datetime.utcnow():
-            remaining = (user.locked_until - datetime.utcnow()).seconds // 60
-            raise HTTPException(
-                status_code=403,
-                detail=f"Account is locked for {remaining} minutes. Try again later."
-            )
+            raise HTTPException(403, "Account locked temporarily")
 
-        # 3. بررسی رمز عبور
-        if not user.hashed_password or not verify_password(password, user.hashed_password):
-            # افزایش تعداد تلاش‌های ناموفق
+        # password verify
+        if not verify_password(password, user.hashed_password):
             user.failed_login_attempts += 1
 
-            # قفل کردن حساب پس از 5 تلاش ناموفق
             if user.failed_login_attempts >= settings.MAX_LOGIN_ATTEMPTS:
                 user.locked_until = datetime.utcnow() + timedelta(minutes=settings.ACCOUNT_LOCKOUT_MINUTES)
                 user.failed_login_attempts = 0
 
             await self.db.commit()
+            await self._fake_delay()
+            raise HTTPException(401, "Invalid credentials")
 
-            # تأخیر تصادفی برای جلوگیری از brute force
-            await self._fake_login_delay()
-            raise HTTPException(status_code=401, detail="Invalid credentials")
-
-        # 4. بررسی فعال بودن کاربر
         if not user.is_active:
-            raise HTTPException(status_code=403, detail="Account is disabled")
+            raise HTTPException(403, "Account disabled")
 
-        # 5. بررسی دستگاه معتبر (اختیاری)
+        # device trust
         if device_id and settings.ENABLE_TRUSTED_DEVICES:
-            if device_id not in (user.trusted_devices or []):
-                # ارسال OTP برای تأیید دستگاه جدید
-                if user.phone:
-                    await OTPService.send_otp(user.phone, purpose="device_verification")
-                    return {"status": "DEVICE_VERIFICATION_REQUIRED", "user": user}
+            device_hash = self._hash_device(device_id)
 
-        # 6. بازنشانی تلاش‌های ناموفق
+            if device_hash not in (user.trusted_devices or []):
+                if user.phone:
+                    await OTPService.send_otp(user.phone, purpose="device")
+                    raise DeviceVerificationRequired()
+
+        # reset attempts
         user.failed_login_attempts = 0
         user.locked_until = None
         user.last_login_at = datetime.utcnow()
@@ -154,125 +143,116 @@ class AuthService:
 
         return user
 
-    # ✅ ایجاد توکن با پشتیبانی 2FA و رفرش توکن
-    async def create_token(self, user: User, device_id: str = None) -> TokenResponse:
-        roles_keys = [role.key for role in user.roles]
+    # ------------------------------------------------
+    # TOKEN
+    # ------------------------------------------------
+    async def create_token(self, user: User, device_id=None):
 
-        # 1. بررسی 2FA
+        roles = [r.key for r in user.roles]
+
+        # 2FA
         if user.two_fa_enabled:
-            # ارسال OTP برای 2FA پیامکی
             if user.two_fa_method == "sms" and user.phone:
                 await OTPService.send_otp(user.phone, purpose="2fa")
 
             return TokenResponse(
                 access_token=None,
                 refresh_token=None,
-                roles=roles_keys,
-                status="2FA_REQUIRED",
-                message="Two-factor authentication required",
-                requires_2fa=True
+                roles=roles,
+                requires_2fa=True,
+                message="2FA required"
             )
 
-        # 2. بررسی تأیید هویت
+        # verification
         if user.status == UserStatus.NEED_VERIFICATION:
             return TokenResponse(
                 access_token=None,
                 refresh_token=None,
-                roles=roles_keys,
-                status=user.status,
-                message="Account pending verification",
-                requires_verification=True
+                roles=roles,
+                requires_verification=True,
+                message="Account pending verification"
             )
 
-        # 3. صدور توکن‌ها
-        access_token = create_access_token(
-            subject=user.uuid,
-            extra_data={
-                "email": user.email,
-                "roles": roles_keys,
-                "device_id": device_id
-            }
-        )
+        access = create_access_token(subject=user.uuid, extra_data={"roles": roles})
+        refresh = create_refresh_token(subject=user.uuid)
 
-        refresh_token = create_refresh_token(subject=user.uuid)
-
-        # ذخیره رفرش توکن در دیتابیس
-        user.refresh_token = refresh_token
+        # rotation
+        user.refresh_token = refresh
         user.refresh_token_expires = datetime.utcnow() + timedelta(days=settings.REFRESH_TOKEN_EXPIRE_DAYS)
         await self.db.commit()
 
-        return TokenResponse(
-            access_token=access_token,
-            refresh_token=refresh_token,
-            roles=roles_keys,
-            status=UserStatus.ACTIVE,
-            message="Login successful"
-        )
+        return TokenResponse(access_token=access, refresh_token=refresh, roles=roles, message="Login successful")
 
-    # ✅ رفرش توکن
-    async def refresh_token(self, refresh_token: str):
+    # ------------------------------------------------
+    # REFRESH
+    # ------------------------------------------------
+    async def refresh_token(self, token: str):
         from jose import jwt, JWTError
 
         try:
-            payload = jwt.decode(
-                refresh_token,
-                settings.SECRET_KEY,
-                algorithms=[settings.ALGORITHM]
-            )
-            user_id = payload.get("sub")
+            payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
+            uid = payload.get("sub")
 
-            if not user_id:
-                raise HTTPException(status_code=401, detail="Invalid refresh token")
-
-            result = await self.db.execute(
-                select(User).where(
-                    and_(
-                        User.uuid == user_id,
-                        User.refresh_token == refresh_token,
-                        User.refresh_token_expires > datetime.utcnow()
+            user = (
+                await self.db.execute(
+                    select(User).where(
+                        and_(
+                            User.uuid == uid,
+                            User.refresh_token == token,
+                            User.refresh_token_expires > datetime.utcnow()
+                        )
                     )
                 )
-            )
-            user = result.scalar_one_or_none()
+            ).scalar_one_or_none()
 
             if not user:
-                raise HTTPException(status_code=401, detail="Invalid or expired refresh token")
+                raise HTTPException(401, "Invalid refresh token")
 
-            # صدور توکن جدید
             return await self.create_token(user)
 
         except JWTError:
-            raise HTTPException(status_code=401, detail="Invalid refresh token")
+            raise HTTPException(401, "Invalid refresh token")
 
-    # ✅ تغییر رمز عبور
-    async def change_password(
-            self,
-            user: User,
-            old_password: str,
-            new_password: str
-    ):
-        if not verify_password(old_password, user.hashed_password):
-            raise HTTPException(status_code=400, detail="Current password is incorrect")
+    # ------------------------------------------------
+    # PASSWORD CHANGE
+    # ------------------------------------------------
+    async def change_password(self, user: User, old: str, new: str):
+        if not verify_password(old, user.hashed_password):
+            raise HTTPException(400, "Wrong password")
 
-        if not self._is_strong_password(new_password):
-            raise HTTPException(
-                status_code=400,
-                detail="New password must be at least 8 characters with uppercase, lowercase, number and special character"
-            )
+        if not self._is_strong_password(new):
+            raise HTTPException(400, "Weak password")
 
-        user.hashed_password = hash_password(new_password)
-        # باطل کردن تمام سشن‌ها
+        user.hashed_password = hash_password(new)
         user.refresh_token = None
-        user.refresh_token_expires = None
         user.trusted_devices = []
 
         await self.db.commit()
 
-        # ارسال نوتیفیکیشن
         if user.phone:
-            await OTPService.send_notification(user.phone, "Your password was changed successfully")
+            await OTPService.send_notification(user.phone, "Password changed")
 
-        return {"message": "Password changed successfully"}
+        return {"message": "Password changed"}
+
+    # ------------------------------------------------
+    # HELPERS
+    # ------------------------------------------------
+    def _hash_device(self, fp: str):
+        return hashlib.sha256(fp.encode()).hexdigest()
+
+    async def _fake_delay(self):
+        await asyncio.sleep(random.uniform(0.5, 1.2))
+
+    def _is_strong_password(self, password: str):
+        import re
+        return (
+            len(password) >= 8
+            and re.search(r"[A-Z]", password)
+            and re.search(r"[a-z]", password)
+            and re.search(r"\d", password)
+            and re.search(r"[!@#$%^&*]", password)
+        )
+
 
     # ✅ ارسال رمز تکی/گروهی توسط ادمین
     async def bulk_create_users(

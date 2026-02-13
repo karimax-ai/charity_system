@@ -9,7 +9,7 @@ from core.permissions import get_current_user, require_roles
 from core.security import hash_password
 from models.verification import VerificationDocument
 from schemas.verification import VerificationDocumentCreate
-from services.auth_service import AuthService
+from services.auth_service import AuthService, DeviceVerificationRequired
 from schemas.user import UserCreate, UserRead, UserLogin, Token, TokenResponse, OTPRequest, OTPVerify, \
     PasswordResetRequest, PasswordResetVerify, ChangePassword, BulkUserCreate, RefreshToken, BulkUserResponse, \
     VerificationReview
@@ -20,7 +20,7 @@ from sqlalchemy import select
 
 from services.otp_service import OTPService
 from services.twofa_service import TwoFAService
-
+import secrets
 router = APIRouter()
 
 
@@ -49,22 +49,36 @@ async def register(user_data: UserCreate, db: AsyncSession = Depends(get_db)):
 @router.post("/login", response_model=TokenResponse)
 async def login(data: UserLogin, db: AsyncSession = Depends(get_db)):
     service = AuthService(db)
-    user = await service.authenticate_user(email=data.email, password=data.password)
-    token_resp = await service.create_token(user)
-    return token_resp
+
+    try:
+        user = await service.authenticate_user(
+            email=data.email,
+            password=data.password,
+            device_id=data.device_id
+        )
+    except DeviceVerificationRequired:
+        return TokenResponse(requires_verification=True, message="Verify new device")
+
+    return await service.create_token(user)
 
 
 @router.post("/google", response_model=TokenResponse)
 async def google_login(data: GoogleOAuth, db: AsyncSession = Depends(get_db)):
-    user_info = await GoogleOAuthService.verify_token(data.token)
+
+    info = await GoogleOAuthService.verify_token(data.token)
     service = AuthService(db)
 
-    result = await db.execute(select(User).where(User.email == user_info["email"]))
-    user = result.scalar_one_or_none()
+    user = (await db.execute(select(User).where(User.email == info["email"]))).scalar_one_or_none()
+
     if not user:
-        user = await service.register_user(email=user_info["email"], password="oauth_dummy", username=user_info.get("name"))
-    token_resp = await service.create_token(user)
-    return token_resp
+        user = await service.register_user(
+            email=info["email"],
+            password=secrets.token_urlsafe(32),
+            username=info.get("name"),
+            role_key="USER"
+        )
+
+    return await service.create_token(user)
 
 
 
@@ -94,7 +108,7 @@ async def verify_2fa(token: str, user: User = Depends(get_current_user)):
 
 
 
-router.post("/otp/request")
+@router.post("/otp/request")
 async def request_otp(data: OTPRequest):
     code = OTPService.send_otp(data.phone)
     return {"detail": f"OTP sent to {data.phone}"}
@@ -119,33 +133,29 @@ async def verify_otp(data: OTPVerify, db: AsyncSession = Depends(get_db)):
 
 
 @router.post("/password/reset/request")
-async def password_reset_request(data: PasswordResetRequest, db: AsyncSession = Depends(get_db)):
-    result = await db.execute(select(User).where(User.email == data.email))
-    user = result.scalar_one_or_none()
-    if not user:
-        raise HTTPException(status_code=400, detail="User not found")
+async def reset_request(data: PasswordResetRequest, db: AsyncSession = Depends(get_db)):
 
-    # ارسال OTP (می‌تواند روی ایمیل یا SMS)
-    OTPService.send_otp(user.phone or user.email)
-    return {"detail": "Password reset OTP sent"}
+    user = (await db.execute(select(User).where(User.email == data.email))).scalar_one_or_none()
 
+    if user:
+        identifier = user.phone or user.email
+        await OTPService.send_otp(identifier, purpose="reset")
+
+    return {"message": "If account exists OTP sent"}
 
 
 @router.post("/password/reset/verify")
-async def password_reset_verify(data: PasswordResetVerify, db: AsyncSession = Depends(get_db)):
-    OTPService.verify_otp(data.email, data.otp)
+async def reset_verify(data: PasswordResetVerify, db: AsyncSession = Depends(get_db)):
 
-    result = await db.execute(select(User).where(User.email == data.email))
-    user = result.scalar_one_or_none()
-    if not user:
-        raise HTTPException(status_code=400, detail="User not found")
+    await OTPService.verify_otp(data.identifier, data.otp, purpose="reset")
 
-    user.hashed_password = hash_password(data.new_password)
-    db.add(user)
+    user = (await db.execute(select(User).where(User.email == data.identifier))).scalar_one()
+
+    user.hashed_password = AuthService(db)._hash_device(data.new_password)
     await db.commit()
-    await db.refresh(user)
 
-    return {"detail": "Password reset successfully"}
+    return {"message": "Password reset success"}
+
 
 
 # ✅新增: تغییر رمز عبور

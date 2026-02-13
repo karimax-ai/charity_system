@@ -46,6 +46,20 @@ async def report(request: Request):
 async def shop(request: Request):
     return render(request, "dashboard/admin/shop.html")
 
+@router.get("/charity", response_class=HTMLResponse)
+async def charity(request: Request):
+    return render(request, "charities/charity.html")
+
+
+@router.get("/needs", response_class=HTMLResponse)
+async def need(request: Request):
+    return render(request, "needs/need.html")
+
+@router.get("/contact_us", response_class=HTMLResponse)
+async def contact_us(request: Request):
+    return render(request, "contact_us.html")
+
+
 
 @router.get("/forgot-password", response_class=HTMLResponse)
 async def forgot(request: Request):

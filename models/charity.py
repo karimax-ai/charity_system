@@ -42,4 +42,9 @@ class Charity(Base):
         back_populates="charity",
         cascade="all, delete-orphan",
     )
+    campaigns = relationship(
+        "Campaign",
+        back_populates="charity",
+        cascade="all, delete-orphan"
+    )
 

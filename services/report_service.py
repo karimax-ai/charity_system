@@ -4,7 +4,6 @@ from sqlalchemy import select, func, and_, or_
 from datetime import datetime, timedelta
 from typing import Optional, Dict, Any, List
 from fastapi import HTTPException
-
 from models.order import Order, OrderItem
 from models.donation import Donation
 from models.need_ad import NeedAd
@@ -24,7 +23,6 @@ class ReportService:
     async def generate_report(self, request: ReportRequest) -> Dict[str, Any]:
         """تولید گزارش بر اساس نوع"""
 
-        # دریافت بازه زمانی
         date_range = await self._get_date_range(request.filters)
 
         if request.report_type == ReportType.SALES:
@@ -40,7 +38,7 @@ class ReportService:
         elif request.report_type == ReportType.CHARITIES:
             return await self._generate_charities_report(request.filters)
         else:
-            raise HTTPException(status_code=400, detail=f"Unsupported report type: {request.report_type}")
+            raise HTTPException(status_code=400, detail=f"نوع گزارش پشتیبانی نمی‌شود: {request.report_type}")
 
     async def _generate_sales_report(self, date_range: Dict, filters: ReportFilter) -> Dict[str, Any]:
         """گزارش فروش"""

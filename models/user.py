@@ -91,6 +91,7 @@ class User(Base):
     email_verification_token = Column(String(255), nullable=True)
     password_reset_token = Column(String(255), nullable=True)
     password_reset_expires = Column(DateTime(timezone=True), nullable=True)
+    refresh_token_jti = Column(String(50), nullable=True)
 
     # ---------- دستگاه‌های معتبر ----------
     trusted_devices = Column(JSON, default=list)  # لیست device_id‌ها
@@ -255,6 +256,33 @@ class User(Base):
         back_populates="uploader",
         cascade="all, delete-orphan"
     )
+    # به کلاس User در models/user.py اضافه کنید:
+
+    # 📢 کمپین‌ها
+    campaigns_owned = relationship(
+        "Campaign",
+        foreign_keys="Campaign.owner_id",
+        back_populates="owner",
+        cascade="all, delete-orphan"
+    )
+
+    campaign_donations = relationship(
+        "CampaignDonation",
+        foreign_keys="CampaignDonation.donor_id",
+        back_populates="donor"
+    )
+
+    campaign_shares = relationship(
+        "CampaignShare",
+        foreign_keys="CampaignShare.user_id",
+        back_populates="user",
+        cascade="all, delete-orphan"
+    )
+
+    campaign_comments = relationship(
+        "CampaignComment",
+        back_populates="user"
+    )
 
     # ========== متدهای کمکی ==========
 
@@ -291,8 +319,7 @@ class User(Base):
 
     @property
     def is_admin(self) -> bool:
-        """آیا کاربر ادمین است؟"""
-        return any(role.key in ["ADMIN", "SUPER_ADMIN"] for role in self.roles)
+        return any(role.key == "SUPER_ADMIN" for role in self.roles)
 
     @property
     def is_volunteer(self) -> bool:

@@ -1,0 +1,1908 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>آگهی‌های نیاز | خیریه‌آنلاین</title>
+
+    <!-- Bootstrap 5 RTL -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
+
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <!-- Vazir Font -->
+    <link href="https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.css" rel="stylesheet">
+
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Toastify -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
+    <!-- Select2 -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+    <!-- Persian Datepicker -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/shahtheme/persian-datepicker@1.2.0/dist/css/persian-datepicker.min.css">
+
+    <style>
+        :root {
+            --primary-deep: #0a2c3d;
+            --primary-soft: #1e4a5f;
+            --primary-gradient: linear-gradient(145deg, #0a2c3d, #1e4a5f);
+            --accent-gold: #e6b31e;
+            --accent-gold-soft: rgba(230, 179, 30, 0.12);
+            --accent-gold-gradient: linear-gradient(135deg, #e6b31e, #ffd166);
+            --accent-orange: #ff8a5c;
+            --accent-orange-soft: rgba(255, 138, 92, 0.12);
+            --accent-teal: #2a9d8f;
+            --accent-teal-soft: rgba(42, 157, 143, 0.12);
+            --accent-purple: #6c5ce7;
+            --accent-purple-soft: rgba(108, 92, 231, 0.12);
+            --accent-red: #e63946;
+            --accent-red-soft: rgba(230, 57, 70, 0.12);
+            --gray-50: #f8fafc;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --gray-600: #475569;
+            --gray-900: #0f172a;
+            --shadow-sm: 0 4px 6px -2px rgba(0,0,0,0.05);
+            --shadow-md: 0 12px 16px -4px rgba(0,0,0,0.06);
+            --shadow-lg: 0 20px 24px -6px rgba(0,0,0,0.08);
+            --shadow-xl: 0 32px 48px -12px rgba(0,0,0,0.12);
+            --shadow-gold: 0 12px 24px -8px rgba(230,179,30,0.24);
+            --radius-sm: 10px;
+            --radius-md: 14px;
+            --radius-lg: 20px;
+            --radius-xl: 28px;
+            --radius-full: 9999px;
+            --font-primary: 'Vazir', sans-serif;
+            --transition-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+            --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: var(--font-primary);
+        }
+
+        body {
+            background-color: var(--gray-50);
+            overflow-x: hidden;
+            color: var(--gray-900);
+            line-height: 1.6;
+        }
+
+        /* ===== اسکرولبار سفارشی ===== */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track { background: var(--gray-100); border-radius: var(--radius-full); }
+        ::-webkit-scrollbar-thumb { background: var(--gray-600); border-radius: var(--radius-full); }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary-deep); }
+
+        /* ===== Header Styles ===== */
+        .main-header {
+            background: white;
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 1050;
+            padding: 16px 0;
+        }
+
+        .brand-logo {
+            width: 48px;
+            height: 48px;
+            background: var(--accent-gold-gradient);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            color: var(--primary-deep);
+            box-shadow: var(--shadow-gold);
+        }
+
+        .nav-link-custom {
+            font-weight: 600;
+            color: var(--gray-900);
+            padding: 10px 16px !important;
+            border-radius: var(--radius-full);
+            transition: all 0.3s;
+        }
+
+        .nav-link-custom:hover,
+        .nav-link-custom.active {
+            background: var(--accent-gold-soft);
+            color: var(--primary-deep);
+        }
+
+        .nav-link-custom.active {
+            position: relative;
+        }
+
+        .nav-link-custom.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 50%;
+            transform: translateX(50%);
+            width: 24px;
+            height: 3px;
+            background: var(--accent-gold);
+            border-radius: var(--radius-full);
+        }
+
+        /* ===== Filter Section ===== */
+        .filter-section {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: 32px;
+            box-shadow: var(--shadow-xl);
+            margin-bottom: 32px;
+            border: 1px solid var(--gray-200);
+        }
+
+        .filter-title {
+            font-weight: 700;
+            color: var(--primary-deep);
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+        }
+
+        .filter-group {
+            background: var(--gray-50);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid var(--gray-200);
+        }
+
+        .filter-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--gray-600);
+            margin-bottom: 8px;
+            display: block;
+            letter-spacing: 0.5px;
+        }
+
+        .form-control, .form-select, .input-group-text {
+            border-radius: var(--radius-md);
+            border: 1.5px solid var(--gray-200);
+            padding: 12px 16px;
+            transition: all 0.2s;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 0 4px var(--accent-gold-soft);
+        }
+
+        /* ===== Need Card ===== */
+        .need-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.4s var(--transition-bounce);
+            border: 1px solid var(--gray-200);
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .need-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+            border-color: transparent;
+        }
+
+        .urgent-badge {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+            padding: 6px 16px;
+            border-radius: var(--radius-full);
+            font-size: 0.8rem;
+            font-weight: 700;
+            animation: pulse 2s infinite;
+            z-index: 2;
+        }
+
+        .emergency-badge {
+            background: linear-gradient(135deg, #7f1d1d, #991b1b);
+            color: white;
+            padding: 4px 12px;
+            border-radius: var(--radius-full);
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .verification-badges {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin: 12px 0;
+        }
+
+        .verified-badge {
+            background: var(--accent-teal);
+            color: white;
+            padding: 4px 12px;
+            border-radius: var(--radius-full);
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .verified-badge-pending {
+            background: #f59e0b;
+            color: white;
+        }
+
+        .verified-badge-multiple {
+            background: var(--accent-purple);
+            color: white;
+        }
+
+        .need-progress {
+            margin: 16px 0;
+        }
+
+        .progress-custom {
+            height: 10px;
+            background: var(--gray-200);
+            border-radius: var(--radius-full);
+            overflow: hidden;
+        }
+
+        .progress-bar-custom {
+            background: var(--primary-gradient);
+            border-radius: var(--radius-full);
+            transition: width 0.6s ease;
+            height: 100%;
+        }
+
+        .need-amount {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--primary-deep);
+        }
+
+        .days-remaining {
+            background: var(--gray-100);
+            padding: 6px 14px;
+            border-radius: var(--radius-full);
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--gray-600);
+        }
+
+        .days-remaining.urgent {
+            background: var(--accent-red-soft);
+            color: var(--accent-red);
+        }
+
+        .category-badge {
+            background: var(--gray-100);
+            padding: 4px 12px;
+            border-radius: var(--radius-full);
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--gray-600);
+        }
+
+        /* ===== Search Suggestions ===== */
+        .suggestions-container {
+            position: absolute;
+            width: 100%;
+            max-height: 300px;
+            overflow-y: auto;
+            background: white;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-xl);
+            border: 1px solid var(--gray-200);
+            z-index: 1060;
+            margin-top: 4px;
+        }
+
+        .suggestion-item {
+            padding: 12px 16px;
+            transition: all 0.2s;
+            cursor: pointer;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .suggestion-item:hover {
+            background: var(--accent-gold-soft);
+        }
+
+        .suggestion-item:last-child {
+            border-bottom: none;
+        }
+
+        /* ===== Pagination ===== */
+        .pagination-custom {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 48px;
+            margin-bottom: 24px;
+        }
+
+        .page-item-custom {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-md);
+            background: white;
+            border: 1px solid var(--gray-200);
+            color: var(--gray-600);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .page-item-custom:hover:not(.disabled) {
+            background: var(--accent-gold-soft);
+            border-color: var(--accent-gold);
+            color: var(--primary-deep);
+        }
+
+        .page-item-custom.active {
+            background: var(--primary-gradient);
+            color: white;
+            border-color: transparent;
+        }
+
+        .page-item-custom.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* ===== Skeleton Loading ===== */
+        .skeleton {
+            background: linear-gradient(90deg, var(--gray-200) 25%, var(--gray-100) 50%, var(--gray-200) 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+            border-radius: var(--radius-sm);
+        }
+
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* ===== View Toggle ===== */
+        .view-toggle {
+            display: flex;
+            gap: 4px;
+            background: var(--gray-100);
+            padding: 4px;
+            border-radius: var(--radius-full);
+        }
+
+        .view-toggle-btn {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-full);
+            background: transparent;
+            border: none;
+            color: var(--gray-600);
+            transition: all 0.2s;
+        }
+
+        .view-toggle-btn.active {
+            background: white;
+            color: var(--primary-deep);
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* ===== Empty State ===== */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            background: white;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .empty-state-icon {
+            font-size: 4rem;
+            color: var(--gray-300);
+            margin-bottom: 20px;
+        }
+
+        /* ===== Animations ===== */
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(239,68,68,0.5); }
+            70% { box-shadow: 0 0 0 10px rgba(239,68,68,0); }
+            100% { box-shadow: 0 0 0 0 rgba(239,68,68,0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s var(--transition-smooth);
+        }
+
+        /* ===== List View ===== */
+        .need-list-item {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            margin-bottom: 16px;
+            border: 1px solid var(--gray-200);
+            transition: all 0.3s;
+        }
+
+        .need-list-item:hover {
+            transform: translateX(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: transparent;
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 992px) {
+            .filter-section { padding: 24px; }
+            .need-card { padding: 20px; }
+        }
+
+        @media (max-width: 768px) {
+            .filter-section { padding: 20px; }
+            .hero-stats { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== Header ===== -->
+<header class="main-header">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid px-0">
+                <a class="navbar-brand d-flex align-items-center gap-2" href="/">
+                    <div class="brand-logo">
+                        <i class="fas fa-hand-holding-heart"></i>
+                    </div>
+                    <span class="fw-bold fs-3" style="color: var(--primary-deep);">خیریه‌آنلاین</span>
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarMain">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-custom" href="/">صفحه اصلی</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-custom active" href="/needs">آگهی‌های نیاز</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-custom" href="/shop">فروشگاه خیریه</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-custom" href="/charities">خیریه‌ها</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-custom" href="/reports">گزارش‌گیری</a>
+                        </li>
+                    </ul>
+
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-outline-gold rounded-pill px-4" onclick="showLoginModal()">
+                            <i class="fas fa-sign-in-alt ms-2"></i> ورود
+                        </button>
+                        <button class="btn btn-register rounded-pill px-4" onclick="window.location.href='/register'">
+                            ثبت‌نام <i class="fas fa-arrow-left ms-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<!-- ===== Main Content ===== -->
+<main class="container py-4">
+    <!-- ===== Breadcrumb ===== -->
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/" class="text-decoration-none text-muted">خانه</a></li>
+            <li class="breadcrumb-item active" aria-current="page">آگهی‌های نیاز</li>
+        </ol>
+    </nav>
+
+    <!-- ===== Page Title & Stats ===== -->
+    <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="fw-bold" style="color: var(--primary-deep);">
+                <i class="fas fa-clipboard-list ms-2" style="color: var(--accent-gold);"></i>
+                آگهی‌های نیاز
+            </h1>
+            <p class="text-muted">مشاهده و جستجوی پیشرفته آگهی‌های نیازمندان تأییدشده</p>
+        </div>
+        <div class="d-flex gap-2">
+            <span class="badge bg-success px-4 py-2" id="activeNeedsCount">
+                <i class="fas fa-check-circle ms-1"></i>
+                ۱۲۴ آگهی فعال
+            </span>
+            <span class="badge bg-danger px-4 py-2" id="emergencyNeedsCount">
+                <i class="fas fa-exclamation-circle ms-1"></i>
+                ۸ آگهی فوری
+            </span>
+        </div>
+    </div>
+
+    <!-- ===== فیلترهای پیشرفته ===== -->
+    <div class="filter-section" data-aos="fade-up">
+        <div class="filter-title">
+            <i class="fas fa-sliders-h" style="color: var(--accent-gold);"></i>
+            فیلترهای پیشرفته
+        </div>
+
+        <!-- ردیف اول: فیلترهای اصلی -->
+        <div class="row g-3 mb-4">
+            <div class="col-lg-4">
+                <label class="filter-label">جستجو در آگهی‌ها</label>
+                <div class="input-group">
+                    <span class="input-group-text bg-white border-end-0">
+                        <i class="fas fa-search text-muted"></i>
+                    </span>
+                    <input type="text" class="form-control border-start-0" id="searchInput"
+                           placeholder="عنوان، توضیحات، کد آگهی..."
+                           autocomplete="off"
+                           onkeyup="handleSearchKeyup(event)">
+                </div>
+                <div id="searchSuggestions" class="suggestions-container" style="display: none;"></div>
+            </div>
+            <div class="col-lg-2">
+                <label class="filter-label">دسته‌بندی</label>
+                <select class="form-select" id="categoryFilter" onchange="applyFilters()">
+                    <option value="">همه دسته‌بندی‌ها</option>
+                    <option value="educational">📚 آموزشی</option>
+                    <option value="health">🏥 بهداشتی/درمانی</option>
+                    <option value="livelihood">🍞 معیشتی</option>
+                    <option value="dowry">💍 جهیزیه</option>
+                    <option value="housing">🏠 مسکن</option>
+                    <option value="emergency">🚨 فوری/اضطراری</option>
+                </select>
+            </div>
+            <div class="col-lg-2">
+                <label class="filter-label">استان</label>
+                <select class="form-select" id="provinceFilter" onchange="applyFilters()">
+                    <option value="">همه استان‌ها</option>
+                </select>
+            </div>
+            <div class="col-lg-2">
+                <label class="filter-label">خیریه</label>
+                <select class="form-select" id="charityFilter" onchange="applyFilters()">
+                    <option value="">همه خیریه‌ها</option>
+                </select>
+            </div>
+            <div class="col-lg-2">
+                <label class="filter-label">مرتب‌سازی</label>
+                <select class="form-select" id="sortFilter" onchange="applyFilters()">
+                    <option value="created_at.desc">🆕 جدیدترین</option>
+                    <option value="collected_amount.desc">💰 بیشترین پیشرفت</option>
+                    <option value="target_amount.desc">🎯 بیشترین هدف</option>
+                    <option value="deadline.asc">⏰ نزدیک‌ترین مهلت</option>
+                    <option value="view_count.desc">👁 پربازدیدترین</option>
+                    <option value="donation_count.desc">🤝 بیشترین کمک</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- ردیف دوم: فیلترهای پیشرفته (کولاپس) -->
+        <div class="collapse" id="advancedFilters">
+            <div class="filter-group">
+                <div class="row g-3">
+                    <div class="col-lg-3 col-md-6">
+                        <label class="filter-label">محدوده مبلغ (تومان)</label>
+                        <div class="d-flex gap-2">
+                            <input type="number" class="form-control" id="minAmount"
+                                   placeholder="از" onchange="applyFilters()">
+                            <input type="number" class="form-control" id="maxAmount"
+                                   placeholder="تا" onchange="applyFilters()">
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-6">
+                        <label class="filter-label">وضعیت</label>
+                        <select class="form-select" id="statusFilter" onchange="applyFilters()">
+                            <option value="">همه وضعیت‌ها</option>
+                            <option value="active">🟢 فعال</option>
+                            <option value="pending">⏳ در انتظار</option>
+                            <option value="approved">✅ تأیید شده</option>
+                            <option value="completed">🏁 تکمیل شده</option>
+                            <option value="rejected">❌ رد شده</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-2 col-md-6">
+                        <label class="filter-label">فوریت</label>
+                        <select class="form-select" id="urgencyFilter" onchange="applyFilters()">
+                            <option value="">همه</option>
+                            <option value="urgent">🔴 فوری</option>
+                            <option value="emergency">🚨 اضطراری</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-2 col-md-6">
+                        <label class="filter-label">تأییدیه‌ها</label>
+                        <select class="form-select" id="verifiedFilter" onchange="applyFilters()">
+                            <option value="">همه</option>
+                            <option value="true">✅ دارای تأییدیه</option>
+                            <option value="false">❌ بدون تأییدیه</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <label class="filter-label">تاریخ ثبت</label>
+                        <div class="d-flex gap-2">
+                            <input type="text" class="form-control datepicker" id="dateFrom"
+                                   placeholder="از تاریخ" onchange="applyFilters()">
+                            <input type="text" class="form-control datepicker" id="dateTo"
+                                   placeholder="تا تاریخ" onchange="applyFilters()">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- دکمه‌های عملیات -->
+        <div class="d-flex flex-wrap justify-content-between align-items-center mt-3">
+            <div>
+                <button class="btn btn-link text-decoration-none" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#advancedFilters" id="advancedFiltersBtn">
+                    <i class="fas fa-chevron-down ms-1"></i>
+                    فیلترهای پیشرفته
+                </button>
+                <button class="btn btn-link text-decoration-none" onclick="resetFilters()">
+                    <i class="fas fa-redo-alt ms-1"></i>
+                    بازنشانی
+                </button>
+            </div>
+            <div class="d-flex gap-2">
+                <button class="btn btn-outline-gold rounded-pill px-4" onclick="applyFilters()">
+                    <i class="fas fa-filter ms-2"></i>
+                    اعمال فیلتر
+                </button>
+                <button class="btn btn-outline-secondary rounded-pill px-4" onclick="saveSearchFilter()">
+                    <i class="fas fa-save ms-2"></i>
+                    ذخیره جستجو
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== نتایج و نمایش ===== -->
+    <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
+        <div class="d-flex align-items-center gap-3">
+            <span class="fw-bold fs-5" id="resultsCount">۱۲۴</span>
+            <span class="text-muted">آگهی یافت شد</span>
+            <span class="badge bg-light text-dark px-3 py-2" id="activeFiltersBadge" style="display: none;">
+                <i class="fas fa-filter ms-1"></i>
+                <span id="activeFiltersCount">۰</span> فیلتر فعال
+            </span>
+        </div>
+        <div class="d-flex align-items-center gap-3">
+            <div class="view-toggle">
+                <button class="view-toggle-btn active" onclick="toggleViewMode('grid')" title="نمایش کارتی">
+                    <i class="fas fa-grid-2"></i>
+                </button>
+                <button class="view-toggle-btn" onclick="toggleViewMode('list')" title="نمایش لیستی">
+                    <i class="fas fa-list"></i>
+                </button>
+            </div>
+            <select class="form-select form-select-sm" style="width: 150px;" id="pageSizeSelect" onchange="changePageSize()">
+                <option value="12">۱۲ عدد در صفحه</option>
+                <option value="24">۲۴ عدد در صفحه</option>
+                <option value="48">۴۸ عدد در صفحه</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- ===== نمایش آگهی‌ها (Grid View) ===== -->
+    <div class="row g-4" id="needsGridContainer">
+        <!-- اسکلتون لودینگ -->
+        <div class="col-lg-4 col-md-6 skeleton-loading">
+            <div class="need-card">
+                <div class="skeleton" style="height: 24px; width: 70%; margin-bottom: 16px;"></div>
+                <div class="skeleton" style="height: 20px; width: 50%; margin-bottom: 12px;"></div>
+                <div class="skeleton" style="height: 16px; width: 40%; margin-bottom: 16px;"></div>
+                <div class="skeleton" style="height: 10px; width: 100%; margin-bottom: 16px;"></div>
+                <div class="skeleton" style="height: 48px; width: 100%;"></div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 skeleton-loading">
+            <div class="need-card">
+                <div class="skeleton" style="height: 24px; width: 70%; margin-bottom: 16px;"></div>
+                <div class="skeleton" style="height: 20px; width: 50%; margin-bottom: 12px;"></div>
+                <div class="skeleton" style="height: 16px; width: 40%; margin-bottom: 16px;"></div>
+                <div class="skeleton" style="height: 10px; width: 100%; margin-bottom: 16px;"></div>
+                <div class="skeleton" style="height: 48px; width: 100%;"></div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 skeleton-loading">
+            <div class="need-card">
+                <div class="skeleton" style="height: 24px; width: 70%; margin-bottom: 16px;"></div>
+                <div class="skeleton" style="height: 20px; width: 50%; margin-bottom: 12px;"></div>
+                <div class="skeleton" style="height: 16px; width: 40%; margin-bottom: 16px;"></div>
+                <div class="skeleton" style="height: 10px; width: 100%; margin-bottom: 16px;"></div>
+                <div class="skeleton" style="height: 48px; width: 100%;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== نمایش آگهی‌ها (List View - مخفی در ابتدا) ===== -->
+    <div id="needsListContainer" style="display: none;"></div>
+
+    <!-- ===== صفحه‌بندی ===== -->
+    <div class="pagination-custom" id="pagination"></div>
+</main>
+
+<!-- ===== مودال ذخیره جستجو ===== -->
+<div class="modal fade" id="saveSearchModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="border-radius: var(--radius-lg);">
+            <div class="modal-header border-0">
+                <h5 class="modal-title fw-bold">
+                    <i class="fas fa-save ms-2" style="color: var(--accent-gold);"></i>
+                    ذخیره فیلتر جستجو
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body p-4">
+                <div class="mb-3">
+                    <label class="form-label fw-bold">نام فیلتر</label>
+                    <input type="text" class="form-control" id="searchFilterName"
+                           placeholder="مثال: آگهی‌های فوری تهران">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold">اعلان خودکار</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="autoNotify">
+                        <label class="form-check-label" for="autoNotify">
+                            برای آگهی‌های جدید اعلان ارسال شود
+                        </label>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold">فرکانس اعلان</label>
+                    <select class="form-select" id="notifyFrequency" disabled>
+                        <option value="instant">لحظه‌ای</option>
+                        <option value="daily">روزانه</option>
+                        <option value="weekly">هفتگی</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer border-0">
+                <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-bs-dismiss="modal">
+                    انصراف
+                </button>
+                <button type="button" class="btn btn-primary-charity rounded-pill px-4" onclick="saveSearchFilterSubmit()">
+                    ذخیره جستجو
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== مودال ورود ===== -->
+<div class="modal fade" id="loginModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="border-radius: var(--radius-lg);">
+            <div class="modal-header border-0">
+                <h5 class="modal-title fw-bold">
+                    <i class="fas fa-sign-in-alt ms-2" style="color: var(--accent-gold);"></i>
+                    ورود به پنل کاربری
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body p-4">
+                <ul class="nav nav-pills mb-4 justify-content-center" id="loginTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="password-tab" data-bs-toggle="pill" data-bs-target="#password" type="button">
+                            رمز عبور
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="otp-tab" data-bs-toggle="pill" data-bs-target="#otp" type="button">
+                            پیامک OTP
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="google-tab" data-bs-toggle="pill" data-bs-target="#google" type="button">
+                            گوگل
+                        </button>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="password">
+                        <form id="loginPasswordForm" onsubmit="handlePasswordLogin(event)">
+                            <div class="mb-3">
+                                <input type="email" class="form-control" placeholder="ایمیل یا نام کاربری">
+                            </div>
+                            <div class="mb-3">
+                                <input type="password" class="form-control" placeholder="رمز عبور">
+                            </div>
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="rememberMe">
+                                <label class="form-check-label" for="rememberMe">مرا به خاطر بسپار</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary-charity w-100 rounded-pill">
+                                ورود
+                            </button>
+                        </form>
+                    </div>
+                    <div class="tab-pane fade" id="otp">
+                        <form id="loginOtpForm">
+                            <div class="mb-3">
+                                <input type="tel" class="form-control" placeholder="شماره موبایل">
+                            </div>
+                            <button type="button" class="btn btn-outline-gold w-100 rounded-pill" onclick="sendOtp()">
+                                ارسال کد تأیید
+                            </button>
+                        </form>
+                    </div>
+                    <div class="tab-pane fade" id="google">
+                        <button class="btn btn-outline-secondary w-100 rounded-pill" onclick="handleGoogleLogin()">
+                            <i class="fab fa-google ms-2"></i>
+                            ورود با گوگل
+                        </button>
+                    </div>
+                </div>
+                <div class="mt-4 text-center">
+                    <span class="text-muted">کاربر جدید هستید؟</span>
+                    <a href="/register" class="fw-bold" style="color: var(--accent-teal);">ثبت‌نام</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/shahtheme/persian-datepicker@1.2.0/dist/js/persian-datepicker.min.js"></script>
+
+<script>
+    // ==================== کانفیگ Axios ====================
+    const api = axios.create({
+        baseURL: '/api/v1',
+        timeout: 15000,
+        headers: { 'Content-Type': 'application/json' }
+    });
+
+    // توکن احراز هویت
+    const authToken = localStorage.getItem('access_token');
+    if (authToken) {
+        api.defaults.headers.common['Authorization'] = `Bearer ${authToken}`;
+    }
+
+    // ==================== State مدیریت ====================
+    const state = {
+        currentPage: 1,
+        pageSize: 12,
+        totalPages: 0,
+        totalItems: 0,
+        filters: {
+            category: null,
+            province: null,
+            charity_id: null,
+            is_urgent: null,
+            is_emergency: null,
+            min_amount: null,
+            max_amount: null,
+            verified_only: false,
+            search_text: null,
+            sort_by: 'created_at',
+            sort_order: 'desc',
+            status: null,
+            start_date: null,
+            end_date: null
+        },
+        viewMode: 'grid',
+        charities: [],
+        provinces: [],
+        activeFiltersCount: 0,
+        savedSearches: []
+    };
+
+    // ==================== 1️⃣ لیست نیازها با فیلتر ====================
+    // GET /api/v1/needs/
+    async function loadNeeds(page = 1) {
+        showLoading();
+
+        try {
+            // ساخت پارامترهای کوئری
+            const params = {
+                page: page,
+                limit: state.pageSize,
+                sort_by: state.filters.sort_by,
+                sort_order: state.filters.sort_order
+            };
+
+            // اضافه کردن فیلترها
+            if (state.filters.category) params.category = state.filters.category;
+            if (state.filters.province) params.province = state.filters.province;
+            if (state.filters.charity_id) params.charity_id = state.filters.charity_id;
+            if (state.filters.is_urgent) params.is_urgent = state.filters.is_urgent;
+            if (state.filters.is_emergency) params.is_emergency = state.filters.is_emergency;
+            if (state.filters.min_amount) params.min_amount = state.filters.min_amount;
+            if (state.filters.max_amount) params.max_amount = state.filters.max_amount;
+            if (state.filters.verified_only) params.verified_only = true;
+            if (state.filters.search_text) params.search_text = state.filters.search_text;
+            if (state.filters.status) params.status = state.filters.status;
+            if (state.filters.start_date) params.start_date = state.filters.start_date;
+            if (state.filters.end_date) params.end_date = state.filters.end_date;
+
+            // درخواست به API
+            // const response = await api.get('/needs/', { params });
+            // const data = response.data;
+
+            // دیتای شبیه‌سازی شده برای نمایش
+            const data = {
+                items: [
+                    {
+                        id: 1,
+                        title: 'کمک فوری برای عمل قلب',
+                        charity_name: 'خیریه امام رضا (ع)',
+                        category: 'health',
+                        province: 'خراسان رضوی',
+                        city: 'مشهد',
+                        target_amount: 50000000,
+                        collected_amount: 18500000,
+                        percentage: 37,
+                        is_urgent: false,
+                        is_emergency: true,
+                        verified_by: ['خیریه امام رضا', 'بیمارستان شهید رجایی'],
+                        days_left: 12,
+                        view_count: 342,
+                        donation_count: 28,
+                        created_at: '2025-01-15T10:30:00Z'
+                    },
+                    {
+                        id: 2,
+                        title: 'جهیزیه نوعروسان',
+                        charity_name: 'خیریه نورالهدی',
+                        category: 'dowry',
+                        province: 'اصفهان',
+                        city: 'اصفهان',
+                        target_amount: 30000000,
+                        collected_amount: 28500000,
+                        percentage: 95,
+                        is_urgent: true,
+                        is_emergency: false,
+                        verified_by: ['کمیته امداد'],
+                        days_left: 5,
+                        view_count: 521,
+                        donation_count: 45,
+                        created_at: '2025-01-20T14:20:00Z'
+                    },
+                    {
+                        id: 3,
+                        title: 'خرید ویلچر برقی',
+                        charity_name: 'مؤسسه مهر سبز',
+                        category: 'health',
+                        province: 'تهران',
+                        city: 'تهران',
+                        target_amount: 15000000,
+                        collected_amount: 4200000,
+                        percentage: 28,
+                        is_urgent: false,
+                        is_emergency: false,
+                        verified_by: ['بهزیستی'],
+                        days_left: 20,
+                        view_count: 187,
+                        donation_count: 12,
+                        created_at: '2025-01-25T09:15:00Z'
+                    },
+                    {
+                        id: 4,
+                        title: 'کمک هزینه تحصیلی',
+                        charity_name: 'خیریه امام رضا (ع)',
+                        category: 'educational',
+                        province: 'فارس',
+                        city: 'شیراز',
+                        target_amount: 5000000,
+                        collected_amount: 3200000,
+                        percentage: 64,
+                        is_urgent: false,
+                        is_emergency: false,
+                        verified_by: ['آموزش و پرورش'],
+                        days_left: 8,
+                        view_count: 256,
+                        donation_count: 31,
+                        created_at: '2025-02-01T11:45:00Z'
+                    },
+                    {
+                        id: 5,
+                        title: 'تأمین مسکن خانواده',
+                        charity_name: 'خیریه حضرت علی (ع)',
+                        category: 'housing',
+                        province: 'خوزستان',
+                        city: 'اهواز',
+                        target_amount: 80000000,
+                        collected_amount: 12300000,
+                        percentage: 15,
+                        is_urgent: false,
+                        is_emergency: false,
+                        verified_by: [],
+                        days_left: 45,
+                        view_count: 98,
+                        donation_count: 7,
+                        created_at: '2025-01-10T08:30:00Z'
+                    },
+                    {
+                        id: 6,
+                        title: 'کمک به بیماران سرطانی',
+                        charity_name: 'مؤسسه مهر سبز',
+                        category: 'health',
+                        province: 'مازندران',
+                        city: 'ساری',
+                        target_amount: 12000000,
+                        collected_amount: 9800000,
+                        percentage: 82,
+                        is_urgent: true,
+                        is_emergency: false,
+                        verified_by: ['بیمارستان امام خمینی'],
+                        days_left: 3,
+                        view_count: 412,
+                        donation_count: 38,
+                        created_at: '2025-02-05T16:20:00Z'
+                    }
+                ],
+                total: 124,
+                total_pages: 21,
+                page: page,
+                limit: state.pageSize
+            };
+
+            // بروزرسانی state
+            state.totalItems = data.total;
+            state.totalPages = data.total_pages;
+            state.currentPage = page;
+
+            // بروزرسانی UI
+            updateResultsCount(data.total);
+            updateActiveFiltersCount();
+
+            if (state.viewMode === 'grid') {
+                renderNeedsGrid(data.items);
+            } else {
+                renderNeedsList(data.items);
+            }
+
+            renderPagination(data.total_pages, page);
+
+        } catch (error) {
+            console.error('Error loading needs:', error);
+            showNotification('خطا در دریافت آگهی‌ها', 'error');
+        } finally {
+            hideLoading();
+        }
+    }
+
+    // ==================== 2️⃣ دریافت آمار نیازها ====================
+    // GET /api/v1/needs/stats
+    async function loadNeedsStats() {
+        try {
+            // const response = await api.get('/needs/stats');
+            // const stats = response.data;
+
+            // دیتای شبیه‌سازی شده
+            document.getElementById('activeNeedsCount').innerHTML = `
+                <i class="fas fa-check-circle ms-1"></i>
+                ۱۲۴ آگهی فعال
+            `;
+            document.getElementById('emergencyNeedsCount').innerHTML = `
+                <i class="fas fa-exclamation-circle ms-1"></i>
+                ۸ آگهی فوری
+            `;
+        } catch (error) {
+            console.error('Error loading stats:', error);
+        }
+    }
+
+    // ==================== 3️⃣ پیشنهادات جستجو ====================
+    // GET /api/v1/needs/search/suggestions?q=
+    let searchTimeout;
+    async function handleSearchKeyup(event) {
+        const query = event.target.value.trim();
+
+        clearTimeout(searchTimeout);
+
+        if (query.length < 2) {
+            document.getElementById('searchSuggestions').style.display = 'none';
+            return;
+        }
+
+        searchTimeout = setTimeout(async () => {
+            try {
+                // const response = await api.get('/needs/search/suggestions', {
+                //     params: { q: query, limit: 5 }
+                // });
+                // const suggestions = response.data.suggestions;
+
+                // دیتای شبیه‌سازی شده
+                const suggestions = [
+                    { text: 'کمک به بیماران', type: 'title' },
+                    { text: 'تهران', type: 'city' },
+                    { text: 'آموزشی', type: 'category' },
+                    { text: 'جهیزیه', type: 'category' },
+                    { text: 'مشهد', type: 'city' }
+                ].filter(s => s.text.includes(query) || s.text.includes(query));
+
+                renderSearchSuggestions(suggestions);
+            } catch (error) {
+                console.error('Error fetching suggestions:', error);
+            }
+        }, 500);
+    }
+
+    function renderSearchSuggestions(suggestions) {
+        const container = document.getElementById('searchSuggestions');
+
+        if (!suggestions || suggestions.length === 0) {
+            container.style.display = 'none';
+            return;
+        }
+
+        let html = '';
+        suggestions.forEach(s => {
+            let icon = 'fa-search';
+            let label = 'عنوان';
+
+            if (s.type === 'city') {
+                icon = 'fa-city';
+                label = 'شهر';
+            } else if (s.type === 'category') {
+                icon = 'fa-tag';
+                label = 'دسته‌بندی';
+            }
+
+            html += `
+                <div class="suggestion-item d-flex align-items-center gap-3" onclick="selectSuggestion('${s.text}', '${s.type}')">
+                    <i class="fas ${icon} text-muted"></i>
+                    <span>${s.text}</span>
+                    <small class="text-muted me-auto">${label}</small>
+                </div>
+            `;
+        });
+
+        container.innerHTML = html;
+        container.style.display = 'block';
+    }
+
+    function selectSuggestion(text, type) {
+        document.getElementById('searchInput').value = text;
+        document.getElementById('searchSuggestions').style.display = 'none';
+
+        if (type === 'city') {
+            state.filters.province = text;
+            document.getElementById('provinceFilter').value = text;
+        } else if (type === 'category') {
+            state.filters.category = text;
+            document.getElementById('categoryFilter').value = text;
+        } else {
+            state.filters.search_text = text;
+        }
+
+        applyFilters();
+    }
+
+    // ==================== 4️⃣ دریافت لیست خیریه‌ها ====================
+    // GET /api/v1/charities
+    async function loadCharities() {
+        try {
+            // const response = await api.get('/charities', {
+            //     params: { limit: 100, active_only: true }
+            // });
+            // state.charities = response.data.items || [];
+
+            // دیتای شبیه‌سازی شده
+            state.charities = [
+                { id: 1, name: 'خیریه امام رضا (ع)' },
+                { id: 2, name: 'مؤسسه مهر سبز' },
+                { id: 3, name: 'خیریه نورالهدی' },
+                { id: 4, name: 'خیریه حضرت علی (ع)' },
+                { id: 5, name: 'خیریه محک' }
+            ];
+
+            renderCharitiesFilter();
+        } catch (error) {
+            console.error('Error loading charities:', error);
+        }
+    }
+
+    function renderCharitiesFilter() {
+        const select = document.getElementById('charityFilter');
+        select.innerHTML = '<option value="">همه خیریه‌ها</option>';
+
+        state.charities.forEach(charity => {
+            select.innerHTML += `<option value="${charity.id}">${charity.name}</option>`;
+        });
+    }
+
+    // ==================== 5️⃣ دریافت لیست استان‌ها ====================
+    async function loadProvinces() {
+        // این داده می‌تونه از API جداگانه بیاد یا از cache
+        state.provinces = [
+            'تهران', 'خراسان رضوی', 'اصفهان', 'فارس',
+            'خوزستان', 'آذربایجان شرقی', 'مازندران', 'گیلان',
+            'البرز', 'قم', 'کرمان', 'یزد'
+        ];
+
+        const select = document.getElementById('provinceFilter');
+        select.innerHTML = '<option value="">همه استان‌ها</option>';
+
+        state.provinces.forEach(province => {
+            select.innerHTML += `<option value="${province}">${province}</option>`;
+        });
+    }
+
+    // ==================== 6️⃣ تأییدیه‌های یک نیاز ====================
+    // GET /api/v1/needs/{need_id}/verifications
+    async function loadNeedVerifications(needId) {
+        try {
+            // const response = await api.get(`/needs/${needId}/verifications`);
+            // return response.data.verifications || [];
+
+            // دیتای شبیه‌سازی شده
+            const mockVerifications = {
+                1: [
+                    { charity_name: 'خیریه امام رضا', status: 'approved', verified_at: '2025-01-20T10:30:00Z' },
+                    { charity_name: 'بیمارستان شهید رجایی', status: 'approved', verified_at: '2025-01-22T14:20:00Z' }
+                ],
+                2: [
+                    { charity_name: 'کمیته امداد', status: 'approved', verified_at: '2025-01-25T09:15:00Z' }
+                ],
+                3: [
+                    { charity_name: 'بهزیستی', status: 'approved', verified_at: '2025-01-28T11:45:00Z' }
+                ],
+                4: [
+                    { charity_name: 'آموزش و پرورش', status: 'approved', verified_at: '2025-02-03T16:20:00Z' }
+                ],
+                6: [
+                    { charity_name: 'بیمارستان امام خمینی', status: 'approved', verified_at: '2025-02-06T08:30:00Z' }
+                ]
+            };
+
+            return mockVerifications[needId] || [];
+        } catch (error) {
+            console.error(`Error loading verifications for need ${needId}:`, error);
+            return [];
+        }
+    }
+
+    // ==================== 7️⃣ آمار یک نیاز ====================
+    // GET /api/v1/needs/{need_id}/stats
+    async function loadNeedStats(needId) {
+        try {
+            // const response = await api.get(`/needs/${needId}/stats`);
+            // return response.data;
+
+            // دیتای شبیه‌سازی شده
+            const mockStats = {
+                1: { progress_percentage: 37, days_remaining: 12, total_donations: 28, total_donated: 18500000 },
+                2: { progress_percentage: 95, days_remaining: 5, total_donations: 45, total_donated: 28500000 },
+                3: { progress_percentage: 28, days_remaining: 20, total_donations: 12, total_donated: 4200000 },
+                4: { progress_percentage: 64, days_remaining: 8, total_donations: 31, total_donated: 3200000 },
+                5: { progress_percentage: 15, days_remaining: 45, total_donations: 7, total_donated: 12300000 },
+                6: { progress_percentage: 82, days_remaining: 3, total_donations: 38, total_donated: 9800000 }
+            };
+
+            return mockStats[needId] || {
+                progress_percentage: 0,
+                days_remaining: null,
+                total_donations: 0,
+                total_donated: 0
+            };
+        } catch (error) {
+            console.error(`Error loading stats for need ${needId}:`, error);
+            return null;
+        }
+    }
+
+    // ==================== 8️⃣ رندر آگهی‌ها (Grid View) ====================
+    async function renderNeedsGrid(needs) {
+        const container = document.getElementById('needsGridContainer');
+
+        if (!needs || needs.length === 0) {
+            container.innerHTML = `
+                <div class="col-12">
+                    <div class="empty-state">
+                        <div class="empty-state-icon">
+                            <i class="fas fa-inbox"></i>
+                        </div>
+                        <h5 class="fw-bold mb-2">آگهی‌ای یافت نشد</h5>
+                        <p class="text-muted">با تغییر فیلترها مجدداً جستجو کنید</p>
+                        <button class="btn btn-outline-gold rounded-pill px-4 mt-3" onclick="resetFilters()">
+                            <i class="fas fa-redo-alt ms-2"></i>
+                            بازنشانی فیلترها
+                        </button>
+                    </div>
+                </div>
+            `;
+            return;
+        }
+
+        let html = '';
+
+        for (const need of needs) {
+            // دریافت تأییدیه‌ها
+            const verifications = await loadNeedVerifications(need.id);
+            const approvedVerifications = verifications.filter(v => v.status === 'approved');
+
+            // دریافت آمار
+            const stats = await loadNeedStats(need.id);
+
+            // تعیین کلاس روزهای باقی‌مانده
+            const daysClass = stats?.days_remaining <= 5 ? 'urgent' : '';
+
+            html += `
+                <div class="col-lg-4 col-md-6" data-aos="fade-up">
+                    <div class="need-card">
+                        ${need.is_emergency ? `
+                            <span class="urgent-badge">
+                                <i class="fas fa-exclamation-circle ms-1"></i> اضطراری
+                            </span>
+                        ` : need.is_urgent ? `
+                            <span class="urgent-badge">
+                                <i class="fas fa-clock ms-1"></i> فوری
+                            </span>
+                        ` : ''}
+
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <h5 class="fw-bold mb-1" style="color: var(--primary-deep);">
+                                ${need.title}
+                            </h5>
+                        </div>
+
+                        <div class="d-flex align-items-center gap-2 mb-2">
+                            <span class="category-badge">
+                                ${getCategoryLabel(need.category)}
+                            </span>
+                            <span class="text-muted small">
+                                <i class="fas fa-building ms-1"></i>
+                                ${need.charity_name}
+                            </span>
+                        </div>
+
+                        <div class="d-flex align-items-center gap-2 mb-2">
+                            <i class="fas fa-map-marker-alt text-muted small"></i>
+                            <span class="small text-muted">${need.city || need.province}</span>
+                        </div>
+
+                        <!-- تأییدیه‌ها -->
+                        ${approvedVerifications.length > 0 ? `
+                            <div class="verification-badges">
+                                ${approvedVerifications.slice(0, 2).map(v => `
+                                    <span class="verified-badge" title="تأیید شده توسط ${v.charity_name}">
+                                        <i class="fas fa-check-circle"></i> ${v.charity_name}
+                                    </span>
+                                `).join('')}
+                                ${approvedVerifications.length > 2 ? `
+                                    <span class="verified-badge verified-badge-multiple">
+                                        <i class="fas fa-ellipsis-h"></i> +${approvedVerifications.length - 2}
+                                    </span>
+                                ` : ''}
+                            </div>
+                        ` : `
+                            <div class="verification-badges">
+                                <span class="verified-badge verified-badge-pending">
+                                    <i class="fas fa-clock"></i> در انتظار تأیید
+                                </span>
+                            </div>
+                        `}
+
+                        <!-- پیشرفت پرداخت -->
+                        <div class="need-progress">
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                <span class="text-muted small">پیشرفت کمک‌ها</span>
+                                <span class="fw-bold">${stats?.progress_percentage || need.percentage || 0}%</span>
+                            </div>
+                            <div class="progress-custom">
+                                <div class="progress-bar-custom" style="width: ${stats?.progress_percentage || need.percentage || 0}%;"></div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mt-2">
+                                <div>
+                                    <small class="text-muted">جمع‌آوری شده</small>
+                                    <div class="need-amount">${formatNumber(need.collected_amount || 0)}</div>
+                                </div>
+                                <div class="text-start">
+                                    <small class="text-muted">هدف</small>
+                                    <div class="need-amount">${formatNumber(need.target_amount)}</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- آمار و دکمه کمک -->
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="days-remaining ${daysClass}">
+                                    <i class="fas fa-clock ms-1"></i>
+                                    ${stats?.days_remaining ? `${stats.days_remaining} روز باقی` : 'بدون مهلت'}
+                                </span>
+                                <span class="text-muted small">
+                                    <i class="fas fa-eye ms-1"></i> ${need.view_count || 0}
+                                </span>
+                            </div>
+                            <button class="btn btn-primary-charity rounded-pill px-4" onclick="viewNeed(${need.id})">
+                                کمک کنید
+                                <i class="fas fa-arrow-left ms-2"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        container.innerHTML = html;
+    }
+
+    // ==================== 9️⃣ رندر آگهی‌ها (List View) ====================
+    async function renderNeedsList(needs) {
+        const container = document.getElementById('needsListContainer');
+        const gridContainer = document.getElementById('needsGridContainer');
+
+        if (!needs || needs.length === 0) {
+            container.innerHTML = `
+                <div class="empty-state">
+                    <div class="empty-state-icon">
+                        <i class="fas fa-inbox"></i>
+                    </div>
+                    <h5 class="fw-bold mb-2">آگهی‌ای یافت نشد</h5>
+                    <p class="text-muted">با تغییر فیلترها مجدداً جستجو کنید</p>
+                </div>
+            `;
+            container.style.display = 'block';
+            gridContainer.style.display = 'none';
+            return;
+        }
+
+        let html = '';
+
+        for (const need of needs) {
+            const verifications = await loadNeedVerifications(need.id);
+            const approvedVerifications = verifications.filter(v => v.status === 'approved');
+            const stats = await loadNeedStats(need.id);
+            const daysClass = stats?.days_remaining <= 5 ? 'urgent' : '';
+
+            html += `
+                <div class="need-list-item" data-aos="fade-up">
+                    <div class="row align-items-center">
+                        <div class="col-lg-5">
+                            <div class="d-flex align-items-start gap-3">
+                                ${need.is_emergency ? `
+                                    <span class="badge bg-danger rounded-pill px-3 py-2">
+                                        اضطراری
+                                    </span>
+                                ` : need.is_urgent ? `
+                                    <span class="badge bg-warning rounded-pill px-3 py-2">
+                                        فوری
+                                    </span>
+                                ` : ''}
+                                <div>
+                                    <h5 class="fw-bold mb-2" style="color: var(--primary-deep);">
+                                        <a href="/needs/${need.id}" class="text-decoration-none" style="color: inherit;">
+                                            ${need.title}
+                                        </a>
+                                    </h5>
+                                    <div class="d-flex flex-wrap gap-3">
+                                        <span class="small text-muted">
+                                            <i class="fas fa-building ms-1"></i>
+                                            ${need.charity_name}
+                                        </span>
+                                        <span class="small text-muted">
+                                            <i class="fas fa-map-marker-alt ms-1"></i>
+                                            ${need.city || need.province}
+                                        </span>
+                                        <span class="small text-muted">
+                                            <i class="fas fa-tag ms-1"></i>
+                                            ${getCategoryLabel(need.category)}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 mt-3 mt-lg-0">
+                            <div class="d-flex align-items-center gap-3">
+                                <div>
+                                    <small class="text-muted">پیشرفت</small>
+                                    <div class="fw-bold">${stats?.progress_percentage || need.percentage || 0}%</div>
+                                </div>
+                                <div>
+                                    <small class="text-muted">جمع‌آوری شده</small>
+                                    <div class="fw-bold" style="color: var(--primary-deep);">
+                                        ${formatNumber(need.collected_amount || 0)}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 mt-3 mt-lg-0">
+                            <span class="days-remaining ${daysClass}">
+                                <i class="fas fa-clock ms-1"></i>
+                                ${stats?.days_remaining ? `${stats.days_remaining} روز` : 'نامحدود'}
+                            </span>
+                        </div>
+                        <div class="col-lg-2 mt-3 mt-lg-0 text-start">
+                            <button class="btn btn-primary-charity rounded-pill w-100" onclick="viewNeed(${need.id})">
+                                کمک کنید
+                                <i class="fas fa-arrow-left ms-2"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        container.innerHTML = html;
+        container.style.display = 'block';
+        gridContainer.style.display = 'none';
+    }
+
+    // ==================== 🔟 صفحه‌بندی ====================
+    function renderPagination(totalPages, currentPage) {
+        const container = document.getElementById('pagination');
+
+        if (totalPages <= 1) {
+            container.innerHTML = '';
+            return;
+        }
+
+        let html = '';
+
+        // دکمه قبلی
+        html += `
+            <div class="page-item-custom ${currentPage === 1 ? 'disabled' : ''}"
+                 onclick="${currentPage > 1 ? `loadNeeds(${currentPage - 1})` : ''}">
+                <i class="fas fa-chevron-right"></i>
+            </div>
+        `;
+
+        // صفحه اول
+        if (currentPage > 3) {
+            html += `<div class="page-item-custom" onclick="loadNeeds(1)">1</div>`;
+            if (currentPage > 4) {
+                html += `<div class="page-item-custom disabled">...</div>`;
+            }
+        }
+
+        // صفحات اطراف صفحه جاری
+        for (let i = Math.max(1, currentPage - 2); i <= Math.min(totalPages, currentPage + 2); i++) {
+            html += `
+                <div class="page-item-custom ${i === currentPage ? 'active' : ''}"
+                     onclick="loadNeeds(${i})">
+                    ${i}
+                </div>
+            `;
+        }
+
+        // صفحه آخر
+        if (currentPage < totalPages - 2) {
+            if (currentPage < totalPages - 3) {
+                html += `<div class="page-item-custom disabled">...</div>`;
+            }
+            html += `<div class="page-item-custom" onclick="loadNeeds(${totalPages})">${totalPages}</div>`;
+        }
+
+        // دکمه بعدی
+        html += `
+            <div class="page-item-custom ${currentPage === totalPages ? 'disabled' : ''}"
+                 onclick="${currentPage < totalPages ? `loadNeeds(${currentPage + 1})` : ''}">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+        `;
+
+        container.innerHTML = html;
+    }
+
+    // ==================== 1️⃣1️⃣ توابع کمکی ====================
+    function formatNumber(num) {
+        if (!num) return '۰';
+        return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    function getCategoryLabel(category) {
+        const labels = {
+            'educational': '📚 آموزشی',
+            'health': '🏥 درمانی',
+            'livelihood': '🍞 معیشتی',
+            'dowry': '💍 جهیزیه',
+            'housing': '🏠 مسکن',
+            'emergency': '🚨 اضطراری'
+        };
+        return labels[category] || category || 'سایر';
+    }
+
+    function showLoading() {
+        // اسکلتون‌ها در HTML هستند
+    }
+
+    function hideLoading() {
+        // حذف اسکلتون‌ها بعد از لود دیتا
+        document.querySelectorAll('.skeleton-loading').forEach(el => el.remove());
+    }
+
+    function updateResultsCount(count) {
+        document.getElementById('resultsCount').innerText = formatNumber(count);
+    }
+
+    function updateActiveFiltersCount() {
+        let count = 0;
+        Object.values(state.filters).forEach(value => {
+            if (value !== null && value !== '' && value !== undefined && value !== false) {
+                count++;
+            }
+        });
+
+        // حذف فیلترهای پیش‌فرض
+        if (state.filters.sort_by === 'created_at' && state.filters.sort_order === 'desc') count--;
+
+        state.activeFiltersCount = count;
+
+        const badge = document.getElementById('activeFiltersBadge');
+        const countSpan = document.getElementById('activeFiltersCount');
+
+        if (count > 0) {
+            countSpan.innerText = count;
+            badge.style.display = 'inline-block';
+        } else {
+            badge.style.display = 'none';
+        }
+    }
+
+    // ==================== 1️⃣2️⃣ اعمال فیلترها ====================
+    function applyFilters() {
+        // خواندن مقادیر از فرم
+        state.filters.category = document.getElementById('categoryFilter').value || null;
+        state.filters.province = document.getElementById('provinceFilter').value || null;
+        state.filters.charity_id = document.getElementById('charityFilter').value || null;
+        state.filters.search_text = document.getElementById('searchInput').value || null;
+
+        // مرتب‌سازی
+        const sortValue = document.getElementById('sortFilter').value;
+        if (sortValue) {
+            [state.filters.sort_by, state.filters.sort_order] = sortValue.split('.');
+        }
+
+        // فیلترهای پیشرفته
+        state.filters.min_amount = document.getElementById('minAmount').value || null;
+        state.filters.max_amount = document.getElementById('maxAmount').value || null;
+        state.filters.status = document.getElementById('statusFilter').value || null;
+
+        const urgency = document.getElementById('urgencyFilter').value;
+        state.filters.is_urgent = urgency === 'urgent';
+        state.filters.is_emergency = urgency === 'emergency';
+
+        state.filters.verified_only = document.getElementById('verifiedFilter').value === 'true';
+
+        // بارگذاری مجدد
+        loadNeeds(1);
+    }
+
+    function resetFilters() {
+        // ریست فرم
+        document.getElementById('categoryFilter').value = '';
+        document.getElementById('provinceFilter').value = '';
+        document.getElementById('charityFilter').value = '';
+        document.getElementById('searchInput').value = '';
+        document.getElementById('sortFilter').value = 'created_at.desc';
+        document.getElementById('minAmount').value = '';
+        document.getElementById('maxAmount').value = '';
+        document.getElementById('statusFilter').value = '';
+        document.getElementById('urgencyFilter').value = '';
+        document.getElementById('verifiedFilter').value = '';
+        document.getElementById('dateFrom').value = '';
+        document.getElementById('dateTo').value = '';
+
+        // ریست state
+        state.filters = {
+            sort_by: 'created_at',
+            sort_order: 'desc'
+        };
+
+        // بستن پیشنهادات جستجو
+        document.getElementById('searchSuggestions').style.display = 'none';
+
+        // بارگذاری مجدد
+        loadNeeds(1);
+        showNotification('فیلترها بازنشانی شدند', 'info');
+    }
+
+    function changePageSize() {
+        state.pageSize = parseInt(document.getElementById('pageSizeSelect').value);
+        loadNeeds(1);
+    }
+
+    function toggleViewMode(mode) {
+        state.viewMode = mode;
+        const gridView = document.getElementById('needsGridContainer');
+        const listView = document.getElementById('needsListContainer');
+        const toggleBtns = document.querySelectorAll('.view-toggle-btn');
+
+        toggleBtns.forEach(btn => {
+            btn.classList.remove('active');
+        });
+
+        if (mode === 'grid') {
+            event.currentTarget.classList.add('active');
+            gridView.style.display = 'flex';
+            listView.style.display = 'none';
+            loadNeeds(state.currentPage);
+        } else {
+            event.currentTarget.classList.add('active');
+            gridView.style.display = 'none';
+            listView.style.display = 'block';
+            loadNeeds(state.currentPage);
+        }
+    }
+
+    // ==================== 1️⃣3️⃣ ذخیره جستجو ====================
+    function saveSearchFilter() {
+        new bootstrap.Modal(document.getElementById('saveSearchModal')).show();
+    }
+
+    function saveSearchFilterSubmit() {
+        const name = document.getElementById('searchFilterName').value;
+        if (!name) {
+            showNotification('لطفاً نام فیلتر را وارد کنید', 'warning');
+            return;
+        }
+
+        // ذخیره در localStorage
+        const savedSearches = JSON.parse(localStorage.getItem('savedSearches') || '[]');
+
+        savedSearches.push({
+            id: Date.now(),
+            name: name,
+            filters: { ...state.filters },
+            notify: document.getElementById('autoNotify').checked,
+            frequency: document.getElementById('notifyFrequency').value,
+            created_at: new Date().toISOString()
+        });
+
+        localStorage.setItem('savedSearches', JSON.stringify(savedSearches));
+
+        showNotification('فیلتر جستجو با موفقیت ذخیره شد', 'success');
+        bootstrap.Modal.getInstance(document.getElementById('saveSearchModal')).hide();
+
+        // پاک کردن فرم
+        document.getElementById('searchFilterName').value = '';
+        document.getElementById('autoNotify').checked = false;
+    }
+
+    // ==================== 1️⃣4️⃣ توابع احراز هویت ====================
+    function showLoginModal() {
+        new bootstrap.Modal(document.getElementById('loginModal')).show();
+    }
+
+    async function handlePasswordLogin(event) {
+        event.preventDefault();
+        showNotification('در حال ورود...', 'info');
+
+        // TODO: فراخوانی API لاگین
+        // const response = await api.post('/auth/login', { email, password });
+
+        setTimeout(() => {
+            showNotification('ورود موفقیت‌آمیز بود', 'success');
+            bootstrap.Modal.getInstance(document.getElementById('loginModal')).hide();
+        }, 1500);
+    }
+
+    function sendOtp() {
+        showNotification('کد تأیید به شماره شما ارسال شد', 'success');
+    }
+
+    function handleGoogleLogin() {
+        showNotification('در حال اتصال به گوگل...', 'info');
+    }
+
+    // ==================== 1️⃣5️⃣ سایر توابع ====================
+    function viewNeed(id) {
+        window.location.href = `/needs/${id}`;
+    }
+
+    function showNotification(message, type = 'success') {
+        Toastify({
+            text: message,
+            duration: 3000,
+            gravity: "bottom",
+            position: "right",
+            backgroundColor: type === 'success' ? 'linear-gradient(135deg, #10b981, #059669)' :
+                           type === 'error' ? 'linear-gradient(135deg, #ef4444, #dc2626)' :
+                           type === 'warning' ? 'linear-gradient(135deg, #f59e0b, #d97706)' :
+                           'linear-gradient(135deg, #3b82f6, #2563eb)',
+            className: "rounded-pill px-4 py-2",
+            close: true
+        }).showToast();
+    }
+
+    // ==================== مقداردهی اولیه ====================
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true,
+            easing: 'ease-in-out'
+        });
+
+        // Initialize Select2
+        $('.form-select').select2({
+            language: 'fa',
+            minimumResultsForSearch: 10,
+            width: '100%'
+        });
+
+        // Initialize Persian Datepicker
+        $('.datepicker').persianDatepicker({
+            format: 'YYYY/MM/DD',
+            autoClose: true,
+            initialValueType: 'gregorian',
+            calendar: {
+                persian: {
+                    locale: 'fa'
+                }
+            }
+        });
+
+        // Load initial data
+        loadNeedsStats();
+        loadCharities();
+        loadProvinces();
+        loadNeeds(1);
+
+        // Click outside to close suggestions
+        document.addEventListener('click', function(event) {
+            const suggestions = document.getElementById('searchSuggestions');
+            if (!event.target.closest('#searchSuggestions') && !event.target.closest('#searchInput')) {
+                suggestions.style.display = 'none';
+            }
+        });
+
+        // Close suggestions on escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                document.getElementById('searchSuggestions').style.display = 'none';
+            }
+        });
+
+        // Load saved searches count
+        const savedSearches = JSON.parse(localStorage.getItem('savedSearches') || '[]');
+        if (savedSearches.length > 0) {
+            // می‌توانید یک نوتیفیکیشن نمایش دهید
+        }
+    });
+</script>
+
+</body>
+</html>
